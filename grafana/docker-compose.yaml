@@ -1,0 +1,31 @@
+version: "3.5"
+services:
+  mosquitto:
+    image: eclipse-mosquitto:1.6
+    hostname: mosquitto
+    container_name: mosquitto
+    expose:
+      - 1883 # MQTT
+      - 9001 # MQTT
+    ports:
+      - 1883:1883 
+      - 9001:9001
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - proxynet
+
+  influxdb:
+    image: influxdb:latest
+    hostname: influx
+    container_name: influx
+    ports:
+      - 8086:8086
+    volumes:
+      - ./influxdb:/var/lib/influxdb
+    networks:
+      - proxynet
+       
+networks:
+  proxynet:
+    name: kavanet-network
