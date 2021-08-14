@@ -1,0 +1,38 @@
+{
+  "name": "kavanet-simulator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
+    "start": "ts-node ./src/index.ts",
+    "mqtt-start": "docker-compose up -d",
+    "mqtt-stop": "docker-compose down",
+    "build": "tsc",
+    "logs": "docker logs kavanet-simulator -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InvisiBug/Kavanet-Simulator.git"
+  },
+  "keywords": [],
+  "author": "InvisiBug",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InvisiBug/Kavanet-Simulator/issues"
+  },
+  "homepage": "https://github.com/InvisiBug/Kavanet-Simulator#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "express": "^4.17.1",
+    "mqtt": "^4.2.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.8",
+    "@types/node": "^14.14.6",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.5"
+  }
+}
