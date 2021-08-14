@@ -3,44 +3,88 @@ import chalk from "chalk";
 
 // console.clear();
 let client = mqtt.connect("mqtt://mqtt.kavanet.io");
-// let intClient = mqtt.connect("mqtt://Grafana-Interconnector-Mosquitto");
 // let intClient = mqtt.connect("mqtt://mosquitto"); // Docker
 let intClient = mqtt.connect("mqtt://localhost");
 
 client.subscribe("#", (err) => {
-  err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
+  // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
+  let x = err;
+  console.log("Subscribed to all");
 });
 
 var sensors: any = {
-  livingRoom: { temperature: 20, humidity: 20 },
-  kitchen: { temperature: 20, humidity: 20 },
-  liamsRoom: { temperature: 20, humidity: 20 },
-  study: { temperature: 20, humidity: 20 },
-  ourRoom: { temperature: 20, humidity: 20 },
+  livingRoom: { temperature: 0, humidity: 0 },
+  kitchen: { temperature: 0, humidity: 0 },
+  liamsRoom: { temperature: 0, humidity: 0 },
+  study: { temperature: 0, humidity: 0 },
+  ourRoom: { temperature: 0, humidity: 0 },
 };
 
-var tempOffsets;
+// var tempOffsets: any;
+let tempOffsets: any = {
+  "Living Room": -0.5,
+  Kitchen: 0,
+  "Liams Room": 0.2,
+  Study: -7.6,
+  "Our Room": 1.9,
+};
+
+let valves: any = {
+  livingRoom: false,
+  kitchen: false,
+  liamsRoom: false,
+  study: false,
+  ourRoom: false,
+};
 
 client.on("message", (topic, payload) => {
-  // if (_ === "Radiator Fan" || _ === "Radiator Fan Control") {
-  // console.log(chalk.white(_) + chalk.cyan(" \t" + payload));
-  // }
+  try {
+    if (topic == "Room Offsets") {
+      tempOffsets = JSON.parse(payload.toString());
+    }
 
-  if (topic == "Room Offsets") {
-    tempOffsets = JSON.parse(payload.toString());
-    // console.log(chalk.yellow(payload.toString()));
-    console.log(tempOffsets);
+    if (topic.includes("Sensor")) {
+      let message = JSON.parse(payload.toString());
+
+      if (message.node.includes("Living Room")) {
+        sensors.livingRoom.temperature = (message.temperature + tempOffsets["Living Room"]).toFixed(2) * 1;
+        sensors.livingRoom.humidity = message.humidity;
+      } else if (message.node.includes("Kitchen")) {
+        sensors.kitchen.temperature = (message.temperature + tempOffsets["Kitchen"]).toFixed(2) * 1;
+        sensors.kitchen.humidity = message.humidity;
+      } else if (message.node.includes("Liams Room")) {
+        sensors.liamsRoom.temperature = (message.temperature + tempOffsets["Liams Room"]).toFixed(2) * 1;
+        sensors.liamsRoom.humidity = message.humidity;
+      } else if (message.node.includes("Study")) {
+        sensors.study.temperature = (message.temperature + tempOffsets["Study"]).toFixed(2) * 1;
+        sensors.study.humidity = message.humidity;
+      } else if (message.node.includes("Our Room")) {
+        sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
+        sensors.ourRoom.humidity = message.humidity;
+      }
+    } else if (topic.includes("Valve")) {
+      let message = JSON.parse(payload.toString());
+      if (message.node.includes("Living Room")) {
+        valves.livingRoom = message.state;
+      } else if (message.node.includes("Liams Room")) {
+        valves.liamsRoom = message.state;
+      } else if (message.node.includes("Study")) {
+        valves.study = message.state;
+      } else if (message.node.includes("Our Room")) {
+        valves.ourRoom = message.state;
+      }
+    }
+  } catch (error) {
+    console.log(error);
   }
-  let x = payload;
-  // console.log(chalk.yellow(payload.toString()));
-  // intClient.publish("node", "Hello");
-  // client.publish("boo", "also Boo");
 });
 
+// Send to grafana
 setInterval(() => {
-  console.log("publish");
-  intClient.publish("node", JSON.stringify(sensors));
+  // console.log("publish");
+  intClient.publish("temperatures", JSON.stringify(sensors));
+  intClient.publish("valves", JSON.stringify(valves));
 }, 5 * 1000);
 
-// client.on("connect", () => console.log("Simulator Connected"));
-// intClient.on("connect", () => console.log("Simulator Connected"));
+client.on("connect", () => console.log("Connected to KavaNet MQTT"));
+intClient.on("connect", () => console.log("Connected to internal MQTT network"));

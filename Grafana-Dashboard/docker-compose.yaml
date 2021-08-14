@@ -1,6 +1,15 @@
 version: "3.1"
 
 services:
+  # kavanet-interconnector:
+  #   container_name: kavanet-interconnector
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: kavanet-interconnector:latest
+  #   networks:
+  #     - proxynet
+
   mosquitto:
     image: eclipse-mosquitto:1.6
     hostname: mosquitto
@@ -8,8 +17,6 @@ services:
     ports:
       - "1883:1883"
       - "9001:9001"
-    # depends_on:
-    #   - influxdb
     restart: always
     volumes:
       - mosquitto-storage:/mosquitto/data
@@ -41,7 +48,7 @@ services:
     ports:
       - "5050:5050"
     depends_on:
-      - influxdb
+      - mosquitto
     volumes:
       - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     networks:
