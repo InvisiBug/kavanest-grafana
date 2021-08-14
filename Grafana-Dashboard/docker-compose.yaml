@@ -1,0 +1,65 @@
+version: "3.1"
+
+services:
+  # mosquitto:
+  #   image: eclipse-mosquitto:1.6
+  #   hostname: mosquitto
+  #   container_name: mosquitto
+  #   ports:
+  #     - "1883:1883"
+  #     - "9001:9001"
+  #   # depends_on: 
+  #   #   - influxdb
+  #   restart: always
+  #   volumes:
+  #     - mosquitto-storage:/mosquitto/data
+  #     - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  influxdb:
+    container_name: influxdb
+    image: influxdb:1.5
+    ports:
+        - "8086:8086"
+    environment:
+        - INFLUXDB_DB=sensors
+        - INFLUXDB_ADMIN_USER=admin-user
+        - INFLUXDB_ADMIN_PASSWORD=telegraf-admin-password
+        - INFLUXDB_USER=telegraf-username
+        - INFLUXDB_PASSWORD=telegraf-password
+    restart: always
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+
+  telegraf:
+    image: telegraf:1.9
+    container_name: telegraf
+    restart: always
+    ports: 
+      - "5050:5050"
+    depends_on: 
+      - influxdb
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    links:
+      - influxdb
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  
+
+volumes:
+  influxdb-storage:
+  grafana-storage:
+  mosquitto-storage:
+
+# networks:
+#   myNet:
+#     name: kavanet-network
