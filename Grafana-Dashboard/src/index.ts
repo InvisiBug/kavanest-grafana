@@ -28,7 +28,6 @@ var valves: any = {
   ourRoom: { state: 0 },
 };
 
-// var tempOffsets: any;
 let tempOffsets: any = {
   "Living Room": -0.5,
   Kitchen: 0,
@@ -92,11 +91,8 @@ let publish = () => {
 
   // console.log(JSON.stringify(valves));
 };
-publish();
 
-setInterval(() => {
-  // intClient.publish("temperatures", JSON.stringify(valves));
-}, 6 * 1000);
+publish();
 
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));
 intClient.on("connect", () => console.log("Connected to internal MQTT network"));

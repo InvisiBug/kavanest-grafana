@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-# /PersistantStorage
-/src/Databases
 /.pnp
 .pnp.js
 

@@ -24,6 +24,19 @@ services:
     networks:
       - proxynet
 
+  telegraf:
+    image: telegraf:1.9
+    container_name: telegraf
+    restart: always
+    ports:
+      - "5050:5050"
+    depends_on:
+      - mosquitto
+    volumes:
+      - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    networks:
+      - proxynet
+
   influxdb:
     container_name: influxdb
     image: influxdb:1.5
@@ -38,19 +51,6 @@ services:
     restart: always
     volumes:
       - influxdb-storage:/var/lib/influxdb
-    networks:
-      - proxynet
-
-  telegraf:
-    image: telegraf:1.9
-    container_name: telegraf
-    restart: always
-    ports:
-      - "5050:5050"
-    depends_on:
-      - mosquitto
-    volumes:
-      - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     networks:
       - proxynet
 
@@ -75,4 +75,4 @@ volumes:
 
 networks:
   proxynet:
-    name: kavanet-network
+    name: grafana-network
