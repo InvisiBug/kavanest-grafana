@@ -43,24 +43,7 @@ client.on("message", (topic, payload) => {
     }
 
     if (topic.includes("Sensor")) {
-      let message = JSON.parse(payload.toString());
-
-      if (message.node.includes("Living Room")) {
-        sensors.livingRoom.temperature = (message.temperature + tempOffsets["Living Room"]).toFixed(2) * 1;
-        sensors.livingRoom.humidity = message.humidity;
-      } else if (message.node.includes("Kitchen")) {
-        sensors.kitchen.temperature = (message.temperature + tempOffsets["Kitchen"]).toFixed(2) * 1;
-        sensors.kitchen.humidity = message.humidity;
-      } else if (message.node.includes("Liams Room")) {
-        sensors.liamsRoom.temperature = (message.temperature + tempOffsets["Liams Room"]).toFixed(2) * 1;
-        sensors.liamsRoom.humidity = message.humidity;
-      } else if (message.node.includes("Study")) {
-        sensors.study.temperature = (message.temperature + tempOffsets["Study"]).toFixed(2) * 1;
-        sensors.study.humidity = message.humidity;
-      } else if (message.node.includes("Our Room")) {
-        sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
-        sensors.ourRoom.humidity = message.humidity;
-      }
+      dealWithSensors(payload, sensors);
     } else if (topic.includes("Valve")) {
       let message = JSON.parse(payload.toString());
       message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
@@ -79,6 +62,65 @@ client.on("message", (topic, payload) => {
     console.log(error);
   }
 });
+
+/*
+  Each room has a timer that will set its sensor values to -1
+  if the sensor hasnt sent out a ping within the last 10 seconds
+  Hacky way to do this but it works well enough
+*/
+let livingRoomTimer: any;
+let kitchenTimer: any;
+let liamsRoomTimer: any;
+let studyTimer: any;
+let ourRoomTimer: any;
+
+let dealWithSensors = (payload: any, sensors: any) => {
+  let message = JSON.parse(payload.toString());
+
+  if (message.node.includes("Living Room")) {
+    clearTimeout(livingRoomTimer);
+    livingRoomTimer = setTimeout(() => {
+      sensors.livingRoom.temperature = -1;
+      sensors.livingRoom.humidity = -1;
+    }, 10 * 1000);
+    sensors.livingRoom.temperature = (message.temperature + tempOffsets["Living Room"]).toFixed(2) * 1;
+    sensors.livingRoom.humidity = message.humidity;
+    console.log(sensors.livingRoom.temperature);
+  } else if (message.node.includes("Kitchen")) {
+    clearTimeout(kitchenTimer);
+    kitchenTimer = setTimeout(() => {
+      sensors.kitchen.temperature = -1;
+      sensors.kitchen.humidity = -1;
+    }, 10 * 1000);
+    sensors.kitchen.temperature = (message.temperature + tempOffsets["Kitchen"]).toFixed(2) * 1;
+    sensors.kitchen.humidity = message.humidity;
+  } else if (message.node.includes("Liams Room")) {
+    clearTimeout(liamsRoomTimer);
+    liamsRoomTimer = setTimeout(() => {
+      sensors.liamsRoom.temperature = -1;
+      sensors.liamsRoom.humidity = -1;
+    }, 10 * 1000);
+    sensors.liamsRoom.temperature = (message.temperature + tempOffsets["Liams Room"]).toFixed(2) * 1;
+    sensors.liamsRoom.humidity = message.humidity;
+  } else if (message.node.includes("Study")) {
+    clearTimeout(studyTimer);
+    studyTimer = setTimeout(() => {
+      sensors.study.temperature = -1;
+      sensors.study.humidity = -1;
+    }, 10 * 1000);
+    sensors.study.temperature = (message.temperature + tempOffsets["Study"]).toFixed(2) * 1;
+    sensors.study.humidity = message.humidity;
+  } else if (message.node.includes("Our Room")) {
+    clearTimeout(ourRoomTimer);
+    ourRoomTimer = setTimeout(() => {
+      sensors.ourRoom.temperature = -1;
+      sensors.ourRoom.humidity = -1;
+    }, 10 * 1000);
+    sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
+    sensors.ourRoom.humidity = message.humidity;
+    console.log(sensors.ourRoom.temperature);
+  }
+};
 
 // Send to grafana
 setInterval(() => {
