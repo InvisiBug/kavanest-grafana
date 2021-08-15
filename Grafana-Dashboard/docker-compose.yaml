@@ -1,14 +1,14 @@
 version: "3.1"
 
 services:
-  # kavanet-interconnector:
-  #   container_name: kavanet-interconnector
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   image: kavanet-interconnector:latest
-  #   networks:
-  #     - proxynet
+  interconnector:
+    container_name: interconnector
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: interconnector:latest
+    networks:
+      - proxynet
 
   mosquitto:
     image: eclipse-mosquitto:1.6

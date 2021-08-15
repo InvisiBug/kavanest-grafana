@@ -3,8 +3,8 @@ import chalk from "chalk";
 
 // console.clear();
 let client = mqtt.connect("mqtt://mqtt.kavanet.io");
-// let intClient = mqtt.connect("mqtt://mosquitto"); // Docker
-let intClient = mqtt.connect("mqtt://localhost");
+let intClient = mqtt.connect("mqtt://mosquitto"); // Docker
+// let intClient = mqtt.connect("mqtt://localhost"); // Development
 
 client.subscribe("#", (err) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
@@ -13,11 +13,19 @@ client.subscribe("#", (err) => {
 });
 
 var sensors: any = {
-  livingRoom: { temperature: 0, humidity: 0 },
-  kitchen: { temperature: 0, humidity: 0 },
-  liamsRoom: { temperature: 0, humidity: 0 },
-  study: { temperature: 0, humidity: 0 },
-  ourRoom: { temperature: 0, humidity: 0 },
+  livingRoom: { temperature: undefined, humidity: undefined },
+  kitchen: { temperature: undefined, humidity: undefined },
+  liamsRoom: { temperature: undefined, humidity: undefined },
+  study: { temperature: undefined, humidity: undefined },
+  ourRoom: { temperature: undefined, humidity: undefined },
+};
+
+var valves: any = {
+  livingRoom: { state: 0 }, // not having the humidity breaks things
+  // kitchen: { state: 0 }, // think it may be something with the software
+  liamsRoom: { state: 0 }, // not liking a non number datapoint on its own
+  study: { state: 0 },
+  ourRoom: { state: 0 },
 };
 
 // var tempOffsets: any;
@@ -27,14 +35,6 @@ let tempOffsets: any = {
   "Liams Room": 0.2,
   Study: -7.6,
   "Our Room": 1.9,
-};
-
-let valves: any = {
-  livingRoom: false,
-  kitchen: false,
-  liamsRoom: false,
-  study: false,
-  ourRoom: false,
 };
 
 client.on("message", (topic, payload) => {
@@ -64,14 +64,16 @@ client.on("message", (topic, payload) => {
       }
     } else if (topic.includes("Valve")) {
       let message = JSON.parse(payload.toString());
+      message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
+
       if (message.node.includes("Living Room")) {
-        valves.livingRoom = message.state;
+        valves.livingRoom.state = message.state;
       } else if (message.node.includes("Liams Room")) {
-        valves.liamsRoom = message.state;
+        valves.liamsRoom.state = message.state;
       } else if (message.node.includes("Study")) {
-        valves.study = message.state;
+        valves.study.state = message.state;
       } else if (message.node.includes("Our Room")) {
-        valves.ourRoom = message.state;
+        valves.ourRoom.state = message.state;
       }
     }
   } catch (error) {
@@ -81,10 +83,20 @@ client.on("message", (topic, payload) => {
 
 // Send to grafana
 setInterval(() => {
-  // console.log("publish");
+  publish();
+}, 5 * 1000);
+
+let publish = () => {
   intClient.publish("temperatures", JSON.stringify(sensors));
   intClient.publish("valves", JSON.stringify(valves));
-}, 5 * 1000);
+
+  // console.log(JSON.stringify(valves));
+};
+publish();
+
+setInterval(() => {
+  // intClient.publish("temperatures", JSON.stringify(valves));
+}, 6 * 1000);
 
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));
 intClient.on("connect", () => console.log("Connected to internal MQTT network"));
