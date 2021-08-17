@@ -1,0 +1,21 @@
+# Pull oficial base image
+FROM node:14
+
+# Set working directory
+WORKDIR /app
+
+# add "./app/node_modules.bin" to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# copy package.json and package-lock.json to container
+COPY package*.json ./
+
+# Intall dependencies 
+RUN npm install
+RUN npm install react-scripts -g
+
+# add app
+COPY . ./
+
+#start app
+CMD [ "npm", "start" ]
