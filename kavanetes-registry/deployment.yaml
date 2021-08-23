@@ -1,5 +1,5 @@
-kind: ReplicationController
 apiVersion: v1
+kind: ReplicationController
 metadata:
   name: kube-registry-v0
   namespace: kube-system
@@ -42,8 +42,8 @@ spec:
           path: /var/lib/registry-storage
         #emptyDir: {}
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: kube-registry
   namespace: kube-system
@@ -51,6 +51,7 @@ metadata:
     k8s-app: kube-registry
     kubernetes.io/name: "KubeRegistry"
 spec:
+  type: LoadBalancer
   selector:
     k8s-app: kube-registry
   ports:
@@ -58,4 +59,3 @@ spec:
     port: 5000
     targetPort: 5000
     protocol: TCP
-  type: LoadBalancer

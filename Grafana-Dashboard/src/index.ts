@@ -2,7 +2,7 @@ import mqtt from "mqtt";
 import chalk from "chalk";
 
 // console.clear();
-let client = mqtt.connect("mqtt://mqtt.kavanet.io");
+let client = mqtt.connect("mqtt://kavanet.io");
 let intClient = mqtt.connect("mqtt://mosquitto"); // Docker
 // let intClient = mqtt.connect("mqtt://localhost"); // Development
 

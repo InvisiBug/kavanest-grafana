@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: guestbook-frontend # this is the name returned when running kgp
+spec:
+  containers:
+  - name: guestbook-frontend
+    image: docker.artifactory.euw.platformservices.io/bpe/guestbook-frontend:1.0.2
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"

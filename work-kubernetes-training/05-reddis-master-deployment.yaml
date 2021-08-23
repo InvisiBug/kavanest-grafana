@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-master # this is the name returned when running kgp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-master
+  template:
+    metadata:
+      labels:
+        app: redis-master
+    spec:
+      containers:
+      - name: redis-master
+        image: docker.artifactory.euw.platformservices.io/redis:3.2.9
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+spec:
+  type: ClusterIP
+  selector:
+    app: redis-master
+  ports:
+  - name: http
+    protocol: TCP
+    port: 6379
+    targetPort: 6379

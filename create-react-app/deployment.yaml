@@ -1,7 +1,8 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: create-react-app
+  namespace: test-space
 spec:
   replicas: 1
   selector:
@@ -15,9 +16,10 @@ spec:
     spec:
       containers:
         - name: create-react-app
-          image: localhost:5000/create-react-app:latest
+          image: localhost:5000/this
           imagePullPolicy: Always
           ports:
+            # - containerPort: 31000
             - containerPort: 80
           resources:
             requests:
@@ -27,15 +29,46 @@ spec:
               memory: "128Mi"
               cpu: "500m"
       restartPolicy: Always
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: create-react-app-service
+#   namespace: test-space
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: create-react-app
+#   ports:
+#   - name: http
+#     protocol: TCP
+#     port: 80
+#     targetPort: 80
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: redis-master
+# spec:
+#   type: ClusterIP
+#   selector:
+#     app: redis-master
+#   ports:
+#   - name: http
+#     protocol: TCP
+#     port: 6379
+#     targetPort: 6379
+
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: create-react-app-entry-point
 spec:
+  type: NodePort
   selector:
     app: create-react-app
-  type: NodePort
   ports:
   - port: 80
     targetPort: 80
