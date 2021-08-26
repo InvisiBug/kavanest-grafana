@@ -1,8 +1,19 @@
+####################################
+#
+#     #                  
+#    # #   #####  #####  
+#   #   #  #    # #    # 
+#  #     # #    # #    # 
+#  ####### #####  #####  
+#  #     # #      #      
+#  #     # #      #     
+#
+####################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: create-react-app
-  namespace: test-space
+  # namespace: test-space
 spec:
   replicas: 1
   selector:
@@ -29,36 +40,78 @@ spec:
               memory: "128Mi"
               cpu: "500m"
       restartPolicy: Always
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: create-react-app-service
-#   namespace: test-space
-# spec:
-#   type: ClusterIP
-#   selector:
-#     app: create-react-app
-#   ports:
-#   - name: http
-#     protocol: TCP
-#     port: 80
-#     targetPort: 80
 
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: redis-master
-# spec:
-#   type: ClusterIP
-#   selector:
-#     app: redis-master
-#   ports:
-#   - name: http
-#     protocol: TCP
-#     port: 6379
-#     targetPort: 6379
+####################################
+#
+#     #####                                       
+#    #     # ###### #####  #    # #  ####  ###### 
+#    #       #      #    # #    # # #    # #      
+#     #####  #####  #    # #    # # #      #####  
+#          # #      #####  #    # # #      #      
+#    #     # #      #   #   #  #  # #    # #      
+#     #####  ###### #    #   ##   #  ####  ######
+#
+####################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: create-react-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: create-react-app
+  ports:
+    - protocol: TCP
+      port: 80
+
+####################################
+#
+#   ###                                           
+#    #  #    #  ####  #####  ######  ####   ####  
+#    #  ##   # #    # #    # #      #      #      
+#    #  # #  # #      #    # #####   ####   ####  
+#    #  #  # # #  ### #####  #           #      # 
+#    #  #   ## #    # #   #  #      #    # #    # 
+#   ### #    #  ####  #    # ######  ####   ####  
+#
+####################################
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: create-react-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.frontend.rule.type: PathPrefixStrip
+    # traefik.frontend.passHostHeader: "false"
+spec:
+  rules:
+  - host: kavanetes.kavanet.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: create-react-app-service
+            port: 
+              number: 80
+      - path: /test
+        pathType: Prefix
+        backend:
+          service:
+            name: create-react-app-service
+            port: 
+              number: 80
+      - path: /boop
+        pathType: Prefix
+        backend:
+          service:
+            name: create-react-app-service
+            port: 
+              number: 80
+
 
 ---
 apiVersion: v1
