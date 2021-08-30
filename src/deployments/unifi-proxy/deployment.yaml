@@ -12,18 +12,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana
+  name: unifi-proxy
   labels:
-    app: grafana
+    app: unifi-proxy
+  namespace: unifi-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: grafana
+      app: unifi-proxy
   template:
     metadata:
       labels:
-        app: grafana
+        app: unifi-proxy
     spec:
       containers:
       - name: nginx
@@ -38,12 +39,12 @@ spec:
               memory: "128Mi"
               cpu: "500m"
         volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
+        - name: unifi-conf
+          mountPath: "/etc/nginx/conf.d/"
       volumes:
-      - name: html-volume
+      - name: unifi-conf
         configMap:
-          name: grafana-site
+          name: unifi-configmap
 
 ####################################
 #
@@ -60,14 +61,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana-service
+  name: unifi
+  namespace: unifi-proxy
 spec:
-  type: ClusterIP
-  selector:
-    app: grafana
   ports:
-    - protocol: TCP
-      port: 80
+  - port: 80
+    targetPort: 80
+  selector:
+    app: unifi
 
 ####################################
 #
@@ -84,29 +85,34 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: grafana-ingress
+  name: testkavanet-ingress
+  namespace: unifi-proxy
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    
     kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.frontend.rule.type: PathPrefixStrip
     traefik.frontend.passHostHeader: "false"
     ingress.kubernetes.io/protocol: http
+    
 spec:
   rules:
-  - host: kavanet.io
+  - host: unifi.kavanet.io
     http:
       paths:
-      - path: /grafana
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: grafana-service
-            port: 
+            name: unifi
+            port:
               number: 80
   tls:
   - hosts:
-    - kavanet.io
-    secretName: kavanet.io-tls
+    - unifi.kavanet.io
+    secretName: unifi.kavanet.io-tls
 
 ####################################
 #
@@ -123,57 +129,24 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-site
+  name: unifi-configmap
+  namespace: unifi-proxy
 data:
-  index.html: |
-    <html>
-      <head><title>Grafana</title>
-        <style>
-          html {
-            font-size: 62.5%;
-          }
-          body {
-            font-family: sans-serif;
-            background-color: #222222;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-          }
-          div {
-            text-align: center;
-            font-size: 8rem;
-          }
-        </style>
-      </head>
-      <body>
-        <div>Grafana goes here :P</div>
-      </body>
-    </html>
+  proxy.conf: |
+    upstream unifi {
+        server        192.168.1.45:8443;
+    }
 
-####################################
-#
-#    #     #                         ######                         #######                     
-#    ##    #  ####  #####  ######    #     #  ####  #####  #####       #    ######  ####  ##### 
-#    # #   # #    # #    # #         #     # #    # #    #   #         #    #      #        #   
-#    #  #  # #    # #    # #####     ######  #    # #    #   #         #    #####   ####    #   
-#    #   # # #    # #    # #         #       #    # #####    #         #    #           #   #   
-#    #    ## #    # #    # #         #       #    # #   #    #         #    #      #    #   #   
-#    #     #  ####  #####  ######    #        ####  #    #   #         #    ######  ####    #   
-#
-####################################
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana-nodeport
-spec:
-  type: NodePort
-  selector:
-    app: grafana
-  ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    nodePort: 31000
+    server {
+        listen        80;
+        
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+
+        location / {
+            proxy_pass  https://unifi;
+            proxy_ssl_verify              off;
+        }
+    }
