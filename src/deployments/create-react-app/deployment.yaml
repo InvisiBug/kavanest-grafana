@@ -87,10 +87,17 @@ metadata:
     # traefik.frontend.passHostHeader: "false"
 spec:
   rules:
-  - host: kavanetes.kavanet.io
-    http:
+  # - host: kavanetes.kavanet.io
+  - http:
       paths:
       - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: create-react-app-service
+            port: 
+              number: 80
+      - path: /create-react-app
         pathType: Prefix
         backend:
           service:
@@ -112,7 +119,17 @@ spec:
             port: 
               number: 80
 
-
+####################################
+#
+#    #     #                         ######                         #######                     
+#    ##    #  ####  #####  ######    #     #  ####  #####  #####       #    ######  ####  ##### 
+#    # #   # #    # #    # #         #     # #    # #    #   #         #    #      #        #   
+#    #  #  # #    # #    # #####     ######  #    # #    #   #         #    #####   ####    #   
+#    #   # # #    # #    # #         #       #    # #####    #         #    #           #   #   
+#    #    ## #    # #    # #         #       #    # #   #    #         #    #      #    #   #   
+#    #     #  ####  #####  ######    #        ####  #    #   #         #    ######  ####    #   
+#
+####################################
 ---
 apiVersion: v1
 kind: Service
@@ -127,4 +144,4 @@ spec:
     targetPort: 80
     protocol: TCP
     nodePort: 31000
-  
+

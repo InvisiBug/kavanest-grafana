@@ -12,38 +12,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ingress-example
+  name: unifi
   labels:
-    app: ingress-example
+    meta.helm.sh/release-namespace: "unifi"
+    meta.helm.sh/release-name: "unifi"
+    app.kubernetes.io/managed-by: "Helm"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ingress-example
+      app.kubernetes.io/name: unifi
   template:
     metadata:
       labels:
-        app: ingress-example
+        app.kubernetes.io/name: unifi
     spec:
+      serviceAccountName: unifi
       containers:
-      - name: nginx
+      - name: unifi
         image: nginx
         ports:
         - containerPort: 80
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
+        - name: unifi-conf
+          mountPath: "/etc/nginx/conf.d/"
       volumes:
-      - name: html-volume
+      - name: unifi-conf
         configMap:
-          name: mysite-html
+          name: unifi-config
 
 ####################################
 #
@@ -60,14 +56,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ingress-example-service
+  name: unifi
+  labels:
+    meta.helm.sh/release-namespace: "unifi"
+    meta.helm.sh/release-name: "unifi"
+    app.kubernetes.io/managed-by: "Helm"
 spec:
-  type: ClusterIP
-  selector:
-    app: ingress-example
   ports:
-    - protocol: TCP
-      port: 80
+  - port: 80
+    targetPort: 80
+  selector:
+    app.kubernetes.io/name: unifi
 
 ####################################
 #
@@ -84,37 +83,30 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-example-ingress
+  name: testkavanet-ingress
+  labels:
+    meta.helm.sh/release-namespace: "unifi"
+    meta.helm.sh/release-name: "unifi"
+    app.kubernetes.io/managed-by: "Helm"
   annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.frontend.rule.type: PathPrefixStrip
-    traefik.frontend.passHostHeader: "false"
-    ingress.kubernetes.io/protocol: http
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  tls:
+  - hosts:
+    - unifi.imtl.co.uk
+    secretName: unifi-imtl-co-uk-tls
   rules:
-  - host: kavanetes.kavanet.io
+  - host: unifi.imtl.co.uk
     http:
       paths:
-      - path: /kavanet
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: ingress-example-service
-            port: 
-              number: 80
-      - path: /test
-        pathType: Prefix
-        backend:
-          service:
-            name: ingress-example-service
-            port: 
-              number: 80
-      - path: /boop
-        pathType: Prefix
-        backend:
-          service:
-            name: ingress-example-service
-            port: 
+            name: unifi
+            port:
               number: 80
 
 ####################################
@@ -132,32 +124,27 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mysite-html
+  name: unifi-config
+  labels:
+    meta.helm.sh/release-namespace: "unifi"
+    meta.helm.sh/release-name: "unifi"
+    app.kubernetes.io/managed-by: "Helm"
 data:
-  index.html: |
-    <html>
-      <head><title>Ingress Example</title>
-        <style>
-          html {
-            font-size: 62.5%;
-          }
-          body {
-            font-family: sans-serif;
-            background-color: midnightblue;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-          }
-          div {
-            text-align: center;
-            font-size: 8rem;
-            text-shadow: 3px 3px 4px dimgrey;
-          }
-        </style>
-      </head>
-      <body>
-        <div>Ingress Example</div>
-      </body>
-    </html>
+  proxy.conf: |
+    upstream unifi {
+        server        192.168.1.45:8443;
+    }
+
+    server {
+        listen        80;
+        
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+
+        location / {
+            proxy_pass  https://unifi;
+            proxy_ssl_verify              off;
+        }
+    }

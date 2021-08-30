@@ -1,0 +1,149 @@
+####################################
+#
+#   #     #                        
+#   ##    #  ####  # #    # #    # 
+#   # #   # #    # # ##   #  #  #  
+#   #  #  # #      # # #  #   ##   
+#   #   # # #  ### # #  # #   ##   
+#   #    ## #    # # #   ##  #  #  
+#   #     #  ####  # #    # #    #
+#
+####################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi
+  labels:
+    app: unifi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi
+  template:
+    metadata:
+      labels:
+        app: unifi
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: unifi-conf
+          mountPath: "/etc/nginx/conf.d/"
+      volumes:
+      - name: unifi-conf
+        configMap:
+          name: unifi-config
+
+####################################
+#
+#     #####                                       
+#    #     # ###### #####  #    # #  ####  ###### 
+#    #       #      #    # #    # # #    # #      
+#     #####  #####  #    # #    # # #      #####  
+#          # #      #####  #    # # #      #      
+#    #     # #      #   #   #  #  # #    # #      
+#     #####  ###### #    #   ##   #  ####  ######
+#
+####################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi
+  # labels:
+    # meta.helm.sh/release-namespace: "unifi"
+    # meta.helm.sh/release-name: "unifi"
+    # app.kubernetes.io/managed-by: "Helm"
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: unifi
+
+####################################
+#
+#   ###                                           
+#    #  #    #  ####  #####  ######  ####   ####  
+#    #  ##   # #    # #    # #      #      #      
+#    #  # #  # #      #    # #####   ####   ####  
+#    #  #  # # #  ### #####  #           #      # 
+#    #  #   ## #    # #   #  #      #    # #    # 
+#   ### #    #  ####  #    # ######  ####   ####  
+#
+####################################
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: testkavanet-ingress
+  labels:
+    # meta.helm.sh/release-namespace: "unifi"
+    # meta.helm.sh/release-name: "unifi"
+    # app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    
+    kubernetes.io/ingress.class: "traefik"
+    traefik.frontend.rule.type: PathPrefixStrip
+    traefik.frontend.passHostHeader: "false"
+    ingress.kubernetes.io/protocol: http
+    
+spec:
+  rules:
+  - host: unifi.kavanet.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: unifi
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - unifi.kavanet.io
+    secretName: unifi.kavanet.io-tls
+
+####################################
+#
+#   #####                                   #     #               
+#  #     #  ####  #    # ###### #  ####     ##   ##   ##   #####  
+#  #       #    # ##   # #      # #    #    # # # #  #  #  #    # 
+#  #       #    # # #  # #####  # #         #  #  # #    # #    # 
+#  #       #    # #  # # #      # #  ###    #     # ###### #####  
+#  #     # #    # #   ## #      # #    #    #     # #    # #      
+#   #####   ####  #    # #      #  ####     #     # #    # #      
+#
+####################################
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: unifi-config
+data:
+  proxy.conf: |
+    upstream unifi {
+        server        192.168.1.45:8443;
+    }
+
+    server {
+        listen        80;
+        
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+
+        location / {
+            proxy_pass  https://unifi;
+            proxy_ssl_verify              off;
+        }
+    }
