@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
 // console.clear();
 let client = mqtt_1.default.connect("mqtt://kavanet.io");
-let intClient = mqtt_1.default.connect("mqtt://mosquitto"); // Docker & Kubernetes
-// let intClient = mqtt.connect("mqtt://localhost"); // Development
-// let intClient = mqtt.connect("mqtt://mqtt"); // Kubernetes
+// let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
+let intClient = mqtt_1.default.connect("mqtt://localhost"); // Development
 client.subscribe("#", (err) => {
     // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
     let x = err;

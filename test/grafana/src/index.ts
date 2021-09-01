@@ -3,9 +3,8 @@ import chalk from "chalk";
 
 // console.clear();
 let client = mqtt.connect("mqtt://kavanet.io");
-let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
-// let intClient = mqtt.connect("mqtt://localhost"); // Development
-// let intClient = mqtt.connect("mqtt://mqtt"); // Kubernetes
+// let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
+let intClient = mqtt.connect("mqtt://localhost"); // Development
 
 client.subscribe("#", (err) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));

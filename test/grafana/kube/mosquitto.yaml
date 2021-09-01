@@ -115,7 +115,6 @@ spec:
 #  #         ##    ####  
 #
 ####################################
-# * Mosquitto
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

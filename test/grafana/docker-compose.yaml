@@ -1,14 +1,17 @@
 version: "3.1"
 
 services:
-  interconnector:
-    container_name: interconnector
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: interconnector:latest
-    networks:
-      - proxynet
+  ## Only uncomment this section if you want
+  ## Grafana to run on your local machine
+  ## Deffo dont uncomment for development
+  # interconnector:
+  #   container_name: interconnector
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: interconnector:latest
+  #   networks:
+  #     - proxynet
 
   mosquitto:
     image: eclipse-mosquitto:1.6
@@ -38,7 +41,7 @@ services:
       - proxynet
 
   influxdb:
-    container_name: influxdb
+    container_name: influx
     image: influxdb:1.5
     ports:
       - "8086:8086"
@@ -50,7 +53,7 @@ services:
       - INFLUXDB_PASSWORD=telegraf-password
     restart: always
     volumes:
-      - influxdb-storage:/var/lib/influxdb
+      - influx-storage:/var/lib/influxdb
     networks:
       - proxynet
 
@@ -69,7 +72,7 @@ services:
       - proxynet
 
 volumes:
-  influxdb-storage:
+  influx-storage:
   grafana-storage:
   mosquitto-storage:
 
