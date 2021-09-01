@@ -12,6 +12,8 @@ COPY ./tsconfig.json ./
 # Copy across source folder
 COPY ./src ./src
 
+
+
 RUN npm install -g nodemon
 RUN npm install
 

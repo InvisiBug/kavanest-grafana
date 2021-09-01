@@ -20,6 +20,10 @@ var sensors: any = {
   ourRoom: { temperature: undefined, humidity: undefined },
 };
 
+var heating: any = {
+  state: undefined,
+};
+
 var valves: any = {
   livingRoom: { state: 0 }, // not having the humidity breaks things
   // kitchen: { state: 0 }, // think it may be something with the software
@@ -40,6 +44,12 @@ client.on("message", (topic, payload) => {
   try {
     if (topic == "Room Offsets") {
       tempOffsets = JSON.parse(payload.toString());
+    }
+
+    if (topic == "Heating") {
+      let message = JSON.parse(payload.toString());
+      heating.heatingState = message.state ? 1 : 0;
+      // console.log(JSON.parse(payload.toString()).state);
     }
 
     if (topic.includes("Sensor")) {
@@ -118,7 +128,6 @@ let dealWithSensors = (payload: any, sensors: any) => {
     }, 10 * 1000);
     sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
     sensors.ourRoom.humidity = message.humidity;
-    // console.log(sensors.ourRoom.temperature);
   }
 };
 
@@ -130,6 +139,7 @@ setInterval(() => {
 let publish = () => {
   intClient.publish("temperatures", JSON.stringify(sensors));
   intClient.publish("valves", JSON.stringify(valves));
+  intClient.publish("heating", JSON.stringify(heating));
 
   // console.log(JSON.stringify(valves));
 };

@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
 // console.clear();
 let client = mqtt_1.default.connect("mqtt://kavanet.io");
-// let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
-let intClient = mqtt_1.default.connect("mqtt://localhost"); // Development
+let intClient = mqtt_1.default.connect("mqtt://mosquitto"); // Docker & Kubernetes
+// let intClient = mqtt.connect("mqtt://localhost"); // Development
 client.subscribe("#", (err) => {
     // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
     let x = err;
@@ -19,6 +19,9 @@ var sensors = {
     liamsRoom: { temperature: undefined, humidity: undefined },
     study: { temperature: undefined, humidity: undefined },
     ourRoom: { temperature: undefined, humidity: undefined },
+};
+var heating = {
+    state: undefined,
 };
 var valves = {
     livingRoom: { state: 0 },
@@ -38,6 +41,11 @@ client.on("message", (topic, payload) => {
     try {
         if (topic == "Room Offsets") {
             tempOffsets = JSON.parse(payload.toString());
+        }
+        if (topic == "Heating") {
+            let message = JSON.parse(payload.toString());
+            heating.heatingState = message.state ? 1 : 0;
+            // console.log(JSON.parse(payload.toString()).state);
         }
         if (topic.includes("Sensor")) {
             dealWithSensors(payload, sensors);
@@ -120,7 +128,6 @@ let dealWithSensors = (payload, sensors) => {
         }, 10 * 1000);
         sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
         sensors.ourRoom.humidity = message.humidity;
-        // console.log(sensors.ourRoom.temperature);
     }
 };
 // Send to grafana
@@ -130,6 +137,7 @@ setInterval(() => {
 let publish = () => {
     intClient.publish("temperatures", JSON.stringify(sensors));
     intClient.publish("valves", JSON.stringify(valves));
+    intClient.publish("heating", JSON.stringify(heating));
     // console.log(JSON.stringify(valves));
 };
 publish();
