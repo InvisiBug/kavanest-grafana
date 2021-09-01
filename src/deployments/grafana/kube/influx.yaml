@@ -1,0 +1,109 @@
+####################################
+#
+#     ######                                                                       
+#     #     # ###### #####  #       ####  #   # #    # ###### #    # ##### 
+#     #     # #      #    # #      #    #  # #  ##  ## #      ##   #   #   
+#     #     # #####  #    # #      #    #   #   # ## # #####  # #  #   #   
+#     #     # #      #####  #      #    #   #   #    # #      #  # #   #   
+#     #     # #      #      #      #    #   #   #    # #      #   ##   #   
+#     ######  ###### #      ######  ####    #   #    # ###### #    #   #    
+#
+####################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influx
+  labels:
+    app: influx
+  namespace: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influx
+  template:
+    metadata:
+      labels:
+        app: influx
+    spec:
+      volumes:
+      - name: pv
+        persistentVolumeClaim:
+          claimName: influx
+      containers:
+      - name: influx
+        image: influxdb:1.5
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: pv
+          mountPath: /var/lib/influxdb/
+        env:
+        - name: INFLUXDB_DB
+          value: sensors
+        - name: INFLUXDB_ADMIN_USER
+          value: admin-user
+        - name: INFLUXDB_ADMIN_PASSWORD
+          value: telegraf-admin-password
+        - name: INFLUXDB_USER
+          value: telegraf-username
+        - name: INFLUXDB_PASSWORD
+          value: telegraf-password
+        resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits: 
+              memory: "128Mi"
+              cpu: "500m"
+
+####################################
+#
+#     #####                                       
+#    #     # ###### #####  #    # #  ####  ###### 
+#    #       #      #    # #    # # #    # #      
+#     #####  #####  #    # #    # # #      #####  
+#          # #      #####  #    # # #      #      
+#    #     # #      #   #   #  #  # #    # #      
+#     #####  ###### #    #   ##   #  ####  ######
+#
+####################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influx
+  namespace: grafana
+spec:
+  type: ClusterIP
+  selector:
+    app: influx
+  ports:
+    - port: 8086
+      protocol: TCP
+      targetPort: 8086
+
+####################################
+#
+#  ######                
+#  #     # #    #  ####  
+#  #     # #    # #    # 
+#  ######  #    # #      
+#  #       #    # #      
+#  #        #  #  #    # 
+#  #         ##    ####  
+#
+####################################
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influx
+  namespace: grafana
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 500Mi

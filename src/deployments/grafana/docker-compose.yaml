@@ -1,0 +1,81 @@
+version: "3.1"
+
+services:
+  ## Only uncomment this section if you want
+  ## Grafana to run on your local machine
+  ## Deffo dont uncomment for development
+  # interconnector:
+  #   container_name: interconnector
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: interconnector:latest
+  #   networks:
+  #     - proxynet
+
+  mosquitto:
+    image: eclipse-mosquitto:1.6
+    hostname: mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    restart: always
+    volumes:
+      - mosquitto-storage:/mosquitto/data
+      - ./config/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - proxynet
+
+  telegraf:
+    image: telegraf:1.9
+    container_name: telegraf
+    restart: always
+    ports:
+      - "5050:5050"
+    depends_on:
+      - mosquitto
+    volumes:
+      - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    networks:
+      - proxynet
+
+  influxdb:
+    container_name: influx
+    image: influxdb:1.5
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=sensors
+      - INFLUXDB_ADMIN_USER=admin-user
+      - INFLUXDB_ADMIN_PASSWORD=telegraf-admin-password
+      - INFLUXDB_USER=telegraf-username
+      - INFLUXDB_PASSWORD=telegraf-password
+    restart: always
+    volumes:
+      - influx-storage:/var/lib/influxdb
+    networks:
+      - proxynet
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    links:
+      - influxdb
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - proxynet
+
+volumes:
+  influx-storage:
+  grafana-storage:
+  mosquitto-storage:
+
+networks:
+  proxynet:
+    name: grafana-network
