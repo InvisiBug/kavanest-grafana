@@ -10,23 +10,16 @@
     "build": "tsc",
     "logs": "docker logs kavanet-simulator -f"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/InvisiBug/Kavanet-Simulator.git"
-  },
   "keywords": [],
   "author": "InvisiBug",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/InvisiBug/Kavanet-Simulator/issues"
-  },
-  "homepage": "https://github.com/InvisiBug/Kavanet-Simulator#readme",
   "dependencies": {
     "chalk": "^4.1.0",
     "express": "^4.17.1",
     "mqtt": "^4.2.4"
   },
   "devDependencies": {
+    "@types/ws": "^7.4.7",
     "@types/express": "^4.17.8",
     "@types/node": "^14.14.6",
     "nodemon": "^2.0.6",

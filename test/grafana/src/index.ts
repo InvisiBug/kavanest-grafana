@@ -3,8 +3,9 @@ import chalk from "chalk";
 
 // console.clear();
 let client = mqtt.connect("mqtt://kavanet.io");
-let intClient = mqtt.connect("mqtt://mosquitto"); // Docker
+let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
 // let intClient = mqtt.connect("mqtt://localhost"); // Development
+// let intClient = mqtt.connect("mqtt://mqtt"); // Kubernetes
 
 client.subscribe("#", (err) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
@@ -85,7 +86,7 @@ let dealWithSensors = (payload: any, sensors: any) => {
     }, 10 * 1000);
     sensors.livingRoom.temperature = (message.temperature + tempOffsets["Living Room"]).toFixed(2) * 1;
     sensors.livingRoom.humidity = message.humidity;
-    console.log(sensors.livingRoom.temperature);
+    // console.log(sensors.livingRoom.temperature);
   } else if (message.node.includes("Kitchen")) {
     clearTimeout(kitchenTimer);
     kitchenTimer = setTimeout(() => {
@@ -118,7 +119,7 @@ let dealWithSensors = (payload: any, sensors: any) => {
     }, 10 * 1000);
     sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
     sensors.ourRoom.humidity = message.humidity;
-    console.log(sensors.ourRoom.temperature);
+    // console.log(sensors.ourRoom.temperature);
   }
 };
 

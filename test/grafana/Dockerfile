@@ -1,20 +1,47 @@
+# # Use Node version 14
+# FROM arm64v8/node:14
+
+# # Create app directory within container
+# WORKDIR /usr/src/app
+
+# # Install app dependencies
+# # A wild card is used to ensure both package.json AND package-lock.json are copied 
+# COPY package*.json ./
+# COPY tsconfig.json ./
+
+# # Copy across source folder
+# COPY ./src ./src
+
+# # RUN npm install -g nodemon
+# RUN npm install
+
+# EXPOSE 1883
+# EXPOSE 9001
+# # CMD ["npm", "start"]
+# CMD ["node", "src/index.js"]
+
+
 # Use Node version 14
-FROM node:14
+FROM arm64v8/node:14
 
 # Create app directory within container
 WORKDIR /usr/src/app
 
 # Install app dependencies
-# A wild card is used to ensure both package.json AND package-lock.json are copied 
+# A wild card is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
-COPY tsconfig.json ./
+COPY tsconfig.json ./ 
+
+
+
 
 # Copy across source folder
-COPY ./src ./src
+COPY ./dist ./
 
-RUN npm install -g nodemon
+# RUN npm install -g nodemon
 RUN npm install
 
 EXPOSE 1883
 EXPOSE 9001
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["node","index.js"]

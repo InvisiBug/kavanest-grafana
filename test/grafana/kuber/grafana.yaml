@@ -1,12 +1,12 @@
 ####################################
 #
-#   #     #                        
-#   ##    #  ####  # #    # #    # 
-#   # #   # #    # # ##   #  #  #  
-#   #  #  # #      # # #  #   ##   
-#   #   # # #  ### # #  # #   ##   
-#   #    ## #    # # #   ##  #  #  
-#   #     #  ####  # #    # #    #
+#     ######                                                                       
+#     #     # ###### #####  #       ####  #   # #    # ###### #    # #####  
+#     #     # #      #    # #      #    #  # #  ##  ## #      ##   #   #    
+#     #     # #####  #    # #      #    #   #   # ## # #####  # #  #   #    
+#     #     # #      #####  #      #    #   #   #    # #      #  # #   #    
+#     #     # #      #      #      #    #   #   #    # #      #   ##   #    
+#     ######  ###### #      ######  ####    #   #    # ###### #    #   #     
 #
 ####################################
 apiVersion: apps/v1
@@ -26,11 +26,18 @@ spec:
       labels:
         app: grafana
     spec:
+      volumes:
+      - name: pv
+        persistentVolumeClaim:
+          claimName: grafana
       containers:
-      - name: nginx
-        image: nginx
+      - name: grafana
+        image: grafana/grafana:latest
         ports:
-        - containerPort: 80
+        - containerPort: 3000
+        volumeMounts:
+        - name: pv
+          mountPath: /var/lib/grafana/
         resources:
             requests:
               memory: "64Mi"
@@ -38,13 +45,6 @@ spec:
             limits: 
               memory: "128Mi"
               cpu: "500m"
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: html-volume
-        configMap:
-          name: grafana-site
 
 ####################################
 #
@@ -58,20 +58,22 @@ spec:
 #
 ####################################
 ---
+# * Grafana
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana-service
+  name: grafana
   namespace: grafana
 spec:
   type: ClusterIP
   selector:
-    app: grafana
+    app: grafana 
   ports:
-    - protocol: TCP
-      port: 80
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
 
-####################################
+###################################
 #
 #   ###                                           
 #    #  #    #  ####  #####  ######  ####   ####  
@@ -96,65 +98,45 @@ metadata:
     ingress.kubernetes.io/protocol: http
 spec:
   rules:
-  - host: kavanet.io
+  - host: grafana.kavanet.io
     http:
       paths:
-      - path: /grafana
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: grafana-service
+            name: grafana
             port: 
-              number: 80
+              number: 3000
   tls:
   - hosts:
-    - kavanet.io
-    secretName: kavanet.io-tls
+    - grafana.kavanet.io
+    secretName: grafana.kavanet.io-tls
 
 ####################################
 #
-#   #####                                   #     #               
-#  #     #  ####  #    # ###### #  ####     ##   ##   ##   #####  
-#  #       #    # ##   # #      # #    #    # # # #  #  #  #    # 
-#  #       #    # # #  # #####  # #         #  #  # #    # #    # 
-#  #       #    # #  # # #      # #  ###    #     # ###### #####  
-#  #     # #    # #   ## #      # #    #    #     # #    # #      
-#   #####   ####  #    # #      #  ####     #     # #    # #      
+#  ######                
+#  #     # #    #  ####  
+#  #     # #    # #    # 
+#  ######  #    # #      
+#  #       #    # #      
+#  #        #  #  #    # 
+#  #         ##    ####  
 #
 ####################################
 ---
 apiVersion: v1
-kind: ConfigMap
+kind: PersistentVolumeClaim
 metadata:
-  name: grafana-site
+  name: grafana
   namespace: grafana
-data:
-  index.html: |
-    <html>
-      <head><title>Grafana</title>
-        <style>
-          html {
-            font-size: 62.5%;
-          }
-          body {
-            font-family: sans-serif;
-            background-color: #222222;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-          }
-          div {
-            text-align: center;
-            font-size: 8rem;
-          }
-        </style>
-      </head>
-      <body>
-        <div>Grafana goes here :P</div>
-      </body>
-    </html>
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 500Mi
 
 ####################################
 #
@@ -178,7 +160,7 @@ spec:
   selector:
     app: grafana
   ports:
-  - port: 80
-    targetPort: 80
+  - port: 3000
+    targetPort: 3000
     protocol: TCP
-    # nodePort: 31000
+    nodePort: 31002

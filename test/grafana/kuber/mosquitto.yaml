@@ -1,0 +1,131 @@
+####################################
+#
+#     ######                                                                       
+#     #     # ###### #####  #       ####  #   # #    # ###### #    # ##### 
+#     #     # #      #    # #      #    #  # #  ##  ## #      ##   #   #   
+#     #     # #####  #    # #      #    #   #   # ## # #####  # #  #   #   
+#     #     # #      #####  #      #    #   #   #    # #      #  # #   #   
+#     #     # #      #      #      #    #   #   #    # #      #   ##   #   
+#     ######  ###### #      ######  ####    #   #    # ###### #    #   #    
+#
+####################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  labels:
+    app: mosquitto
+  namespace: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      volumes:
+      - name: mosquitto-volume
+        configMap:
+          name: mosquitto
+      - name: pv
+        persistentVolumeClaim:
+          claimName: mosquitto
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto:1.6
+        ports:
+        - containerPort: 1883
+        - containerPort: 9001
+        volumeMounts:
+        - name: mosquitto-volume
+          mountPath: /mosquitto/config
+        - name: pv
+          mountPath: /mosquitto/data
+        resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits: 
+              memory: "128Mi"
+              cpu: "500m"
+
+####################################
+#
+#   #####                                   #     #                       
+#  #     #  ####  #    # ###### #  ####     ##   ##   ##   #####  
+#  #       #    # ##   # #      # #    #    # # # #  #  #  #    # 
+#  #       #    # # #  # #####  # #         #  #  # #    # #    # 
+#  #       #    # #  # # #      # #  ###    #     # ###### #####  
+#  #     # #    # #   ## #      # #    #    #     # #    # #      
+#   #####   ####  #    # #      #  ####     #     # #    # #     
+#
+####################################
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto
+  namespace: grafana
+data:
+  mosquitto.conf: |
+    log_dest file /mosquitto/log/mosquitto.log
+  
+####################################
+#
+#     #####                                       
+#    #     # ###### #####  #    # #  ####  ###### 
+#    #       #      #    # #    # # #    # #      
+#     #####  #####  #    # #    # # #      #####  
+#          # #      #####  #    # # #      #      
+#    #     # #      #   #   #  #  # #    # #      
+#     #####  ###### #    #   ##   #  ####  ######
+#
+####################################
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto
+  namespace: grafana
+spec:
+  type: ClusterIP
+  selector:
+    app: mosquitto
+  ports:
+    - name: tcp-ip
+      port: 1883
+      protocol: TCP
+      targetPort: 1883
+    - name: ssl
+      port: 9001
+      protocol: TCP
+      targetPort: 9001
+
+####################################
+#
+#  ######                
+#  #     # #    #  ####  
+#  #     # #    # #    # 
+#  ######  #    # #      
+#  #       #    # #      
+#  #        #  #  #    # 
+#  #         ##    ####  
+#
+####################################
+# * Mosquitto
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mosquitto
+  namespace: grafana
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 500Mi
