@@ -3,8 +3,8 @@ import chalk from "chalk";
 
 // console.clear();
 let client = mqtt.connect("mqtt://kavanet.io");
-// let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
-let intClient = mqtt.connect("mqtt://localhost"); // Development
+let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
+// let intClient = mqtt.connect("mqtt://localhost"); // Development
 
 client.subscribe("#", (err) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
@@ -49,7 +49,6 @@ client.on("message", (topic, payload) => {
     if (topic == "Heating") {
       let message = JSON.parse(payload.toString());
       heating.heatingState = message.state ? 1 : 0;
-      // console.log(JSON.parse(payload.toString()).state);
     }
 
     if (topic.includes("Sensor")) {
@@ -90,8 +89,8 @@ let dealWithSensors = (payload: any, sensors: any) => {
   if (message.node.includes("Living Room")) {
     clearTimeout(livingRoomTimer);
     livingRoomTimer = setTimeout(() => {
-      sensors.livingRoom.temperature = -1;
-      sensors.livingRoom.humidity = -1;
+      sensors.livingRoom.temperature = undefined;
+      sensors.livingRoom.humidity = undefined;
     }, 10 * 1000);
     sensors.livingRoom.temperature = (message.temperature + tempOffsets["Living Room"]).toFixed(2) * 1;
     sensors.livingRoom.humidity = message.humidity;
@@ -99,32 +98,32 @@ let dealWithSensors = (payload: any, sensors: any) => {
   } else if (message.node.includes("Kitchen")) {
     clearTimeout(kitchenTimer);
     kitchenTimer = setTimeout(() => {
-      sensors.kitchen.temperature = -1;
-      sensors.kitchen.humidity = -1;
+      sensors.kitchen.temperature = undefined;
+      sensors.kitchen.humidity = undefined;
     }, 10 * 1000);
     sensors.kitchen.temperature = (message.temperature + tempOffsets["Kitchen"]).toFixed(2) * 1;
     sensors.kitchen.humidity = message.humidity;
   } else if (message.node.includes("Liams Room")) {
     clearTimeout(liamsRoomTimer);
     liamsRoomTimer = setTimeout(() => {
-      sensors.liamsRoom.temperature = -1;
-      sensors.liamsRoom.humidity = -1;
+      sensors.liamsRoom.temperature = undefined;
+      sensors.liamsRoom.humidity = undefined;
     }, 10 * 1000);
     sensors.liamsRoom.temperature = (message.temperature + tempOffsets["Liams Room"]).toFixed(2) * 1;
     sensors.liamsRoom.humidity = message.humidity;
   } else if (message.node.includes("Study")) {
     clearTimeout(studyTimer);
     studyTimer = setTimeout(() => {
-      sensors.study.temperature = -1;
-      sensors.study.humidity = -1;
+      sensors.study.temperature = undefined;
+      sensors.study.humidity = undefined;
     }, 10 * 1000);
     sensors.study.temperature = (message.temperature + tempOffsets["Study"]).toFixed(2) * 1;
     sensors.study.humidity = message.humidity;
   } else if (message.node.includes("Our Room")) {
     clearTimeout(ourRoomTimer);
     ourRoomTimer = setTimeout(() => {
-      sensors.ourRoom.temperature = -1;
-      sensors.ourRoom.humidity = -1;
+      sensors.ourRoom.temperature = undefined;
+      sensors.ourRoom.humidity = undefined;
     }, 10 * 1000);
     sensors.ourRoom.temperature = (message.temperature + tempOffsets["Our Room"]).toFixed(2) * 1;
     sensors.ourRoom.humidity = message.humidity;

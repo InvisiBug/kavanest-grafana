@@ -1,0 +1,50 @@
+# HTTPS ingress
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: whoami-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+
+spec:
+  rules:
+    - host: whoami
+      http:
+        paths:
+          - backend:
+              serviceName: whoami
+              servicePort: 80
+  tls:
+    - secretName: mysecret
+
+---
+# Ingresses
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect
+
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+# http ingress for http->https redirection
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: whoami-redirect
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+
+spec:
+  rules:
+    - host: whoami
+      http:
+        paths:
+          - backend:
+              serviceName: whoami
+              servicePort: 80

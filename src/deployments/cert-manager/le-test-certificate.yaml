@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: kavanet-io
+  name: test-cert-kavanet-io
   # namespace: default
 spec:
-  secretName: kavanet-io-tls
+  secretName: test-cert-kavanet-io-tls
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
-  commonName: kavanet.io
+  commonName: test.kavanet.io
   dnsNames:
-  - kavanet.io
+  - test.kavanet.io

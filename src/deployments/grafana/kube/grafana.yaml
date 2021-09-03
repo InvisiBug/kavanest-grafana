@@ -65,9 +65,16 @@ spec:
   selector:
     app: grafana 
   ports:
-    - port: 3000
+    - name: port1
+      port: 3000
       protocol: TCP
-      targetPort: 3000
+    # - name: port2
+    #   port: 80
+    #   protocol: TCP
+    # - name: port3
+    #   port: 443
+    #   protocol: TCP
+      # targetPort: 3000
 
 ###################################
 #
@@ -89,9 +96,12 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.frontend.rule.type: PathPrefixStrip
-    traefik.frontend.passHostHeader: "false"
+    # traefik.frontend.rule.type: PathPrefix
+    # traefik.frontend.passHostHeader: "true"
     ingress.kubernetes.io/protocol: http
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    # traefik.ingress.kubernetes.io/preserve-host: "true"
+    # traefik.ingress.kubernetes.io/rule-type: PathPrefix
 spec:
   rules:
   - host: grafana.kavanet.io
@@ -104,6 +114,7 @@ spec:
             name: grafana
             port: 
               number: 3000
+              
   tls:
   - hosts:
     - grafana.kavanet.io

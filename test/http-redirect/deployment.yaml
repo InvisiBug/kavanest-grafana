@@ -88,19 +88,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     traefik.frontend.rule.type: PathPrefixStrip
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.frontend.passHostHeader: "false"
     ingress.kubernetes.io/protocol: http
 spec:
-  tls:
-  - hosts:
-    - test.kavanet.io
-    secretName: test.kavanet.io-tls
   rules:
-  - host: test.kavanet.io
+  # - host: kavanetes.kavanet.io
   - http:
       paths:
-      - path: /
+      - path: /kavanet
         pathType: Prefix
         backend:
           service:
@@ -139,7 +134,7 @@ kind: ConfigMap
 metadata:
   name: mysite-html
 data:
-  index.html: |
+  index.html: | 
     <html>
       <head><title>Ingress Example</title>
         <style>
@@ -163,6 +158,6 @@ data:
         </style>
       </head>
       <body>
-        <div>Ingress Example</div>
+        <div>HTTP Redirect</div>
       </body>
     </html>
