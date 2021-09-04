@@ -88,16 +88,16 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     traefik.frontend.rule.type: PathPrefixStrip
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.frontend.passHostHeader: "false"
     ingress.kubernetes.io/protocol: http
 spec:
-  tls:
-  - hosts:
-    - test.kavanet.io
-    secretName: test.kavanet.io-tls
+  # tls:
+  # - hosts:
+  #   - test.kavanet.io
+  #   secretName: test.kavanet.io-tls
   rules:
-  - host: test.kavanet.io
+  # - host: kavanet.io
   - http:
       paths:
       - path: /
