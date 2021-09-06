@@ -15,7 +15,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  namespace: unifi-proxy
+  namespace: printer-proxy
 spec:
   replicas: 1
   selector:
@@ -39,12 +39,12 @@ spec:
               memory: "128Mi"
               cpu: "500m"
         volumeMounts:
-        - name: unifi-conf
+        - name: volume
           mountPath: "/etc/nginx/conf.d/"
       volumes:
-      - name: unifi-conf
+      - name: volume
         configMap:
-          name: unifi-configmap
+          name: configmap
 
 ####################################
 #
@@ -61,8 +61,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: unifi
-  namespace: unifi-proxy
+  name: nginx
+  namespace: printer-proxy
 spec:
   selector:
     app: nginx
@@ -85,8 +85,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: testkavanet-ingress
-  namespace: unifi-proxy
+  name: printer-proxy
+  namespace: printer-proxy
   annotations:  
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -96,20 +96,20 @@ metadata:
     
 spec:
   rules:
-  - host: unifi.kavanet.io
+  - host: printer.kavanet.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: unifi
+            name: nginx
             port:
               number: 80
   tls:
   - hosts:
-    - unifi.kavanet.io
-    secretName: unifi.kavanet.io-tls
+    - printer.kavanet.io
+    secretName: printer.kavanet.io-tls
 
 ####################################
 #
@@ -126,24 +126,112 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: unifi-configmap
-  namespace: unifi-proxy
+  name: configmap
+  namespace: printer-proxy
 data:
   proxy.conf: |
-    upstream unifi {
-        server 192.168.1.45:8443;
+    upstream controller {
+        server 192.168.1.168:80;
     }
 
     server {
         listen 80;
+        listen 8080;
         
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
         proxy_set_header Host $host;
 
-        location / {
-            proxy_pass https://unifi;
+        location /websocket {
+            proxy_pass http://controller;
             proxy_ssl_verify off;
         }
+
+        location / {
+            proxy_pass http://controller;
+            proxy_ssl_verify off;
+        }
+
+        # location /sockjs/ {
+
+        # proxy_pass ​http://controller;
+        # proxy_http_version 1.1;
+        # proxy_set_header Upgrade $http_upgrade;
+        # proxy_set_header Connection "upgrade";
+        # proxy_read_timeout 86400;
+
+        # }
     }
+
+
+
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: mysite-html
+# data:
+#   index.html: |
+#     <html>
+#       <head><title>Ingress Example</title>
+#         <style>
+#           html {
+#             font-size: 62.5%;
+#           }
+#           body {
+#             font-family: sans-serif;
+#             background-color: midnightblue;
+#             color: white;
+#             display: flex;
+#             flex-direction: column;
+#             justify-content: center;
+#             height: 100vh;
+#           }
+#           div {
+#             text-align: center;
+#             font-size: 8rem;
+#             text-shadow: 3px 3px 4px dimgrey;
+#           }
+#         </style>
+#       </head>
+#       <body>
+#         <div>Ingress Example</div>
+#       </body>
+#     </html>
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: ingress-example
+#   labels:
+#     app: ingress-example
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: ingress-example
+#   template:
+#     metadata:
+#       labels:
+#         app: ingress-example
+#     spec:
+#       containers:
+#       - name: nginx
+#         image: nginx
+#         ports:
+#         - containerPort: 80
+#         resources:
+#             requests:
+#               memory: "64Mi"
+#               cpu: "250m"
+#             limits: 
+#               memory: "128Mi"
+#               cpu: "500m"
+#         volumeMounts:
+#         - name: html-volume
+#           mountPath: /usr/share/nginx/html
+#       volumes:
+#       - name: html-volume
+#         configMap:
+#           name: mysite-html

@@ -12,24 +12,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: unifi
+  name: nginx
   labels:
-    meta.helm.sh/release-namespace: "unifi"
-    meta.helm.sh/release-name: "unifi"
-    app.kubernetes.io/managed-by: "Helm"
+    app: nginx
+  namespace: controller-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: unifi
+      app: nginx
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: unifi
+        app: nginx
     spec:
-      serviceAccountName: unifi
       containers:
-      - name: unifi
+      - name: nginx
         image: nginx
         ports:
         - containerPort: 80
@@ -41,12 +39,12 @@ spec:
               memory: "128Mi"
               cpu: "500m"
         volumeMounts:
-        - name: unifi-conf
+        - name: volume
           mountPath: "/etc/nginx/conf.d/"
       volumes:
-      - name: unifi-conf
+      - name: volume
         configMap:
-          name: unifi-config
+          name: configmap
 
 ####################################
 #
@@ -63,17 +61,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: unifi
-  labels:
-    meta.helm.sh/release-namespace: "unifi"
-    meta.helm.sh/release-name: "unifi"
-    app.kubernetes.io/managed-by: "Helm"
+  name: nginx
+  namespace: controller-proxy
 spec:
+  selector:
+    app: nginx
   ports:
   - port: 80
     targetPort: 80
-  selector:
-    app.kubernetes.io/name: unifi
 
 ####################################
 #
@@ -91,30 +86,30 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: testkavanet-ingress
-  labels:
-    meta.helm.sh/release-namespace: "unifi"
-    meta.helm.sh/release-name: "unifi"
-    app.kubernetes.io/managed-by: "Helm"
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: controller-proxy
+  annotations:  
+    kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/protocol: http
+    
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    
 spec:
-  tls:
-  - hosts:
-    - unifi.imtl.co.uk
-    secretName: unifi-imtl-co-uk-tls
   rules:
-  - host: unifi.imtl.co.uk
+  - host: controller.kavanet.io
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: unifi
+            name: nginx
             port:
               number: 80
+  tls:
+  - hosts:
+    - controller.kavanet.io
+    secretName: controller.kavanet.io-tls
 
 ####################################
 #
@@ -131,19 +126,16 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: unifi-config
-  labels:
-    meta.helm.sh/release-namespace: "unifi"
-    meta.helm.sh/release-name: "unifi"
-    app.kubernetes.io/managed-by: "Helm"
+  name: configmap
+  namespace: controller-proxy
 data:
   proxy.conf: |
-    upstream unifi {
-        server        192.168.1.45:8443;
+    upstream controller {
+        server 192.168.1.46:80;
     }
 
     server {
-        listen        80;
+        listen 80;
         
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -151,7 +143,77 @@ data:
         proxy_set_header Host $host;
 
         location / {
-            proxy_pass  https://unifi;
-            proxy_ssl_verify              off;
+            proxy_pass http://controller;
+            proxy_ssl_verify off;
         }
     }
+
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: mysite-html
+# data:
+#   index.html: |
+#     <html>
+#       <head><title>Ingress Example</title>
+#         <style>
+#           html {
+#             font-size: 62.5%;
+#           }
+#           body {
+#             font-family: sans-serif;
+#             background-color: midnightblue;
+#             color: white;
+#             display: flex;
+#             flex-direction: column;
+#             justify-content: center;
+#             height: 100vh;
+#           }
+#           div {
+#             text-align: center;
+#             font-size: 8rem;
+#             text-shadow: 3px 3px 4px dimgrey;
+#           }
+#         </style>
+#       </head>
+#       <body>
+#         <div>Ingress Example</div>
+#       </body>
+#     </html>
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: ingress-example
+#   labels:
+#     app: ingress-example
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: ingress-example
+#   template:
+#     metadata:
+#       labels:
+#         app: ingress-example
+#     spec:
+#       containers:
+#       - name: nginx
+#         image: nginx
+#         ports:
+#         - containerPort: 80
+#         resources:
+#             requests:
+#               memory: "64Mi"
+#               cpu: "250m"
+#             limits: 
+#               memory: "128Mi"
+#               cpu: "500m"
+#         volumeMounts:
+#         - name: html-volume
+#           mountPath: /usr/share/nginx/html
+#       volumes:
+#       - name: html-volume
+#         configMap:
+#           name: mysite-html

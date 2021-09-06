@@ -103,6 +103,10 @@ metadata:
     # traefik.ingress.kubernetes.io/preserve-host: "true"
     # traefik.ingress.kubernetes.io/rule-type: PathPrefix
 spec:
+  tls:
+  - hosts:
+    - grafana.kavanet.io
+    secretName: grafana.kavanet.io-tls
   rules:
   - host: grafana.kavanet.io
     http:
@@ -115,10 +119,6 @@ spec:
             port: 
               number: 3000
               
-  tls:
-  - hosts:
-    - grafana.kavanet.io
-    secretName: grafana.kavanet.io-tls
 
 ####################################
 #
