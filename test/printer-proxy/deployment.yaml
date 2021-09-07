@@ -92,6 +92,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     ingress.kubernetes.io/protocol: http
     
+    traefik.ingress.kubernetes.io/preserve-host: "true"
     traefik.ingress.kubernetes.io/redirect-entry-point: https
     
 spec:
@@ -130,38 +131,23 @@ metadata:
   namespace: printer-proxy
 data:
   proxy.conf: |
-    upstream controller {
-        server 192.168.1.168:80;
-    }
-
     server {
-        listen 80;
-        listen 8080;
-        
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "Upgrade";
-        proxy_set_header Host $host;
+      listen 80;
 
-        location /websocket {
-            proxy_pass http://controller;
-            proxy_ssl_verify off;
-        }
+      location / {
+          proxy_pass http://192.168.1.168;
+          proxy_set_header Host $http_host;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Scheme https;
+          proxy_ssl_verify off;
 
-        location / {
-            proxy_pass http://controller;
-            proxy_ssl_verify off;
-        }
+          proxy_http_version 1.1;
 
-        # location /sockjs/ {
-
-        # proxy_pass ​http://controller;
-        # proxy_http_version 1.1;
-        # proxy_set_header Upgrade $http_upgrade;
-        # proxy_set_header Connection "upgrade";
-        # proxy_read_timeout 86400;
-
-        # }
+          client_max_body_size 0;
+      }
     }
 
 
