@@ -1,5 +1,6 @@
 import mqtt from "mqtt";
 import chalk from "chalk";
+const request = require("request");
 
 // console.clear();
 let client = mqtt.connect("mqtt://kavanet.io");
@@ -11,6 +12,29 @@ client.subscribe("#", (err) => {
   let x = err;
   console.log("Subscribed to all");
 });
+
+var weather: any = {
+  current: undefined,
+};
+
+const getCurrent = () => {
+  request(
+    "https://api.openweathermap.org/data/2.5/weather?q=Sheffield&APPID=85c05ad811ead4d20eac5bb0e1ce640d&units=metric",
+    (error: any, response: any, body: any) => {
+      if (!error && response.statusCode == 200) {
+        var data = JSON.parse(body);
+        weather.current = data.main.temp;
+        console.log(data.main.temp);
+      }
+    },
+  );
+};
+
+setInterval(() => {
+  getCurrent();
+}, 5 * 1000);
+
+getCurrent();
 
 var sensors: any = {
   livingRoom: { temperature: undefined, humidity: undefined },
@@ -139,8 +163,7 @@ let publish = () => {
   intClient.publish("temperatures", JSON.stringify(sensors));
   intClient.publish("valves", JSON.stringify(valves));
   intClient.publish("heating", JSON.stringify(heating));
-
-  // console.log(JSON.stringify(valves));
+  intClient.publish("outside", JSON.stringify(weather));
 };
 
 publish();

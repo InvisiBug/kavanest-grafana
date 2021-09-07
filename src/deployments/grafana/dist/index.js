@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
+const request = require("request");
 // console.clear();
 let client = mqtt_1.default.connect("mqtt://kavanet.io");
 let intClient = mqtt_1.default.connect("mqtt://mosquitto"); // Docker & Kubernetes
@@ -13,6 +14,22 @@ client.subscribe("#", (err) => {
     let x = err;
     console.log("Subscribed to all");
 });
+var weather = {
+    current: undefined,
+};
+const getCurrent = () => {
+    request("https://api.openweathermap.org/data/2.5/weather?q=Sheffield&APPID=85c05ad811ead4d20eac5bb0e1ce640d&units=metric", (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            var data = JSON.parse(body);
+            weather.current = data.main.temp;
+            console.log(data.main.temp);
+        }
+    });
+};
+setInterval(() => {
+    getCurrent();
+}, 5 * 1000);
+getCurrent();
 var sensors = {
     livingRoom: { temperature: undefined, humidity: undefined },
     kitchen: { temperature: undefined, humidity: undefined },
@@ -137,7 +154,7 @@ let publish = () => {
     intClient.publish("temperatures", JSON.stringify(sensors));
     intClient.publish("valves", JSON.stringify(valves));
     intClient.publish("heating", JSON.stringify(heating));
-    // console.log(JSON.stringify(valves));
+    intClient.publish("outside", JSON.stringify(weather));
 };
 publish();
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));

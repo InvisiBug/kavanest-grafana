@@ -15,7 +15,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  namespace: printer-proxy
+  namespace: printer-unsecured
 spec:
   replicas: 1
   selector:
@@ -62,7 +62,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx
-  namespace: printer-proxy
+  namespace: printer-unsecured
 spec:
   selector:
     app: nginx
@@ -85,16 +85,17 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: printer-proxy
-  namespace: printer-proxy
+  name: printer-unsecured
+  namespace: printer-unsecured
   annotations:  
     kubernetes.io/ingress.class: "traefik"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
     ingress.kubernetes.io/protocol: http
     
+    # traefik.ingress.kubernetes.io/redirect-entry-point: https
     traefik.ingress.kubernetes.io/preserve-host: "true"
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
-    
+    # traefik.ingress.kubernetes.io/redirect-entry-point: http
+        
 spec:
   rules:
   - host: printer.kavanet.io
@@ -107,10 +108,10 @@ spec:
             name: nginx
             port:
               number: 80
-  tls:
-  - hosts:
-    - printer.kavanet.io
-    secretName: printer.kavanet.io-tls
+  # tls:
+  # - hosts:
+  #   - printer.kavanet.io
+  #   secretName: printer.kavanet.io-tls
 
 ####################################
 #
@@ -128,96 +129,25 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configmap
-  namespace: printer-proxy
+  namespace: printer-unsecured
 data:
   proxy.conf: |
     server {
-      listen 80;
+        listen 80;
 
-      location / {
-          proxy_pass http://192.168.1.168;
-          proxy_set_header Host $http_host;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Scheme https;
-          # proxy_ssl_verify off;
+        location / {
+            proxy_pass https://192.168.1.168;
+            proxy_set_header Host $http_host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            
+            proxy_set_header X-Scheme $scheme;
+            # proxy_ssl_verify off;
 
-          proxy_http_version 1.1;
+            proxy_http_version 1.1;
 
-          client_max_body_size 0;
+            client_max_body_size 0;
+        }
       }
-    }
-
-
-
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: mysite-html
-# data:
-#   index.html: |
-#     <html>
-#       <head><title>Ingress Example</title>
-#         <style>
-#           html {
-#             font-size: 62.5%;
-#           }
-#           body {
-#             font-family: sans-serif;
-#             background-color: midnightblue;
-#             color: white;
-#             display: flex;
-#             flex-direction: column;
-#             justify-content: center;
-#             height: 100vh;
-#           }
-#           div {
-#             text-align: center;
-#             font-size: 8rem;
-#             text-shadow: 3px 3px 4px dimgrey;
-#           }
-#         </style>
-#       </head>
-#       <body>
-#         <div>Ingress Example</div>
-#       </body>
-#     </html>
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: ingress-example
-#   labels:
-#     app: ingress-example
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: ingress-example
-#   template:
-#     metadata:
-#       labels:
-#         app: ingress-example
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: nginx
-#         ports:
-#         - containerPort: 80
-#         resources:
-#             requests:
-#               memory: "64Mi"
-#               cpu: "250m"
-#             limits: 
-#               memory: "128Mi"
-#               cpu: "500m"
-#         volumeMounts:
-#         - name: html-volume
-#           mountPath: /usr/share/nginx/html
-#       volumes:
-#       - name: html-volume
-#         configMap:
-#           name: mysite-html
