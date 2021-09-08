@@ -45,7 +45,11 @@ var sensors: any = {
 };
 
 var heating: any = {
-  state: undefined,
+  heatingState: undefined,
+};
+
+type Heating = {
+  heatingState: number | undefined;
 };
 
 var valves: any = {
@@ -56,6 +60,13 @@ var valves: any = {
   ourRoom: { state: 0 },
 };
 
+type Valves = {
+  livingRoom: { state: number };
+  liamsRoom: { state: number };
+  study: { state: number };
+  ourRoom: { state: number };
+};
+
 let tempOffsets: any = {
   "Living Room": -0.5,
   Kitchen: 0,
@@ -64,11 +75,12 @@ let tempOffsets: any = {
   "Our Room": 1.9,
 };
 
-client.on("message", (topic, payload) => {
+client.on("message", (topic: string, payload: object) => {
   try {
     if (topic == "Room Offsets") {
       tempOffsets = JSON.parse(payload.toString());
     }
+    console.log(typeof payload);
 
     if (topic == "Heating") {
       let message = JSON.parse(payload.toString());
@@ -77,7 +89,9 @@ client.on("message", (topic, payload) => {
 
     if (topic.includes("Sensor")) {
       dealWithSensors(payload, sensors);
-    } else if (topic.includes("Valve")) {
+    }
+
+    if (topic.includes("Valve")) {
       let message = JSON.parse(payload.toString());
       message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
 
