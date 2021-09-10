@@ -38,7 +38,7 @@ var sensors = {
     ourRoom: { temperature: undefined, humidity: undefined },
 };
 var heating = {
-    state: undefined,
+    heatingState: undefined,
 };
 var valves = {
     livingRoom: { state: 0 },
@@ -59,6 +59,7 @@ client.on("message", (topic, payload) => {
         if (topic == "Room Offsets") {
             tempOffsets = JSON.parse(payload.toString());
         }
+        console.log(typeof payload);
         if (topic == "Heating") {
             let message = JSON.parse(payload.toString());
             heating.heatingState = message.state ? 1 : 0;
@@ -66,7 +67,7 @@ client.on("message", (topic, payload) => {
         if (topic.includes("Sensor")) {
             dealWithSensors(payload, sensors);
         }
-        else if (topic.includes("Valve")) {
+        if (topic.includes("Valve")) {
             let message = JSON.parse(payload.toString());
             message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
             if (message.node.includes("Living Room")) {

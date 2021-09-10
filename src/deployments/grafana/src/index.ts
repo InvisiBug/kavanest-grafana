@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import chalk from "chalk";
+import { Sensors, TimerType, TemperatureOffsets, Valves, Heating } from "./types";
 const request = require("request");
 
 // console.clear();
@@ -7,7 +7,7 @@ let client = mqtt.connect("mqtt://kavanet.io");
 let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
 // let intClient = mqtt.connect("mqtt://localhost"); // Development
 
-client.subscribe("#", (err) => {
+client.subscribe("#", (err: any) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
   let x = err;
   console.log("Subscribed to all");
@@ -20,7 +20,7 @@ var weather: any = {
 const getCurrent = () => {
   request(
     "https://api.openweathermap.org/data/2.5/weather?q=Sheffield&APPID=85c05ad811ead4d20eac5bb0e1ce640d&units=metric",
-    (error: any, response: any, body: any) => {
+    (error: any, response: any, body: string) => {
       if (!error && response.statusCode == 200) {
         var data = JSON.parse(body);
         weather.current = data.main.temp;
@@ -36,7 +36,7 @@ setInterval(() => {
 
 getCurrent();
 
-var sensors: any = {
+var sensors: Sensors = {
   livingRoom: { temperature: undefined, humidity: undefined },
   kitchen: { temperature: undefined, humidity: undefined },
   liamsRoom: { temperature: undefined, humidity: undefined },
@@ -44,15 +44,11 @@ var sensors: any = {
   ourRoom: { temperature: undefined, humidity: undefined },
 };
 
-var heating: any = {
+var heating: Heating = {
   heatingState: undefined,
 };
 
-type Heating = {
-  heatingState: number | undefined;
-};
-
-var valves: any = {
+var valves: Valves = {
   livingRoom: { state: 0 }, // not having the humidity breaks things
   // kitchen: { state: 0 }, // think it may be something with the software
   liamsRoom: { state: 0 }, // not liking a non number datapoint on its own
@@ -60,14 +56,7 @@ var valves: any = {
   ourRoom: { state: 0 },
 };
 
-type Valves = {
-  livingRoom: { state: number };
-  liamsRoom: { state: number };
-  study: { state: number };
-  ourRoom: { state: number };
-};
-
-let tempOffsets: any = {
+let tempOffsets: TemperatureOffsets = {
   "Living Room": -0.5,
   Kitchen: 0,
   "Liams Room": 0.2,
@@ -115,11 +104,11 @@ client.on("message", (topic: string, payload: object) => {
   if the sensor hasnt sent out a ping within the last 10 seconds
   Hacky way to do this but it works well enough
 */
-let livingRoomTimer: any;
-let kitchenTimer: any;
-let liamsRoomTimer: any;
-let studyTimer: any;
-let ourRoomTimer: any;
+let livingRoomTimer: TimerType;
+let kitchenTimer: TimerType;
+let liamsRoomTimer: TimerType;
+let studyTimer: TimerType;
+let ourRoomTimer: TimerType;
 
 let dealWithSensors = (payload: any, sensors: any) => {
   let message = JSON.parse(payload.toString());
