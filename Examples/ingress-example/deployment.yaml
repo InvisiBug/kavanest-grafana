@@ -86,11 +86,12 @@ kind: Ingress
 metadata:
   name: ingress-example-ingress
   annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.frontend.rule.type: PathPrefixStrip
+    kubernetes.io/ingress.class: "nginx"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+
     # cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.frontend.passHostHeader: "false"
-    ingress.kubernetes.io/protocol: http
+
+    # ingress.kubernetes.io/protocol: http
 spec:
   # tls:
   # - hosts:
@@ -107,20 +108,20 @@ spec:
             name: ingress-example-service
             port: 
               number: 80
-      - path: /test
-        pathType: Prefix
-        backend:
-          service:
-            name: ingress-example-service
-            port: 
-              number: 80
-      - path: /boop
-        pathType: Prefix
-        backend:
-          service:
-            name: ingress-example-service
-            port: 
-              number: 80
+      # - path: /test
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: ingress-example-service
+      #       port: 
+      #         number: 80
+      # - path: /boop
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: ingress-example-service
+      #       port: 
+      #         number: 80
 
 ####################################
 #
@@ -166,3 +167,20 @@ data:
         <div>Ingress Example</div>
       </body>
     </html>
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: kube-registry
+#   labels:
+#     app: ingress-example
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: ingress-example
+#   ports:
+#   - name: registry
+#     port: 80
+#     targetPort: 80
+#     protocol: TCP

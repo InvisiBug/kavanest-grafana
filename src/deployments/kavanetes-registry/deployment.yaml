@@ -59,3 +59,24 @@ spec:
     port: 5000
     targetPort: 5000
     protocol: TCP
+
+# * Was used to see if the metallb would allocate a different ip
+# * which it did
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: kube-registry-test
+#   namespace: kube-system
+#   labels:
+#     k8s-app: kube-registry
+#     kubernetes.io/name: "KubeRegistry"
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     k8s-app: kube-registry
+#   ports:
+#   - name: registry
+#     port: 5000
+#     targetPort: 5000
+#     protocol: TCP
