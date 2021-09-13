@@ -1,3 +1,14 @@
+####################################
+#
+#   #     #                                                         
+#   ##    #   ##   #    # ######  ####  #####    ##    ####  ###### 
+#   # #   #  #  #  ##  ## #      #      #    #  #  #  #    # #      
+#   #  #  # #    # # ## # #####   ####  #    # #    # #      #####  
+#   #   # # ###### #    # #           # #####  ###### #      #      
+#   #    ## #    # #    # #      #    # #      #    # #    # #      
+#   #     # #    # #    # ######  ####  #      #    #  ####  ###### 
+#
+####################################
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -90,16 +101,16 @@ metadata:
   name: kavanet-io-ingress
   namespace: kavanet-io
   annotations:
-    # kubernetes.io/ingress.class: "traefik"
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    # ingress.kubernetes.io/protocol: http
-    
-    # traefik.ingress.kubernetes.io/redirect-entry-point: https
+
+
 spec:
   rules:
-  - host: kavanet.io
-    http:
+  # - host: kavanet.io
+    # http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
