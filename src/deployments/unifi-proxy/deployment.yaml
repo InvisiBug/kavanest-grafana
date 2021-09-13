@@ -1,5 +1,21 @@
 ####################################
 #
+#   #     #                                                         
+#   ##    #   ##   #    # ######  ####  #####    ##    ####  ###### 
+#   # #   #  #  #  ##  ## #      #      #    #  #  #  #    # #      
+#   #  #  # #    # # ## # #####   ####  #    # #    # #      #####  
+#   #   # # ###### #    # #           # #####  ###### #      #      
+#   #    ## #    # #    # #      #    # #      #    # #    # #      
+#   #     # #    # #    # ######  ####  #      #    #  ####  ###### 
+#
+####################################
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unifi-proxy
+
+####################################
+#
 #   #     #                        
 #   ##    #  ####  # #    # #    # 
 #   # #   # #    # # ##   #  #  #  
@@ -9,6 +25,7 @@
 #   #     #  ####  # #    # #    #
 #
 ####################################
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -93,7 +110,7 @@ metadata:
     ingress.kubernetes.io/protocol: http
     
     traefik.ingress.kubernetes.io/redirect-entry-point: https
-    
+
 spec:
   rules:
   - host: unifi.kavanet.io

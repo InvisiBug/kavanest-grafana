@@ -1,5 +1,21 @@
 ####################################
 #
+#   #     #                                                         
+#   ##    #   ##   #    # ######  ####  #####    ##    ####  ###### 
+#   # #   #  #  #  ##  ## #      #      #    #  #  #  #    # #      
+#   #  #  # #    # # ## # #####   ####  #    # #    # #      #####  
+#   #   # # ###### #    # #           # #####  ###### #      #      
+#   #    ## #    # #    # #      #    # #      #    # #    # #      
+#   #     # #    # #    # ######  ####  #      #    #  ####  ###### 
+#
+####################################
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: printer-proxy
+
+####################################
+#
 #   #     #                        
 #   ##    #  ####  # #    # #    # 
 #   # #   # #    # # ##   #  #  #  
@@ -9,6 +25,7 @@
 #   #     #  ####  # #    # #    #
 #
 ####################################
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -87,14 +104,14 @@ kind: Ingress
 metadata:
   name: printer-proxy
   namespace: printer-proxy
-  annotations:  
+  annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     ingress.kubernetes.io/protocol: http
     
     traefik.ingress.kubernetes.io/preserve-host: "true"
     traefik.ingress.kubernetes.io/redirect-entry-point: https
-    
+
 spec:
   rules:
   - host: printer.kavanet.io
@@ -149,75 +166,3 @@ data:
           client_max_body_size 0;
       }
     }
-
-
-
-# ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: mysite-html
-# data:
-#   index.html: |
-#     <html>
-#       <head><title>Ingress Example</title>
-#         <style>
-#           html {
-#             font-size: 62.5%;
-#           }
-#           body {
-#             font-family: sans-serif;
-#             background-color: midnightblue;
-#             color: white;
-#             display: flex;
-#             flex-direction: column;
-#             justify-content: center;
-#             height: 100vh;
-#           }
-#           div {
-#             text-align: center;
-#             font-size: 8rem;
-#             text-shadow: 3px 3px 4px dimgrey;
-#           }
-#         </style>
-#       </head>
-#       <body>
-#         <div>Ingress Example</div>
-#       </body>
-#     </html>
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: ingress-example
-#   labels:
-#     app: ingress-example
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: ingress-example
-#   template:
-#     metadata:
-#       labels:
-#         app: ingress-example
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: nginx
-#         ports:
-#         - containerPort: 80
-#         resources:
-#             requests:
-#               memory: "64Mi"
-#               cpu: "250m"
-#             limits: 
-#               memory: "128Mi"
-#               cpu: "500m"
-#         volumeMounts:
-#         - name: html-volume
-#           mountPath: /usr/share/nginx/html
-#       volumes:
-#       - name: html-volume
-#         configMap:
-#           name: mysite-html
