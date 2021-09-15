@@ -45,7 +45,7 @@ spec:
     spec:
       containers:
         - name: kavanet-io
-          image: 192.168.1.62:5000/kavanet.io
+          image: 192.168.1.61:5000/kavanet.io
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -103,14 +103,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 
 
 spec:
   rules:
-  # - host: kavanet.io
-    # http:
-  - http:
+  - host: kavanet.io
+    http:
+  # - http:
       paths:
       - path: /
         pathType: Prefix
@@ -119,10 +119,10 @@ spec:
             name: kavanet-io-service
             port: 
               number: 80
-  # tls:
-  # - hosts:
-  #   - kavanet.io
-  #   secretName: kavanet.io-tls
+  tls:
+  - hosts:
+    - kavanet.io
+    secretName: kavanet.io-tls
 
 ####################################
 #
@@ -142,11 +142,10 @@ metadata:
   name: kavanet-io-entry-point
   namespace: kavanet-io
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: kavanet-io
   ports:
   - port: 80
     targetPort: 80
     protocol: TCP
-    nodePort: 31001
