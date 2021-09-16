@@ -23,7 +23,7 @@ data:
           - targets: ['localhost:9090']
       - job_name: 'K3S'
         static_configs:
-          - targets: ['192.168.1.60:9100', '192.168.1.61:9100']
+          - targets: ['192.168.1.42:9100', '192.168.1.43:9100']
 ---
 apiVersion: apps/v1
 kind: Deployment

@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: interconnector
-        image: localhost:5000/grafana-interconnector
+        image: 192.168.1.61:5000/grafana-interconnector
         ports:
         - containerPort: 1883
         - containerPort: 9001

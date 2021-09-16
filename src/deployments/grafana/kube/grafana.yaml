@@ -103,11 +103,9 @@ metadata:
   name: grafana-ingress
   namespace: grafana
   annotations:
-    kubernetes.io/ingress.class: "traefik"
+    kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    ingress.kubernetes.io/protocol: http
-
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   tls:
   - hosts:

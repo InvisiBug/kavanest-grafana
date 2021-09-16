@@ -47,30 +47,45 @@ spec:
               memory: "512Mi"
               cpu: "1000m"
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: monitoring-ingress
+  name: grafana-loadlabancer
   namespace: monitoring
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    # cert-manager.io/cluster-issuer: "letsencrypt-prod"
-
-
 spec:
-  rules:
-  # - host: kavanet.io
-    # http:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: grafana-service
-            port: 
-              number: 80
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+  - port: 80
+    name: grafana
+    protocol: TCP
+    targetPort: 3000
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: monitoring-ingress
+#   namespace: monitoring
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+#     # cert-manager.io/cluster-issuer: "letsencrypt-prod"
+
+
+# spec:
+#   rules:
+#   # - host: kavanet.io
+#     # http:
+#   - http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: grafana-service
+#             port: 
+#               number: 80
 ---
 apiVersion: v1
 kind: Service
