@@ -1,0 +1,4 @@
+
+{{ include "library.deployment" . }}
+{{ include "library.loadBalancer" . }}
+{{ include "library.configMap" .}}

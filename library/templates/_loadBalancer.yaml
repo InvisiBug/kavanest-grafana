@@ -1,0 +1,38 @@
+{{- define "library.loadBalancer" -}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+# check here for service.name, if exists replace this name
+# otherwise use the values.name
+  name: {{.Values.name}}
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{.Values.name}}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{.Values.name}}
+  ports:
+    - name: {{.Values.name}}
+      port: {{.Values.loadBalancer.port}}
+      targetPort: {{.Values.loadBalancer.port}}
+      protocol: TCP
+{{- end -}}
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: kube-registry
+#   labels:
+#     app: ingress-example
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: ingress-example
+#   ports:
+#   - name: registry
+#     port: 80
+#     targetPort: 80
+#     protocol: TCP

@@ -1,0 +1,15 @@
+name: test-app
+
+namespace: helm-test
+
+deployment:
+  containerName: nginx
+  image: nginx
+  port: 80
+
+loadBalancer:
+  port: 80
+
+config: 
+  name: test
+  file: "config/*"
