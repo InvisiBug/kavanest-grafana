@@ -1,0 +1,87 @@
+name: test-app
+
+namespace: helm-test
+
+# deployment:
+#   - name: nginx
+#     image: nginx
+#     port: 80
+
+#   - name: istio
+#     image: istio
+#     port: 3000
+#     resources: 
+#       memory: "500m"
+#       cpu: 100m
+
+ingress:
+  - name: ig1
+    host: kavanet.io
+    selector: kavanet.io-service
+
+  - name: ig2
+    host: kavanet.io
+    selector: kavanet.io-service
+
+
+
+
+
+
+# service:
+#   nodePort:
+#     - name: np1
+#       selector: nginx
+#       port: 80
+#       nodePort: 31001
+
+#     - name: np2
+#       selector: nginx
+#       port: 8080
+#       nodePort: 31002
+
+#   clusterIP:
+#     - name: cip1
+#       selector: "none"
+#       port: 80
+
+#     - name: cip2
+#       selector: "none"
+#       port: 8080
+
+#   loadBalancer:
+#     - name: lb1
+#       selector: nginx
+#       port: 80
+
+#     - name: lb2
+#       selector: nginx
+#       port: 80
+
+
+
+
+# All stuff below is correct but needs comments
+# deployment:
+#   - name: nginx
+#     image: nginx
+#     port: 80
+
+# service:
+#   nodePort:
+#     - name: "Name"
+#       selector: "App to attach to"
+#       port: "Port of the app"
+#       nodePort: "Port to connect to the outside world"
+#   clusterIP:
+#     - name: cip1
+#       selector: "none"
+#       port: 80
+#   loadBalancer: # Check if target port is needed with loadbalancer
+#     - name: lb1
+#       selector: nginx
+#       port: 80
+
+# config: 
+#   name: test
+#   file: "config/telegraf.conf"
