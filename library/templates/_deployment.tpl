@@ -1,4 +1,5 @@
 {{- define "library.deployment" -}}
+{{- if .Values.deployment}}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,4 +29,5 @@ spec:
             memory: {{.Values.deployment.resources.memory}}
             cpu: {{.Values.deployment.resources.cpu -}}
         {{end}}
+{{- end -}}
 {{- end -}}

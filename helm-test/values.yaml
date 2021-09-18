@@ -15,15 +15,42 @@ namespace: helm-test
 
 service:
   nodePort:
-    - name: test1
+    - name: np1
       selector: nginx
       port: 80
       nodePort: 31001
 
-    - name: test2
+    - name: np2
       selector: nginx
       port: 8080
       nodePort: 31002
+
+  clusterIP:
+    - name: cip1
+      selector: "none"
+      port: 80
+
+    - name: cip2
+      selector: "none"
+      port: 8080
+
+  loadBalancer: # Check if target port is needed with loadbalancer
+    - name: lb1
+      selector: nginx
+      port: 80
+
+    - name: lb2
+      selector: nginx
+      port: 80
+
+
+
+# service:
+#   nodePort:
+#     - name: "Name"
+#       selector: "App to attach to"
+#       port: "Port of the app"
+#       nodePort: "Port to connect to the outside world"
 
 # clusterIP:
 #   - name: test1
