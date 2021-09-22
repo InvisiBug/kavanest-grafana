@@ -4,4 +4,4 @@
 {{ include "library.loadBalancer" . }}
 {{ include "library.ingress" . }}
 {{ include "library.pvc" . }}
-{{ include "library.configMap" .}}
+{{ include "library.configmap" .}}

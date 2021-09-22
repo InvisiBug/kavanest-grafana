@@ -16,6 +16,6 @@ spec:
     - name: {{$element.name}}
       port: {{$element.port}}
       protocol: TCP
-{{- end -}}
-{{- end -}}
-{{- end -}}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -20,28 +20,26 @@ spec:
       labels:
         app: {{$element.name}}
     spec:
-      {{- if $element.volumes}}
+      {{- if $element.volumes }}
       volumes:
       {{- range $index2, $vols := $element.volumes}}
       - name: {{$vols.name}}
         persistentVolumeClaim:
-          claimName: {{$vols.pvcName }}
+          claimName: {{$vols.selector }}
       {{- end }}
-      {{ end -}}
-
+      {{- end }}
       containers:
       - name: {{$element.name}}
-        image: {{$element.image}}
+        image: {{$element.image | quote}}
+        imagePullPolicy: Always
         ports:
         - containerPort: {{$element.port}}
-
         {{- if $element.resources}}
         resources:
-          limits: 
+          limits:
             memory: {{$element.resources.memory}}
             cpu: {{$element.resources.cpu }}
-        {{- end}}
-
+        {{- end }}
         {{- if $element.volumes}}
         volumeMounts:
         {{- range $index2, $vols := $element.volumes}}
@@ -49,15 +47,14 @@ spec:
           mountPath: {{$vols.path }}
         {{- end }}
         {{- end }}
-
         {{- if $element.env}}
         env:
         {{- range $index2, $vars := $element.env}}
           - name: {{ $vars.name }}
             value: {{ $vars.value }}
-        {{- end -}}
-        {{- end -}}
-
-{{- end -}}
-{{- end -}}
-{{- end -}}
+        {{- end }}
+        {{- end }}
+      restartPolicy: Always
+{{- end }}
+{{- end }}
+{{- end }}

@@ -50,39 +50,66 @@ pvc:
 
 
 
+# ingress:
+#   - name: ig1
+#     selector: kavanet.io-service
+#     path: /
+#     port: 80
+#     tls: true
+#     host: grafana.kavanet.io
+
+#   - name: ig2
+#     selector: kavanet.io-service
+#     path: /test-path
+#     port: 26
+
+
+configMap: 
+  - name: test
+    file: "config/telegraf.conf"
+  - name: test2
+    file: "config/telegraf.conf"
 
 
 
-
+# ? Finished
 # service:
 #   nodePort:
-#     - name: np1
-#       selector: nginx
-#       port: 80
-#       nodePort: 31001
-
-#     - name: np2
-#       selector: nginx
-#       port: 8080
-#       nodePort: 31002
+#     - name: <name>
+#       selector: <deployment_name>
+#       port: <container_port>
+#       nodePort: <external_port>
 
 #   clusterIP:
-#     - name: cip1
-#       selector: "none"
-#       port: 80
-
-#     - name: cip2
-#       selector: "none"
-#       port: 8080
+#     - name: <name>
+#       selector: <deployment>
+#       port: <internal_port>
 
 #   loadBalancer:
-#     - name: lb1
-#       selector: nginx
-#       port: 80
+#     - name: <name>
+#       selector: <deployment_name>
+#       port: <external_port>
 
-#     - name: lb2
-#       selector: nginx
-#       port: 80
+service:
+  nodePort:
+    - name: np21
+      selector: nginx1
+      port: 80
+      nodePort: 31001
+
+  clusterIP:
+    - name: cip1
+      selector: nginx2
+      port: 80
+
+  loadBalancer:
+    - name: lb1
+      selector: nginx3
+      port: 80
+
+
+
+
 
 
 
@@ -108,6 +135,3 @@ pvc:
 #       selector: nginx
 #       port: 80
 
-# config: 
-#   name: test
-#   file: "config/telegraf.conf"

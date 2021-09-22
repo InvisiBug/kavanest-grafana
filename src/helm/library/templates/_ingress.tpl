@@ -27,7 +27,7 @@ spec:
             name: {{$element.selector}}
             port: 
               number: 80
-  {{- if $element.tls}}
+  {{- if $element.host}}
   tls:
   - hosts:
     - {{$element.host}}

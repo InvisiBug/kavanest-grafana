@@ -1,5 +1,0 @@
-{{ include "library.clusterIP" . }}
-{{ include "library.deployment" . }}
-{{ include "library.nodePort" . }}
-{{ include "library.loadBalancer" . }}
-{{ include "library.ingress" . }}
