@@ -2,26 +2,52 @@ name: test-app
 
 namespace: helm-test
 
-# deployment:
-#   - name: nginx
-#     image: nginx
+deployment:
+  - name: grafana
+    image: grafana
+    port: 3000
+    resources: 
+      memory: "500m"
+      cpu: 100m
+    env:
+      - name: INFLUXDB_DB
+        value: sensors
+      - name: INFLUXDB_ADMIN_USER
+        value: admin-user
+      - name: INFLUXDB_ADMIN_PASSWORD
+        value: telegraf-admin-password
+      - name: INFLUXDB_USER
+        value: telegraf-username
+      - name: INFLUXDB_PASSWORD
+        value: telegraf-password
+    volumes:
+      - name: pv
+        path: /var/lib/influxdb/
+        pvcName: test-pvc
+
+
+  # - name: nginx
+  #   image: nginx
+  #   port: 80
+
+
+# ingress:
+#   - name: ig1
+#     selector: kavanet.io-service
+#     path: /
 #     port: 80
+#     tls: true
+#     host: grafana.kavanet.io
 
-#   - name: istio
-#     image: istio
-#     port: 3000
-#     resources: 
-#       memory: "500m"
-#       cpu: 100m
+#   - name: ig2
+#     path: /test-path
+#     selector: kavanet.io-service
+#     port: 26
 
-ingress:
-  - name: ig1
-    host: kavanet.io
-    selector: kavanet.io-service
+pvc:
+  - name: test-pvc
+    storage: 500mi
 
-  - name: ig2
-    host: kavanet.io
-    selector: kavanet.io-service
 
 
 
