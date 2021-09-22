@@ -2,28 +2,28 @@ name: test-app
 
 namespace: helm-test
 
-deployment:
-  - name: grafana
-    image: grafana
-    port: 3000
-    resources: 
-      memory: "500m"
-      cpu: 100m
-    env:
-      - name: INFLUXDB_DB
-        value: sensors
-      - name: INFLUXDB_ADMIN_USER
-        value: admin-user
-      - name: INFLUXDB_ADMIN_PASSWORD
-        value: telegraf-admin-password
-      - name: INFLUXDB_USER
-        value: telegraf-username
-      - name: INFLUXDB_PASSWORD
-        value: telegraf-password
-    volumes:
-      - name: pv
-        path: /var/lib/influxdb/
-        selector: test-pvc
+# deployment:
+#   - name: grafana
+#     image: grafana
+#     port: 3000
+#     resources: 
+#       memory: "500m"
+#       cpu: 100m
+#     env:
+#       - name: INFLUXDB_DB
+#         value: sensors
+#       - name: INFLUXDB_ADMIN_USER
+#         value: admin-user
+#       - name: INFLUXDB_ADMIN_PASSWORD
+#         value: telegraf-admin-password
+#       - name: INFLUXDB_USER
+#         value: telegraf-username
+#       - name: INFLUXDB_PASSWORD
+#         value: telegraf-password
+#     volumes:
+#       - name: pv
+#         path: /var/lib/influxdb/
+#         selector: test-pvc
 
 # ? Finished
 # pvc:
@@ -54,12 +54,12 @@ deployment:
 
 
 # ! Needs more work
-# configmap: 
-#   - name: test
-#     file: "config/telegraf.conf"
+configmap: 
+  - name: test
+    file: "config/telegraf.conf"
 
-#   - name: test2
-#     file: "config/telegraf.conf"
+  - name: test2
+    file: "config/telegraf.conf"
 
 
 
