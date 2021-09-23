@@ -6,9 +6,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{$element.name}}
+  name: {{$element.file | quote}}
 data:
-{{ (.Files.Glob $element.file ).AsConfig | indent 2 }}
+  test.conf |
+  sometest
 {{- end }}
 {{- end }}
 {{- end }}
