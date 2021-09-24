@@ -65,13 +65,13 @@ namespace: helm-test
 
 
 configmap: 
-  # - name: configmap1
-  #   file: telegraf.conf
-  # - name: configmap2
-  #   file: config/telegraf.conf
+  - name: configmap1
+    file: telegraf.conf
+  - name: configmap2
+    file: config/telegraf.conf
 
-  name: test1
-  file: config/telegraf.conf
+  # name: test1
+  # file: config/telegraf.conf
 
   # name: configmap1
   # file: config/telegraf.conf
