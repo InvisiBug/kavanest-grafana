@@ -2,7 +2,7 @@ version: "3.1"
 
 services:
   ## Only uncomment this section if you want
-  ## Grafana to run on your local machine
+  ## Grafana to run permenamtly on your local machine
   ## Deffo dont uncomment for development
   # interconnector:
   #   container_name: interconnector

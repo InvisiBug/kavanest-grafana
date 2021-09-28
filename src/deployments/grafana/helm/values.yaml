@@ -2,121 +2,112 @@ name: grafana
 
 namespace: grafana-test
 
-# deployment:
-#   - name: grafana
-#     image: grafana/grafana:latest
-#     ports:
-#       - port: 3000
-#     volumes:
-#       - type: pvc
-#         name: grafana-storage
-#         path: /var/lib/grafana
-#         selector: grafana-storage
+deployment:
+  - name: grafana
+    image: grafana/grafana:latest
+    ports:
+      - port: 3000
+    volumes:
+      - type: pvc
+        name: grafana-storage
+        path: /var/lib/grafana
 
-#   - name: influx
-#     image: influxdb:1.5
-#     ports:
-#       - port: 3000
-#     env:
-#       - name: INFLUXDB_DB
-#         value: sensors
-#       - name: INFLUXDB_ADMIN_USER
-#         value: admin-user
-#       - name: INFLUXDB_ADMIN_PASSWORD
-#         value: telegraf-admin-password
-#       - name: INFLUXDB_USER
-#         value: telegraf-username
-#       - name: INFLUXDB_PASSWORD
-#         value: telegraf-password
-#     volumes:
-#       - name: influx-storage
-#         type: pvc
-#         path: /var/lib/influxdb/
-#         selector: influx-storage
+  - name: influx
+    image: influxdb:1.5
+    ports:
+      - port: 3000
+    env:
+      - name: INFLUXDB_DB
+        value: sensors
+      - name: INFLUXDB_ADMIN_USER
+        value: admin-user
+      - name: INFLUXDB_ADMIN_PASSWORD
+        value: telegraf-admin-password
+      - name: INFLUXDB_USER
+        value: telegraf-username
+      - name: INFLUXDB_PASSWORD
+        value: telegraf-password
+    volumes:
+      - name: influx-storage
+        type: pvc
+        path: /var/lib/influxdb/
 
-#   - name: telegraf
-#     image: telegraf:1.9
-#     ports: 
-#     - port: 5050
-#     volumes:
-#       - name: telegraf-config
-#         type: config
-#         path: /etc/telegraf/
-#         selector: telegraf-config
+  - name: telegraf
+    image: telegraf:1.9
+    ports: 
+    - port: 5050
+    volumes:
+      - name: telegraf-config
+        type: config
+        path: /etc/telegraf/
 
-#   - name: mosquitto
-#     image: eclipse-mosquitto:1.6
-#     ports:
-#     - port: 1883
-#     - port: 9001
+  - name: mosquitto
+    image: eclipse-mosquitto:1.6
+    ports:
+    - port: 1883
+    - port: 9001
 
-#   - name: interconnector
-#     image: 192.168.1.61:5000/grafana-interconnector
-#     ports:
-#     - port: 1883
-#     - port: 9001
+  - name: interconnector
+    image: 192.168.1.61:5000/grafana-interconnector
+    ports:
+    - port: 1883
+    - port: 9001
 
-#   - name: prometheus
-#     image: prom/prometheus
-#     ports: 
-#       - port: 9090
-#     volumes:
-#       - name: prometheus-config
-#         type: config
-#         path: /etc/prometheus
+  - name: prometheus
+    image: prom/prometheus
+    ports: 
+      - port: 9090
+    volumes:
+      - name: prometheus-config
+        type: config
+        path: /etc/prometheus/
 
 
-# service:
-#   clusterIP:
-#     - name: grafana
-#       selector: grafana
-#       ports:
-#         - port: 3000
+service:
+  clusterIP:
+    - name: grafana
+      selector: grafana
+      ports:
+        - port: 3000
 
-#     - name: influx
-#       selector: influx
-#       ports:
-#         - port: 8086
+    - name: influx
+      selector: influx
+      ports:
+        - port: 8086
 
-#     - name: telegraf
-#       selector: telegraf
-#       ports:
-#         - port: 5000
+    - name: telegraf
+      selector: telegraf
+      ports:
+        - port: 5000
 
-#     - name: mosquitto
-#       selector: mosquitto
-#       ports:
-#         - port: 1883
-#         - port: 9001
+    - name: mosquitto
+      selector: mosquitto
+      ports:
+        - port: 1883
+        - port: 9001
 
-#     - name: interconnector
-#       selector: interconnector
-#       ports:
-#         - port: 1883
-#         - port: 9001
+    - name: interconnector
+      selector: interconnector
+      ports:
+        - port: 1883
+        - port: 9001
 
-#   loadBalancer:
-#     - name: grafana-lb
-#       selector: grafana
-#       port: 80
-#       containerPort: 3000
+  loadBalancer:
+    - name: grafana-lb
+      selector: grafana
+      port: 80
+      containerPort: 3000
 
 configmap: 
   - name: telegraf-config
     file: config/telegraf/telegraf.conf
 
   - name: prometheus-config
-    file: config/prometheus/prometheus.yaml
-  # file: config/prometheus/prometheus.json
+    file: config/prometheus/prometheus.yml
 
 
-# pvc:
-#   - name: grafana-storage
-#     storage: 500Mi
-#   - name: influx-storage
-#     storage: 500Mi
-
-  # - name: mosquitto-config
-  #   storage: 500Mi
-
-
+pvc:
+  - name: grafana-storage
+    storage: 500Mi
+  - name: influx-storage
+    storage: 500Mi

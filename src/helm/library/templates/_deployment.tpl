@@ -26,11 +26,11 @@ spec:
       {{- if eq $vols.type "pvc" }}
       - name: {{$vols.name}}
         persistentVolumeClaim:
-          claimName: {{$vols.selector }}
+          claimName: {{$vols.name }}
       {{- else if eq $vols.type "config" }}
       - name: {{$vols.name}}
         configMap:
-          name: {{$vols.selector }}
+          name: {{$vols.name }}
       {{- end }}
       {{- end }}
       {{- end }}
