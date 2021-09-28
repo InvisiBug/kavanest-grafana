@@ -25,19 +25,33 @@
   "links": [],
   "panels": [
     {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 171,
+      "panels": [],
+      "title": "KavaNetes",
+      "type": "row"
+    },
+    {
       "datasource": null,
       "gridPos": {
         "h": 2,
         "w": 11,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 168,
       "options": {
         "content": "<h1 style=\"text-align:center\">Master Node</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "transparent": true,
       "type": "text"
     },
@@ -48,14 +62,14 @@
         "h": 2,
         "w": 11,
         "x": 13,
-        "y": 0
+        "y": 1
       },
       "id": 169,
       "options": {
         "content": "<h1 style=\"text-align:center\">\n  Worker Node\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "transparent": true,
       "type": "text"
     },
@@ -106,16 +120,14 @@
         "h": 4,
         "w": 2,
         "x": 0,
-        "y": 2
+        "y": 3
       },
       "id": 155,
       "links": [],
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -123,7 +135,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -178,7 +190,7 @@
         "h": 4,
         "w": 2,
         "x": 2,
-        "y": 2
+        "y": 3
       },
       "hideTimeOverride": false,
       "id": 16,
@@ -186,9 +198,7 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -196,7 +206,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -271,16 +281,14 @@
         "h": 4,
         "w": 2,
         "x": 4,
-        "y": 2
+        "y": 3
       },
       "id": 154,
       "links": [],
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -288,7 +296,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -345,7 +353,7 @@
         "h": 2,
         "w": 2,
         "x": 6,
-        "y": 2
+        "y": 3
       },
       "id": 14,
       "interval": null,
@@ -357,16 +365,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -427,7 +433,7 @@
         "h": 2,
         "w": 2,
         "x": 8,
-        "y": 2
+        "y": 3
       },
       "id": 23,
       "interval": null,
@@ -439,16 +445,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -512,16 +516,14 @@
         "h": 4,
         "w": 2,
         "x": 13,
-        "y": 2
+        "y": 3
       },
       "id": 156,
       "links": [],
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -529,7 +531,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -544,6 +546,88 @@
         }
       ],
       "title": "Sys Load (5m avg)",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "description": "Non available RAM memory",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 80
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 2,
+        "x": 15,
+        "y": 3
+      },
+      "hideTimeOverride": false,
+      "id": 17,
+      "links": [],
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "text": {}
+      },
+      "pluginVersion": "8.1.4",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "((node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} )) * 100",
+          "format": "time_series",
+          "hide": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "exemplar": true,
+          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"})",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "B",
+          "step": 240
+        }
+      ],
+      "title": "RAM Used",
       "type": "gauge"
     },
     {
@@ -592,17 +676,15 @@
       "gridPos": {
         "h": 4,
         "w": 2,
-        "x": 15,
-        "y": 2
+        "x": 17,
+        "y": 3
       },
       "id": 157,
       "links": [],
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -610,7 +692,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -624,90 +706,6 @@
         }
       ],
       "title": "Root FS Used",
-      "type": "gauge"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "Prometheus",
-      "description": "Non available RAM memory",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 80
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 2,
-        "x": 17,
-        "y": 2
-      },
-      "hideTimeOverride": false,
-      "id": 17,
-      "links": [],
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "text": {}
-      },
-      "pluginVersion": "8.1.3",
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "((node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} )) * 100",
-          "format": "time_series",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 240
-        },
-        {
-          "exemplar": true,
-          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"})",
-          "format": "time_series",
-          "hide": false,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "B",
-          "step": 240
-        }
-      ],
-      "title": "RAM Used",
       "type": "gauge"
     },
     {
@@ -751,7 +749,7 @@
         "h": 2,
         "w": 2,
         "x": 19,
-        "y": 2
+        "y": 3
       },
       "id": 158,
       "interval": null,
@@ -763,16 +761,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -833,7 +829,7 @@
         "h": 2,
         "w": 2,
         "x": 21,
-        "y": 2
+        "y": 3
       },
       "id": 160,
       "interval": null,
@@ -845,16 +841,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -913,7 +907,7 @@
         "h": 2,
         "w": 2,
         "x": 6,
-        "y": 4
+        "y": 5
       },
       "id": 75,
       "interval": null,
@@ -925,16 +919,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -991,7 +983,7 @@
         "h": 2,
         "w": 2,
         "x": 19,
-        "y": 4
+        "y": 5
       },
       "id": 159,
       "interval": null,
@@ -1003,16 +995,14 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.3",
+      "pluginVersion": "8.1.4",
       "targets": [
         {
           "exemplar": true,
@@ -1089,7 +1079,7 @@
         "h": 10,
         "w": 11,
         "x": 0,
-        "y": 6
+        "y": 7
       },
       "id": 162,
       "links": [],
@@ -1112,7 +1102,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 1m",
           "refId": "A",
           "step": 240
@@ -1122,7 +1112,7 @@
           "expr": "node_load5{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 5m",
           "refId": "B",
           "step": 240
@@ -1132,7 +1122,7 @@
           "expr": "node_load15{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 15m",
           "refId": "C",
           "step": 240
@@ -1205,7 +1195,7 @@
         "h": 10,
         "w": 11,
         "x": 13,
-        "y": 6
+        "y": 7
       },
       "id": 165,
       "links": [],
@@ -1227,7 +1217,7 @@
           "format": "time_series",
           "instant": false,
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 1m",
           "refId": "A",
           "step": 240
@@ -1237,7 +1227,7 @@
           "expr": "node_load5{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 5m",
           "refId": "B",
           "step": 240
@@ -1247,7 +1237,7 @@
           "expr": "node_load15{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 4,
+          "intervalFactor": 1,
           "legendFormat": "Load 15m",
           "refId": "C",
           "step": 240
@@ -1314,10 +1304,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 11,
         "x": 0,
-        "y": 16
+        "y": 17
       },
       "id": 164,
       "links": [],
@@ -1338,7 +1328,7 @@
           "expr": "node_hwmon_temp_celsius{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 10,
+          "intervalFactor": 1,
           "legendFormat": "{{sensor }} ",
           "refId": "A",
           "step": 240
@@ -1405,10 +1395,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 11,
         "x": 13,
-        "y": 16
+        "y": 17
       },
       "id": 166,
       "links": [],
@@ -1429,7 +1419,7 @@
           "expr": "node_hwmon_temp_celsius{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
-          "intervalFactor": 2,
+          "intervalFactor": 1,
           "legendFormat": "{{sensor }} ",
           "refId": "A",
           "step": 240
@@ -1449,12 +1439,12 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "My Dash",
+  "title": "Infrastructure Monitor",
   "uid": "HcLYc_Ink",
-  "version": 7
+  "version": 22
 }

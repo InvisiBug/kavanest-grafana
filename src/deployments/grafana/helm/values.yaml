@@ -91,6 +91,11 @@ service:
       ports:
         - port: 1883
         - port: 9001
+    
+    - name: prometheus
+      selector: prometheus
+      ports:
+        - port: 9090
 
   loadBalancer:
     - name: grafana-lb
