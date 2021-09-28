@@ -1,0 +1,12 @@
+global:
+  scrape_interval:     15s
+  external_labels:
+    monitor: 'k3s-monitor'
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'K3S'
+    static_configs:
+      - targets: ['192.168.1.42:9100', '192.168.1.43:9100','192.168.1.50:9100']

@@ -1,0 +1,20 @@
+name: kavanet-io
+
+namespace: kavanet-io-test
+
+deployment:
+  - name: kavanet-io
+    image: 192.168.1.61:5000/kavanet.io
+    ports:
+    - port: 90
+
+service:
+  # clusterIP:
+  #   - name: kavanet-io
+  #     selector: kavanet-io
+  #     port: 80
+
+  loadBalancer:
+    - name: kavanet-lb
+      selector: kavanet-io
+      port: 80
