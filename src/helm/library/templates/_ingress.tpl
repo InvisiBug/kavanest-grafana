@@ -11,7 +11,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
-    {{- if $element.tls}}
+    {{- if $element.host}}
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     {{- end -}}
 {{- if $element.host}}
@@ -26,7 +26,7 @@ spec:
           service:
             name: {{$element.selector}}
             port: 
-              number: 80
+              number: {{$element.port}}
   {{- if $element.host}}
   tls:
   - hosts:

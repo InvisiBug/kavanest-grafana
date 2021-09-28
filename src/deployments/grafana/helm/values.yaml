@@ -1,6 +1,6 @@
 name: grafana
 
-namespace: grafana-test
+namespace: grafana
 
 deployment:
   - name: grafana
@@ -102,6 +102,13 @@ service:
       selector: grafana
       port: 80
       containerPort: 3000
+  
+ingress:
+  - name: grafana
+    selector: grafana
+    path: /
+    port: 3000
+    host: grafana.kavanet.io
 
 configmap: 
   - name: telegraf-config

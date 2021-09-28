@@ -21,7 +21,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 1,
+  "iteration": 1632868302005,
   "links": [],
   "panels": [
     {
@@ -51,7 +52,7 @@
         "content": "<h1 style=\"text-align:center\">Master Node</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "transparent": true,
       "type": "text"
     },
@@ -69,7 +70,7 @@
         "content": "<h1 style=\"text-align:center\">\n  Worker Node\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "transparent": true,
       "type": "text"
     },
@@ -135,11 +136,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(node_load5{instance=\"192.168.1.42:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"192.168.1.42:9100\",job=\"K3S\"}) by (cpu)) * 100",
+          "expr": "avg(node_load5{instance=\"$master:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu)) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -206,11 +207,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "((node_memory_MemTotal_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"} )) * 100",
+          "expr": "((node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"$master:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"} )) * 100",
           "format": "time_series",
           "hide": true,
           "interval": "",
@@ -221,7 +222,7 @@
         },
         {
           "exemplar": true,
-          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"})",
+          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$master:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -296,11 +297,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -372,11 +373,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "count(count(node_cpu_seconds_total{instance=\"192.168.1.42:9100\",job=\"K3S\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -452,11 +453,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_filesystem_size_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -531,11 +532,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(node_load5{instance=\"192.168.1.43:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"192.168.1.43:9100\",job=\"K3S\"}) by (cpu)) * 100",
+          "expr": "avg(node_load5{instance=\"$worker1:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"$worker1:9100\",job=\"K3S\"}) by (cpu)) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -602,11 +603,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "((node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} )) * 100",
+          "expr": "((node_memory_MemTotal_bytes{instance=\"$worker1:9100\",job=\"K3S\"} - node_memory_MemFree_bytes{instance=\"$worker1:9100\",job=\"K3S\"}) / (node_memory_MemTotal_bytes{instance=\"$worker1:9100\",job=\"K3S\"} )) * 100",
           "format": "time_series",
           "hide": true,
           "interval": "",
@@ -617,7 +618,7 @@
         },
         {
           "exemplar": true,
-          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"})",
+          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$worker1:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$worker1:9100\",job=\"K3S\"})",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -692,11 +693,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
+          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$worker1:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$worker1:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -768,11 +769,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "count(count(node_cpu_seconds_total{instance=\"192.168.1.43:9100\",job=\"K3S\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{instance=\"$worker1:9100\",job=\"K3S\"}) by (cpu))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -848,11 +849,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_filesystem_size_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{instance=\"$worker1:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -926,11 +927,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1002,11 +1003,11 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_memory_MemTotal_bytes{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$worker1:9100\",job=\"K3S\"}",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1098,7 +1099,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_load1{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
+          "expr": "node_load1{instance=\"$master:9100\",job=\"K3S\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1109,7 +1110,7 @@
         },
         {
           "exemplar": true,
-          "expr": "node_load5{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
+          "expr": "node_load5{instance=\"$master:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1119,7 +1120,7 @@
         },
         {
           "exemplar": true,
-          "expr": "node_load15{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
+          "expr": "node_load15{instance=\"$master:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1213,7 +1214,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_load1{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
+          "expr": "node_load1{instance=\"$worker1:9100\",job=\"K3S\"}",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -1224,7 +1225,7 @@
         },
         {
           "exemplar": true,
-          "expr": "node_load5{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
+          "expr": "node_load5{instance=\"$worker1:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1234,7 +1235,7 @@
         },
         {
           "exemplar": true,
-          "expr": "node_load15{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
+          "expr": "node_load15{instance=\"$worker1:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1325,7 +1326,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_hwmon_temp_celsius{instance=\"192.168.1.42:9100\",job=\"K3S\"}",
+          "expr": "node_hwmon_temp_celsius{instance=\"$master:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1416,7 +1417,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "node_hwmon_temp_celsius{instance=\"192.168.1.43:9100\",job=\"K3S\"}",
+          "expr": "node_hwmon_temp_celsius{instance=\"$worker1:9100\",job=\"K3S\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1436,7 +1437,28 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "master",
+        "query": "192.168.1.42",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "worker1",
+        "query": "192.168.1.43",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -1444,7 +1466,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Infrastructure Monitor",
+  "title": "Cluster Monitor",
   "uid": "HcLYc_Ink",
-  "version": 22
+  "version": 9
 }

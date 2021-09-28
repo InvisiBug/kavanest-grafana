@@ -10,6 +10,7 @@ metadata:
   namespace: {{ $root.Values.namespace }}
   labels:
     app: {{$element.name}}
+  
 spec:
   replicas: 1
   selector:
@@ -19,6 +20,8 @@ spec:
     metadata:
       labels:
         app: {{$element.name}}
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       {{- if $element.volumes }}
       volumes:

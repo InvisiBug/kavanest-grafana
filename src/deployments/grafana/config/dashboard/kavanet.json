@@ -21,7 +21,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -99,7 +99,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Heating State",
@@ -496,7 +496,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Outside",
@@ -578,7 +578,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "groupBy": [
@@ -659,7 +659,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "groupBy": [
@@ -740,7 +740,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "groupBy": [
@@ -821,7 +821,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "groupBy": [
@@ -902,7 +902,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "groupBy": [
@@ -1013,7 +1013,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Living Room",
@@ -1117,7 +1117,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Liams Room",
@@ -1502,7 +1502,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Study",
@@ -1599,7 +1599,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.4",
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Our Room",
@@ -1658,5 +1658,5 @@
   "timezone": "",
   "title": "Kavanet",
   "uid": "FcZv3X47k",
-  "version": 5
+  "version": 2
 }
