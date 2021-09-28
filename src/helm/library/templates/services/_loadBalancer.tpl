@@ -15,7 +15,7 @@ spec:
   ports:
     - name: {{$element.name}}
       port: {{$element.port}}
-      targetPort: {{$element.port}}
+      targetPort: {{$element.containerPort}}
       protocol: TCP
 {{- end -}}
 {{- end -}}

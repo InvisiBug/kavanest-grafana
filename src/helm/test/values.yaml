@@ -64,7 +64,7 @@ namespace: helm-test
 #     port: 26
 
 
-configmap: 
+configmap:  
   - name: configmap1
     file: telegraf.conf
   - name: configmap2

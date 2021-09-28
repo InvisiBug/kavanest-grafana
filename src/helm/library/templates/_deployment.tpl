@@ -23,9 +23,15 @@ spec:
       {{- if $element.volumes }}
       volumes:
       {{- range $index2, $vols := $element.volumes}}
+      {{- if eq $vols.type "pvc" }}
       - name: {{$vols.name}}
         persistentVolumeClaim:
           claimName: {{$vols.selector }}
+      {{- else if eq $vols.type "config" }}
+      - name: {{$vols.name}}
+        configMap:
+          name: {{$vols.selector }}
+      {{- end }}
       {{- end }}
       {{- end }}
       containers:
@@ -33,7 +39,9 @@ spec:
         image: {{$element.image | quote}}
         imagePullPolicy: Always
         ports:
-        - containerPort: {{$element.port}}
+        {{- range $index2, $ports := $element.ports}}
+        - containerPort: {{$ports.port}}
+        {{- end }}
         {{- if $element.resources}}
         resources:
           limits:
@@ -43,8 +51,13 @@ spec:
         {{- if $element.volumes}}
         volumeMounts:
         {{- range $index2, $vols := $element.volumes}}
+        {{- if eq $vols.type "config" }}
         - name: {{$vols.name}}
           mountPath: {{$vols.path }}
+        {{- else if eq $vols.type "pvc" }}
+        - name: {{$vols.name}}
+          mountPath: {{$vols.path }}
+        {{- end }}
         {{- end }}
         {{- end }}
         {{- if $element.env}}

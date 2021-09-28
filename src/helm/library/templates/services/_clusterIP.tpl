@@ -13,9 +13,11 @@ spec:
   selector:
     app: {{$element.selector}}
   ports:
-    - name: {{$element.name}}
-      port: {{$element.port}}
+    {{- range $index2, $ports := $element.ports}}
+    - name: port{{$index2}}
+      port: {{$ports.port}}
       protocol: TCP
+    {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

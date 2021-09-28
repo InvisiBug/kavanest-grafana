@@ -59,7 +59,6 @@ client.on("message", (topic, payload) => {
         if (topic == "Room Offsets") {
             tempOffsets = JSON.parse(payload.toString());
         }
-        console.log(typeof payload);
         if (topic == "Heating") {
             let message = JSON.parse(payload.toString());
             heating.heatingState = message.state ? 1 : 0;
