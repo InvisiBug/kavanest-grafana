@@ -1,0 +1,7 @@
+{{ include "library.deployment" . }}
+{{ include "library.clusterIP" . }}
+{{ include "library.nodePort" . }}
+{{ include "library.loadBalancer" . }}
+{{ include "library.ingress" . }}
+{{ include "library.pvc" . }}
+{{ include "library.configmap" .}}

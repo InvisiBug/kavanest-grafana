@@ -1,9 +1,9 @@
-name: printer-proxy
+name: unifi-proxy
 
-namespace: printer-proxy
+namespace: unifi-proxy
 
 deployment:
-  - name: printer-proxy
+  - name: unifi-proxy
     image: nginx
     ports:
     - port: 80
@@ -14,8 +14,8 @@ deployment:
 
 service:
   clusterIP:
-    - name: printer-proxy
-      selector: printer-proxy
+    - name: unifi-proxy
+      selector: unifi-proxy
       ports:
       - port: 80
 
@@ -24,8 +24,8 @@ configmap:
     file: config/proxy.conf
 
 ingress:
-  - name: printer-proxy
-    selector: printer-proxy
+  - name: unifi-proxy
+    selector: unifi-proxy
     path: /
     port: 80
-    host: printer.kavanet.io
+    host: unifi.kavanet.io
