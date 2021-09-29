@@ -1,7 +1,7 @@
-{{ include "library.deployment" . }}
 {{ include "library.clusterIP" . }}
-{{ include "library.nodePort" . }}
 {{ include "library.loadBalancer" . }}
+{{ include "library.nodePort" . }}
+{{ include "library.configmap" .}}
+{{ include "library.deployment" . }}
 {{ include "library.ingress" . }}
 {{ include "library.pvc" . }}
-{{ include "library.configmap" .}}
