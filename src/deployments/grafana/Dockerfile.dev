@@ -12,6 +12,7 @@ COPY ./tsconfig.json ./
 # Copy across source folder
 COPY ./src ./src
 
+ENV CLUSTER=true
 
 
 RUN npm install -g nodemon

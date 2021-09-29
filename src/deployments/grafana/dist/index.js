@@ -5,10 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_1 = __importDefault(require("mqtt"));
 const request = require("request");
-// console.clear();
+require("dotenv").config();
+const runningInCluster = process.env.CLUSTER == "cluster" ? true : false;
 let client = mqtt_1.default.connect("mqtt://kavanet.io");
-let intClient = mqtt_1.default.connect("mqtt://mosquitto"); // Docker & Kubernetes
-// let intClient = mqtt.connect("mqtt://localhost"); // Development
+let intClient;
+if (runningInCluster) {
+    intClient = mqtt_1.default.connect("mqtt://mosquitto");
+}
+else {
+    intClient = mqtt_1.default.connect("mqtt://localhost"); // Development
+    console.log("Not running in cluster");
+}
 client.subscribe("#", (err) => {
     // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));
     let x = err;

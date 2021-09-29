@@ -8,7 +8,7 @@ services:
   #   container_name: interconnector
   #   build:
   #     context: .
-  #     dockerfile: Dockerfile
+  #     dockerfile: Dockerfile.dev
   #   image: interconnector:latest
   #   networks:
   #     - proxynet
