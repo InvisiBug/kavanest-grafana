@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kavanet-io
-description: A Helm chart for Kubernetes
+description: My personal websites helm chart
 
 # A chart can be either an 'application' or a 'library' chart.
 #
