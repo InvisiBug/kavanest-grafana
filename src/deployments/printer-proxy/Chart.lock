@@ -1,6 +1,6 @@
 dependencies:
 - name: library
-  repository: file://../../helm/library
+  repository: file://../library
   version: 0.1.0
-digest: sha256:b916dabda1a892b1e0fbefa3a25c9520dbe5d52a5d91af236827a7fd023f554a
-generated: "2021-09-29T14:37:15.542352+01:00"
+digest: sha256:a648afcef7f5a1a7d7b268c300e682e2cb5e4a22973815b73ca6b9f1545c089a
+generated: "2021-09-29T15:34:15.072948+01:00"
