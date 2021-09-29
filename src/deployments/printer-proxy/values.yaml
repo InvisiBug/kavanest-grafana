@@ -1,0 +1,31 @@
+name: printer-proxy
+
+namespace: printer-proxy
+
+deployment:
+  - name: printer-proxy
+    image: nginx
+    ports:
+    - port: 80
+    volumes:
+      - name: nginx-settings
+        type: config
+        path: /etc/nginx/conf.d/
+
+service:
+  clusterIP:
+    - name: printer-proxy
+      selector: printer-proxy
+      ports:
+      - port: 80
+
+configmap: 
+  - name: nginx-settings
+    file: config/proxy.conf
+
+ingress:
+  - name: printer-proxy
+    selector: printer-proxy
+    path: /
+    port: 80
+    host: printer.kavanet.io
