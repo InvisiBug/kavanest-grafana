@@ -52,6 +52,9 @@ deployment:
     ports:
     - port: 1883
     - port: 9001
+    env:
+      - name: CLUSTER
+        value: cluster
 
   - name: prometheus
     image: prom/prometheus

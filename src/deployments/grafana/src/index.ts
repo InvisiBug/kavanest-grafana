@@ -1,11 +1,19 @@
 import mqtt from "mqtt";
 import { Sensors, TimerType, TemperatureOffsets, Valves, Heating } from "./types";
 const request = require("request");
+require("dotenv").config();
 
-// console.clear();
-let client = mqtt.connect("mqtt://kavanet.io");
-let intClient = mqtt.connect("mqtt://mosquitto"); // Docker & Kubernetes
-// let intClient = mqtt.connect("mqtt://localhost"); // Development
+const runningInCluster: boolean = process.env.CLUSTER == "cluster" ? true : false; // Kuberneted didnt like this value being boolean so its now "cluster"
+
+let client: mqtt.MqttClient = mqtt.connect("mqtt://kavanet.io");
+let intClient: mqtt.MqttClient;
+
+if (runningInCluster) {
+  intClient = mqtt.connect("mqtt://mosquitto");
+} else {
+  intClient = mqtt.connect("mqtt://localhost"); // Development
+  console.log("Not running in cluster");
+}
 
 client.subscribe("#", (err: any) => {
   // err ? console.log(err) : console.log("Subscribed to all \t", chalk.cyan("MQTT messages will appear shortly"));

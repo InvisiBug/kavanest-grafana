@@ -1,2 +1,3 @@
 #!/bin/sh
-helm upgrade grafana . --namespace grafana --create-namespace
+
+cd helm && helm dependency update && helm upgrade grafana . --namespace grafana --create-namespace
