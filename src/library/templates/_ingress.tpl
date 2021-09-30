@@ -11,6 +11,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 1G
     {{- if $element.host}}
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     {{- end -}}
