@@ -34,6 +34,10 @@ spec:
       - name: {{$vols.name}}
         configMap:
           name: {{$vols.name }}
+      {{- else if eq $vols.type "hostpath" }}
+      - name: {{$vols.name}}
+        hostPath:
+          path: {{$vols.path }}
       {{- end }}
       {{- end }}
       {{- end }}
@@ -55,6 +59,9 @@ spec:
         volumeMounts:
         {{- range $index2, $vols := $element.volumes}}
         {{- if eq $vols.type "config" }}
+        - name: {{$vols.name}}
+          mountPath: {{$vols.path }}
+        {{- else if eq $vols.type "hostpath" }}
         - name: {{$vols.name}}
           mountPath: {{$vols.path }}
         {{- else if eq $vols.type "pvc" }}

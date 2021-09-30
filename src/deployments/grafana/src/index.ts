@@ -32,7 +32,6 @@ const getCurrent = () => {
       if (!error && response.statusCode == 200) {
         var data = JSON.parse(body);
         weather.current = data.main.temp;
-        console.log(data.main.temp);
       }
     },
   );
@@ -50,6 +49,11 @@ var sensors: Sensors = {
   liamsRoom: { temperature: undefined, humidity: undefined },
   study: { temperature: undefined, humidity: undefined },
   ourRoom: { temperature: undefined, humidity: undefined },
+};
+
+var radiatorMonitor: any = {
+  inlet: undefined,
+  outlet: undefined,
 };
 
 var heating: Heating = {
@@ -76,6 +80,12 @@ client.on("message", (topic: string, payload: object) => {
   try {
     if (topic == "Room Offsets") {
       tempOffsets = JSON.parse(payload.toString());
+    }
+
+    if (topic == "Radiator Monitor") {
+      radiatorMonitor.inlet = parseFloat((JSON.parse(payload.toString()).inlet - 0.56).toFixed(2));
+      radiatorMonitor.outlet = parseFloat((JSON.parse(payload.toString()).outlet - 0).toFixed(2));
+      console.log(radiatorMonitor);
     }
 
     if (topic == "Heating") {
@@ -174,6 +184,7 @@ let publish = () => {
   intClient.publish("valves", JSON.stringify(valves));
   intClient.publish("heating", JSON.stringify(heating));
   intClient.publish("outside", JSON.stringify(weather));
+  intClient.publish("radiatorMonitor", JSON.stringify(radiatorMonitor));
 };
 
 publish();
