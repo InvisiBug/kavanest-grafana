@@ -64,6 +64,9 @@ deployment:
       - name: prometheus-config
         type: config
         path: /etc/prometheus/
+      - name: prometheus-storage
+        type: pvc
+        path: /prometheus
 
 
 service:
@@ -100,11 +103,11 @@ service:
       ports:
         - port: 9090
 
-  loadBalancer:
-    - name: grafana-lb
-      selector: grafana
-      port: 80
-      containerPort: 3000
+  # loadBalancer:
+  #   - name: grafana-lb
+  #     selector: grafana
+  #     port: 80
+  #     containerPort: 3000
   
 ingress:
   - name: grafana
@@ -125,4 +128,6 @@ pvc:
   - name: grafana-storage
     storage: 500Mi
   - name: influx-storage
+    storage: 500Mi
+  - name: prometheus-storage
     storage: 500Mi
