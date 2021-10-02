@@ -1,2 +1,2 @@
 #!/bin/sh
-helm install grafana . --namespace grafana --create-namespace
+cd helm && helm install grafana . --namespace grafana --create-namespace
