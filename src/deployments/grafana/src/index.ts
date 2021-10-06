@@ -23,20 +23,25 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
+let devices: Array<Heating> = [];
 const temperatureSensorInput: TemperatureSensor = new TemperatureSensor(client);
 const radiatorMonitorInput: RadiatorMonitor = new RadiatorMonitor(client);
 const radiatorValveInput: RadiatorValve = new RadiatorValve(client);
-const heatingInput: Heating = new Heating(client);
+// const heatingInput: Heating = new Heating(client);
+devices.push(new Heating(client));
 const weather: Weather = new Weather();
 
 client.on("message", (topic: string, payload: object) => {
   try {
+    console.log(devices.length);
+    for (let i = 0; i < devices.length; i++) {
+      devices[i].handleIncoming(topic, payload);
+    }
+    // heatingInput.handleIncoming(topic, payload);
     if (topic == "Room Offsets") {
       temperatureSensorInput.updateOffsets(payload);
     } else if (topic == "Radiator Monitor") {
       radiatorMonitorInput.handleIncoming(payload);
-    } else if (topic == "Heating") {
-      heatingInput.handleIncoming(payload);
     } else if (topic.includes("Sensor")) {
       temperatureSensorInput.handleIncoming(payload);
     } else if (topic.includes("Valve")) {
@@ -50,18 +55,12 @@ client.on("message", (topic: string, payload: object) => {
 // Send to grafana
 setInterval(() => {
   publish();
-  // console.log(temperatureSensorInput.getCurrent());
-  // intClient.publish("temperatures", temperatureSensorInput.getCurrent());
-  // intClient.publish("valves", radiatorValveInput.getCurrent());
-  // intClient.publish("heating", heatingInput.getCurrent());
-  // intClient.publish("outside", weather.getCurrent());
-  // intClient.publish("radiatorMonitor", radiatorMonitorInput.getCurrent());
 }, 5 * 1000);
 
 let publish = () => {
   intClient.publish("sensors", temperatureSensorInput.getCurrent());
   intClient.publish("valves", radiatorValveInput.getCurrent());
-  intClient.publish("heating", heatingInput.getCurrent());
+  // intClient.publish("heating", heatingInput.getCurrent());
   intClient.publish("outside", weather.getCurrent());
   intClient.publish("radiatorMonitor", radiatorMonitorInput.getCurrent());
 };

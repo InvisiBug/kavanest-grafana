@@ -8,9 +8,12 @@ export default class Heating {
     this.client = client;
   }
 
-  handleIncoming(payload: object) {
-    let message = JSON.parse(payload.toString());
-    this.state = message.state ? 1 : 0;
+  handleIncoming(topic: string, payload: object) {
+    if (topic === "Heating") {
+      let message = JSON.parse(payload.toString());
+      this.state = message.state ? 1 : 0;
+      console.log(this.state);
+    }
   }
 
   getCurrent() {
