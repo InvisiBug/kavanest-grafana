@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, TemperatureSensor, Heating, Weather, RadiatorValve } from "./components/index";
+import { RadiatorMonitor, TemperatureSensor, Heating, Weather, RadiatorValves } from "./components/index";
 require("dotenv").config();
 
 // Use environment variables to see if we're running in a cluster
@@ -23,46 +23,34 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
-let devices: Array<Heating> = [];
-const temperatureSensorInput: TemperatureSensor = new TemperatureSensor(client);
-const radiatorMonitorInput: RadiatorMonitor = new RadiatorMonitor(client);
-const radiatorValveInput: RadiatorValve = new RadiatorValve(client);
-// const heatingInput: Heating = new Heating(client);
-devices.push(new Heating(client));
-const weather: Weather = new Weather();
+let devices: Array<RadiatorMonitor | TemperatureSensor | Weather | Heating | RadiatorValves> = [];
 
+devices.push(new Heating(client));
+devices.push(new RadiatorValves(client));
+devices.push(new RadiatorMonitor(client));
+devices.push(new TemperatureSensor(client));
+devices.push(new Weather());
+
+//? Incoming message
 client.on("message", (topic: string, payload: object) => {
   try {
-    console.log(devices.length);
     for (let i = 0; i < devices.length; i++) {
       devices[i].handleIncoming(topic, payload);
-    }
-    // heatingInput.handleIncoming(topic, payload);
-    if (topic == "Room Offsets") {
-      temperatureSensorInput.updateOffsets(payload);
-    } else if (topic == "Radiator Monitor") {
-      radiatorMonitorInput.handleIncoming(payload);
-    } else if (topic.includes("Sensor")) {
-      temperatureSensorInput.handleIncoming(payload);
-    } else if (topic.includes("Valve")) {
-      radiatorValveInput.handleIncoming(payload);
     }
   } catch (error: unknown) {
     console.log(error);
   }
 });
 
-// Send to grafana
+//? Send to grafana
 setInterval(() => {
   publish();
 }, 5 * 1000);
 
 let publish = () => {
-  intClient.publish("sensors", temperatureSensorInput.getCurrent());
-  intClient.publish("valves", radiatorValveInput.getCurrent());
-  // intClient.publish("heating", heatingInput.getCurrent());
-  intClient.publish("outside", weather.getCurrent());
-  intClient.publish("radiatorMonitor", radiatorMonitorInput.getCurrent());
+  for (let i = 0; i < devices.length; i++) {
+    intClient.publish(devices[i].topic, devices[i].getCurrent());
+  }
 };
 
 publish();

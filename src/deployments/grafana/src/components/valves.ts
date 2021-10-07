@@ -2,6 +2,7 @@ import { MqttClient } from "mqtt";
 
 export default class Valves {
   client: MqttClient;
+  topic: string;
   inlet: number = 0;
   outlet: number = 0;
 
@@ -12,20 +13,23 @@ export default class Valves {
 
   constructor(client: MqttClient) {
     this.client = client;
+    this.topic = "Valves";
   }
 
-  handleIncoming(payload: object) {
-    let message = JSON.parse(payload.toString());
-    message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
+  handleIncoming(topic: string, payload: object) {
+    if (topic.includes("Valve")) {
+      let message = JSON.parse(payload.toString());
+      message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
 
-    if (message.node.includes("Living Room")) {
-      this.livingRoom = message.state;
-    } else if (message.node.includes("Liams Room")) {
-      this.liamsRoom = message.state;
-    } else if (message.node.includes("Study")) {
-      this.study = message.state;
-    } else if (message.node.includes("Our Room")) {
-      this.ourRoom = message.state;
+      if (message.node.includes("Living Room")) {
+        this.livingRoom = message.state;
+      } else if (message.node.includes("Liams Room")) {
+        this.liamsRoom = message.state;
+      } else if (message.node.includes("Study")) {
+        this.study = message.state;
+      } else if (message.node.includes("Our Room")) {
+        this.ourRoom = message.state;
+      }
     }
   }
 

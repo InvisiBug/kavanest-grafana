@@ -2,6 +2,7 @@ import { MqttClient } from "mqtt";
 
 export default class TemperatureSensor {
   client: MqttClient;
+  topic: string;
   inlet: number = 0;
   outlet: number = 0;
 
@@ -11,45 +12,90 @@ export default class TemperatureSensor {
   study = new sensor("Study");
   ourRoom = new sensor("Our Room");
 
+  sensors: Array<sensor> = [];
+
   constructor(client: MqttClient) {
     this.client = client;
+    this.topic = "Temperatures";
+
+    this.sensors.push(new sensor("Living Room"));
+    this.sensors.push(new sensor("Kitchen"));
+    this.sensors.push(new sensor("Liams Room"));
+    this.sensors.push(new sensor("Study"));
+    this.sensors.push(new sensor("Our Room"));
   }
 
-  handleIncoming(payload: object) {
-    this.livingRoom.handleIncoming(payload);
-    this.kitchen.handleIncoming(payload);
-    this.liamsRoom.handleIncoming(payload);
-    this.study.handleIncoming(payload);
-    this.ourRoom.handleIncoming(payload);
+  handleIncoming(topic: string, payload: object) {
+    if (topic.includes("Sensor")) {
+      for (let i = 0; i < this.sensors.length; i++) {
+        this.sensors[i].handleIncoming(payload);
+      }
+    } else if (topic == "Room Offsets") {
+      console.log("Offsets Received");
+      this.updateOffsets(payload);
+    }
+
+    // if (topic.includes("Sensor")) {
+    //   this.livingRoom.handleIncoming(payload);
+    //   this.kitchen.handleIncoming(payload);
+    //   this.liamsRoom.handleIncoming(payload);
+    //   this.study.handleIncoming(payload);
+    //   this.ourRoom.handleIncoming(payload);
+    // } else if (topic == "Room Offsets") {
+    //   console.log("Offsets Received");
+    //   this.updateOffsets(payload);
+    // }
   }
 
   updateOffsets(payload: object) {
     const newOffsets = JSON.parse(payload.toString());
 
-    this.livingRoom.updateOffset(newOffsets);
-    this.kitchen.updateOffset(newOffsets);
-    this.liamsRoom.updateOffset(newOffsets);
-    this.study.updateOffset(newOffsets);
-    this.ourRoom.updateOffset(newOffsets);
+    for (let i = 0; i < this.sensors.length; i++) {
+      this.sensors[i].updateOffset(newOffsets);
+    }
+
+    // this.livingRoom.updateOffset(newOffsets);
+    // this.kitchen.updateOffset(newOffsets);
+    // this.liamsRoom.updateOffset(newOffsets);
+    // this.study.updateOffset(newOffsets);
+    // this.ourRoom.updateOffset(newOffsets);
   }
 
   getCurrent() {
-    return JSON.stringify({
-      livingRoomTemperature: this.livingRoom.getTemp(),
-      livingRoomHumidity: this.livingRoom.getHumidity(),
+    let string: string = "{";
+    for (let i = 0; i < this.sensors.length; i++) {
+      if (i < this.sensors.length - 1) {
+        string += this.sensors[i].getTemp() + ",\n";
+      } else {
+        string += this.sensors[i].getTemp() + "\n";
+      }
+    }
+    string += "}";
 
-      kitchenTemperature: this.kitchen.getTemp(),
-      kitchenHumidity: this.kitchen.getHumidity(),
+    console.log(string);
+    try {
+      console.log(JSON.parse(string));
+      return JSON.stringify(JSON.parse(string));
+    } catch {
+      return "";
+    }
 
-      liamsRoomTemperature: this.liamsRoom.getTemp(),
-      liamsRoomHumidity: this.liamsRoom.getHumidity(),
+    // return JSON.stringify({
+    //   livingRoomTemperature: this.livingRoom.getTemp(),
+    //   livingRoomHumidity: this.livingRoom.getHumidity(),
 
-      studyTemperature: this.study.getTemp(),
-      studyHumidity: this.study.getHumidity(),
+    //   kitchenTemperature: this.kitchen.getTemp(),
+    //   kitchenHumidity: this.kitchen.getHumidity(),
 
-      ourRoomTemperature: this.ourRoom.getTemp(),
-      ourRoomHumidity: this.ourRoom.getHumidity(),
-    });
+    //   liamsRoomTemperature: this.liamsRoom.getTemp(),
+    //   liamsRoomHumidity: this.liamsRoom.getHumidity(),
+
+    //   studyTemperature: this.study.getTemp(),
+    //   studyHumidity: this.study.getHumidity(),
+
+    //   ourRoomTemperature: this.ourRoom.getTemp(),
+    //   ourRoomHumidity: this.ourRoom.getHumidity(),
+    // });
   }
 }
 
@@ -88,7 +134,8 @@ class sensor {
   }
 
   getTemp() {
-    return this.temperature;
+    const test = `"${this.camelRoomName(this.id)}Temperature":${this.temperature}`;
+    return test;
   }
 
   getHumidity() {
@@ -97,5 +144,11 @@ class sensor {
 
   getPressure() {
     return this.pressure;
+  }
+
+  camelRoomName(roomName: string) {
+    if (roomName.split(" ").length === 2) {
+      return `${roomName.split(" ")[0].toLowerCase()}${roomName.split(" ")[1]}`;
+    } else return roomName.toLowerCase();
   }
 }
