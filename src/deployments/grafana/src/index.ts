@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, TemperatureSensor, Heating, Weather, RadiatorValve } from "./components/index";
+import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves } from "./components/index";
 require("dotenv").config();
 
 // Use environment variables to see if we're running in a cluster
@@ -14,7 +14,7 @@ if (runningInCluster) {
   intClient = mqtt.connect("mqtt://mosquitto");
 } else {
   intClient = mqtt.connect("mqtt://localhost"); // Development
-  console.log("Not running in cluster");
+  console.log("Running on a laptop 💻");
 }
 
 client.subscribe("#", (error: Error) => {
@@ -23,47 +23,34 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
-const temperatureSensorInput: TemperatureSensor = new TemperatureSensor(client);
-const radiatorMonitorInput: RadiatorMonitor = new RadiatorMonitor(client);
-const radiatorValveInput: RadiatorValve = new RadiatorValve(client);
-const heatingInput: Heating = new Heating(client);
-const weather: Weather = new Weather();
+let devices: Array<RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves> = [];
 
+devices.push(new Heating(client));
+devices.push(new RadiatorValves(client));
+devices.push(new RadiatorMonitor(client));
+devices.push(new TemperatureSensors(client));
+devices.push(new Weather());
+
+//? Incoming message
 client.on("message", (topic: string, payload: object) => {
   try {
-    if (topic == "Room Offsets") {
-      temperatureSensorInput.updateOffsets(payload);
-    } else if (topic == "Radiator Monitor") {
-      radiatorMonitorInput.handleIncoming(payload);
-    } else if (topic == "Heating") {
-      heatingInput.handleIncoming(payload);
-    } else if (topic.includes("Sensor")) {
-      temperatureSensorInput.handleIncoming(payload);
-    } else if (topic.includes("Valve")) {
-      radiatorValveInput.handleIncoming(payload);
+    for (let i = 0; i < devices.length; i++) {
+      devices[i].handleIncoming(topic, payload);
     }
   } catch (error: unknown) {
     console.log(error);
   }
 });
 
-// Send to grafana
+//? Send to grafana
 setInterval(() => {
   publish();
-  // console.log(temperatureSensorInput.getCurrent());
-  // intClient.publish("temperatures", temperatureSensorInput.getCurrent());
-  // intClient.publish("valves", radiatorValveInput.getCurrent());
-  // intClient.publish("heating", heatingInput.getCurrent());
-  // intClient.publish("outside", weather.getCurrent());
-  // intClient.publish("radiatorMonitor", radiatorMonitorInput.getCurrent());
 }, 5 * 1000);
 
 let publish = () => {
-  intClient.publish("sensors", temperatureSensorInput.getCurrent());
-  intClient.publish("valves", radiatorValveInput.getCurrent());
-  intClient.publish("heating", heatingInput.getCurrent());
-  intClient.publish("outside", weather.getCurrent());
-  intClient.publish("radiatorMonitor", radiatorMonitorInput.getCurrent());
+  for (let i = 0; i < devices.length; i++) {
+    intClient.publish(devices[i].topic, devices[i].getCurrent());
+  }
 };
 
 publish();

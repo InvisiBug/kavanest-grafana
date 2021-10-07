@@ -2,13 +2,17 @@ const request = require("request");
 
 export default class Weather {
   outsideTemp: any = undefined;
+  topic: string;
 
   constructor() {
+    this.topic = "Weather";
     this.getCurrentWeather();
     setInterval(() => {
       this.getCurrentWeather();
     }, 5 * 1000);
   }
+
+  handleIncoming() {}
 
   getCurrentWeather() {
     request(
