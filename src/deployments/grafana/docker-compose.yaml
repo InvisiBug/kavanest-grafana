@@ -26,49 +26,49 @@ services:
     networks:
       - proxynet
 
-  # telegraf:
-  #   image: telegraf:1.9
-  #   container_name: telegraf
-  #   restart: always
-  #   ports:
-  #     - "5050:5050"
-  #   depends_on:
-  #     - mosquitto
-  #   volumes:
-  #     - ./helm/config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-  #   networks:
-  #     - proxynet
+  telegraf:
+    image: telegraf:1.9
+    container_name: telegraf
+    restart: always
+    ports:
+      - "5050:5050"
+    depends_on:
+      - mosquitto
+    volumes:
+      - ./helm/config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    networks:
+      - proxynet
 
-  # influxdb:
-  #   container_name: influx
-  #   image: influxdb:1.5
-  #   ports:
-  #     - "8086:8086"
-  #   environment:
-  #     - INFLUXDB_DB=sensors
-  #     - INFLUXDB_ADMIN_USER=admin-user
-  #     - INFLUXDB_ADMIN_PASSWORD=telegraf-admin-password
-  #     - INFLUXDB_USER=telegraf-username
-  #     - INFLUXDB_PASSWORD=telegraf-password
-  #   restart: always
-  #   volumes:
-  #     - influx-storage:/var/lib/influxdb
-  #   networks:
-  #     - proxynet
+  influxdb:
+    container_name: influx
+    image: influxdb:1.5
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=sensors
+      - INFLUXDB_ADMIN_USER=admin-user
+      - INFLUXDB_ADMIN_PASSWORD=telegraf-admin-password
+      - INFLUXDB_USER=telegraf-username
+      - INFLUXDB_PASSWORD=telegraf-password
+    restart: always
+    volumes:
+      - influx-storage:/var/lib/influxdb
+    networks:
+      - proxynet
 
-  # grafana:
-  #   image: grafana/grafana:latest
-  #   container_name: grafana
-  #   ports:
-  #     - "3000:3000"
-  #   links:
-  #     - influxdb
-  #   depends_on:
-  #     - influxdb
-  #   volumes:
-  #     - grafana-storage:/var/lib/grafana
-  #   networks:
-  #     - proxynet
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    links:
+      - influxdb
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - proxynet
 
 volumes:
   influx-storage:

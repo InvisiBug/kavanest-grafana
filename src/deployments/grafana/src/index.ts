@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, TemperatureSensor, Heating, Weather, RadiatorValves } from "./components/index";
+import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves } from "./components/index";
 require("dotenv").config();
 
 // Use environment variables to see if we're running in a cluster
@@ -14,7 +14,7 @@ if (runningInCluster) {
   intClient = mqtt.connect("mqtt://mosquitto");
 } else {
   intClient = mqtt.connect("mqtt://localhost"); // Development
-  console.log("Not running in cluster");
+  console.log("Running on a laptop 💻");
 }
 
 client.subscribe("#", (error: Error) => {
@@ -23,12 +23,12 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
-let devices: Array<RadiatorMonitor | TemperatureSensor | Weather | Heating | RadiatorValves> = [];
+let devices: Array<RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves> = [];
 
 devices.push(new Heating(client));
 devices.push(new RadiatorValves(client));
 devices.push(new RadiatorMonitor(client));
-devices.push(new TemperatureSensor(client));
+devices.push(new TemperatureSensors(client));
 devices.push(new Weather());
 
 //? Incoming message
