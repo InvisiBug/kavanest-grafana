@@ -2,12 +2,12 @@ import mqtt from "mqtt";
 import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves } from "./components/index";
 require("dotenv").config();
 
-// Use environment variables to see if we're running in a cluster
-const runningInCluster: boolean = process.env.CLUSTER == "cluster" ? true : false; // Kuberneted didnt like this value being boolean so its now "cluster"
-
 // Connect to MQTT networks
 let client: mqtt.MqttClient = mqtt.connect("mqtt://kavanet.io");
 let intClient: mqtt.MqttClient;
+
+// Use environment variables to see if we're running in a cluster
+const runningInCluster: boolean = process.env.CLUSTER == "cluster" ? true : false; // Kuberneted didnt like this value being boolean so its now "cluster"
 
 // Connect to a different internal network if we're running on a cluster
 if (runningInCluster) {
@@ -23,7 +23,7 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
-let devices: Array<RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves> = [];
+let devices: Array<PossibleDevices> = [];
 
 devices.push(new Heating(client));
 devices.push(new RadiatorValves(client));
@@ -57,3 +57,5 @@ publish();
 
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));
 intClient.on("connect", () => console.log("Connected to Grafana MQTT network"));
+
+type PossibleDevices = RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves;

@@ -3,8 +3,6 @@ import { MqttClient } from "mqtt";
 export default class TemperatureSensor {
   client: MqttClient;
   topic: string;
-  inlet: number = 0;
-  outlet: number = 0;
 
   sensors: Array<sensor> = [];
 
@@ -97,9 +95,8 @@ class sensor {
     };
   }
 
-  camelRoomName(roomName: string) {
-    if (roomName.split(" ").length === 2) {
-      return `${roomName.split(" ")[0].toLowerCase()}${roomName.split(" ")[1]}`;
-    } else return roomName.toLowerCase();
+  camelRoomName(text: string) {
+    text = text.replace(/[-_\s.]+(.)?/g, (_, c) => (c ? c.toUpperCase() : ""));
+    return text.substr(0, 1).toLowerCase() + text.substr(1);
   }
 }
