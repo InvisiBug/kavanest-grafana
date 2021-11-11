@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
     "start": "ts-node ./src/index.ts",
-    "mqtt-start": "docker-compose up -d",
-    "mqtt-stop": "docker-compose down",
+    "up": "docker-compose up -d",
+    "down": "docker-compose down",
     "build": "tsc",
-    "logs": "docker logs kavanet-simulator -f"
+    "logs": "docker logs kavanet-simulator -f",
+    "push": "./bin/push.sh",
+    "deploy": "yarn push && ./bin/deploy.sh"
   },
   "keywords": [],
   "author": "InvisiBug",

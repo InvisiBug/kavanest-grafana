@@ -19,7 +19,7 @@ service:
       ports:
       - port: 80
 
-configmap: 
+configmap:
   - name: nginx-settings
     file: config/proxy.conf
 

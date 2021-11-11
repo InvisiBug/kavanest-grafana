@@ -21,3 +21,8 @@ ingress:
     path: /
     port: 80
     host: kavanet.io
+  - name: kavanet-co-uk
+    selector: kavanet-io
+    path: /
+    port: 80
+    host: kavanet.co.uk

@@ -110,11 +110,18 @@ service:
   #     containerPort: 3000
   
 ingress:
-  - name: grafana
+  - name: grafana.kavanet.io
     selector: grafana
     path: /
     port: 3000
     host: grafana.kavanet.io
+  # - name: grafana.kavanet.co.uk
+  #   selector: grafana
+  #   path: /
+  #   port: 3000
+  #   host: grafana.kavanet.co.uk
+
+    # This hasnt been applied yet
 
 configmap: 
   - name: telegraf-config
