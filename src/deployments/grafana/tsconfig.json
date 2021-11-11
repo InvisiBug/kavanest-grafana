@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "noEmitOnError": true,
@@ -9,6 +7,7 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "strict": true,
+    "declaration": true,
     "outDir": "dist/"
   },
   "include": [

@@ -12,7 +12,7 @@ export default class Heating {
 
   handleIncoming(topic: string, payload: object) {
     if (topic === "Heating") {
-      let message = JSON.parse(payload.toString());
+      let message: Message = JSON.parse(payload.toString());
       this.state = message.state ? 1 : 0;
     }
   }
@@ -23,3 +23,8 @@ export default class Heating {
     });
   }
 }
+
+type Message = {
+  node: string;
+  state: boolean;
+};

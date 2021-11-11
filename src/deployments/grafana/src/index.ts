@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves } from "./components/index";
+import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves, AirSensor } from "./components/index";
 require("dotenv").config();
 
 // Connect to MQTT networks
@@ -30,8 +30,9 @@ devices.push(new RadiatorValves(client));
 devices.push(new RadiatorMonitor(client));
 devices.push(new TemperatureSensors(client));
 devices.push(new Weather());
+devices.push(new AirSensor(client));
 
-//? Incoming message
+//* Incoming message
 client.on("message", (topic: string, payload: object) => {
   try {
     for (let i = 0; i < devices.length; i++) {
@@ -42,7 +43,7 @@ client.on("message", (topic: string, payload: object) => {
   }
 });
 
-//? Send to grafana
+//* Send to grafana
 setInterval(() => {
   publish();
 }, 5 * 1000);
@@ -58,4 +59,4 @@ publish();
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));
 intClient.on("connect", () => console.log("Connected to Grafana MQTT network"));
 
-type PossibleDevices = RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves;
+type PossibleDevices = RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves | AirSensor;
