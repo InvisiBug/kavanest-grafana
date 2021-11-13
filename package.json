@@ -2,19 +2,18 @@
   "name": "kavanet-simulator",
   "version": "1.0.0",
   "main": "index.js",
+  "repository": "https://github.com/InvisiBug/kavanet-simulator.git",
+  "author": "InvisiBug <matthewjkavanagh@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
-    "start": "ts-node ./src/index.ts",
-    "up": "docker-compose up -d",
-    "down": "docker-compose down",
+    "start": "yarn build && node ./dist/index.js",
     "build": "tsc",
-    "logs": "docker logs kavanet-simulator -f",
     "push": "./bin/push.sh",
-    "deploy": "yarn push && ./bin/deploy.sh"
+    "deploy": "yarn push && ./bin/deploy.sh",
+    "up": "docker compose up -d && yarn start",
+    "down": "docker compose down"
   },
-  "keywords": [],
-  "author": "InvisiBug",
-  "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
     "dotenv": "^10.0.0",
