@@ -19,11 +19,13 @@
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1632868302005,
+  "id": 3,
+  "iteration": 1637325256619,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -52,7 +54,7 @@
         "content": "<h1 style=\"text-align:center\">Master Node</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "transparent": true,
       "type": "text"
     },
@@ -70,14 +72,14 @@
         "content": "<h1 style=\"text-align:center\">\n  Worker Node\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "transparent": true,
       "type": "text"
     },
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "description": "Busy state of all CPU cores together (5 min average)",
+      "description": "Busy state of all CPU cores together",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -123,7 +125,7 @@
         "x": 0,
         "y": 3
       },
-      "id": 155,
+      "id": 173,
       "links": [],
       "options": {
         "orientation": "horizontal",
@@ -136,12 +138,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(node_load5{instance=\"$master:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu)) * 100",
-          "format": "time_series",
+          "expr": "(((count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$master:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -150,7 +151,7 @@
           "step": 240
         }
       ],
-      "title": "Sys Load (5m avg)",
+      "title": "CPU Busy",
       "type": "gauge"
     },
     {
@@ -207,7 +208,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -297,7 +298,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -373,7 +374,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -453,7 +454,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -473,7 +474,7 @@
     {
       "cacheTimeout": null,
       "datasource": "Prometheus",
-      "description": "Busy state of all CPU cores together (5 min average)",
+      "description": "Busy state of all CPU cores together",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -519,7 +520,7 @@
         "x": 13,
         "y": 3
       },
-      "id": 156,
+      "id": 174,
       "links": [],
       "options": {
         "orientation": "horizontal",
@@ -532,12 +533,11 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(node_load5{instance=\"$worker1:9100\",job=\"K3S\"}) /  count(count(node_cpu_seconds_total{instance=\"$worker1:9100\",job=\"K3S\"}) by (cpu)) * 100",
-          "format": "time_series",
+          "expr": "(((count(count(node_cpu_seconds_total{instance=\"$worker1:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$worker1:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$worker1:9100\",job=\"K3S\"}) by (cpu))",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
@@ -546,7 +546,7 @@
           "step": 240
         }
       ],
-      "title": "Sys Load (5m avg)",
+      "title": "CPU Busy",
       "type": "gauge"
     },
     {
@@ -603,7 +603,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -693,7 +693,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -769,7 +769,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -849,7 +849,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -927,7 +927,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -1003,7 +1003,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.1.5",
+      "pluginVersion": "8.2.3",
       "targets": [
         {
           "exemplar": true,
@@ -1433,7 +1433,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 30,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1461,12 +1461,12 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Cluster Monitor",
   "uid": "HcLYc_Ink",
-  "version": 9
+  "version": 4
 }
