@@ -10,6 +10,7 @@
     "start": "yarn build && node ./dist/index.js",
     "build": "tsc",
     "push": "./bin/push.sh",
+    "deploy--live": "./bin/deploy--live.sh",
     "deploy": "yarn push && ./bin/deploy.sh",
     "up": "docker compose up -d && yarn start",
     "down": "docker compose down"

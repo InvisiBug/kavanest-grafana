@@ -1,5 +1,6 @@
 #!/bin/sh
 
+
 clear && cd helm && helm upgrade grafana . --namespace grafana --create-namespace
 
 EXITCODE=$?
