@@ -123,7 +123,7 @@ ingress:
 
     # This hasnt been applied yet
 
-configmap: 
+configmap:
   - name: telegraf-config
     file: config/telegraf/telegraf.conf
 

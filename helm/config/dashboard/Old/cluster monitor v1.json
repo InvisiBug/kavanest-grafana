@@ -22,8 +22,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1637325256619,
+  "id": 1,
+  "iteration": 1640026689678,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -54,7 +54,7 @@
         "content": "<h1 style=\"text-align:center\">Master Node</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "transparent": true,
       "type": "text"
     },
@@ -72,7 +72,7 @@
         "content": "<h1 style=\"text-align:center\">\n  Worker Node\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "transparent": true,
       "type": "text"
     },
@@ -130,7 +130,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -138,7 +140,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -200,7 +202,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -208,7 +212,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -290,7 +294,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -298,7 +304,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -367,14 +373,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -447,14 +455,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -525,7 +535,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -533,7 +545,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -595,7 +607,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -603,7 +617,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -685,7 +699,9 @@
       "options": {
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -693,7 +709,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -762,14 +778,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -842,14 +860,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -920,14 +940,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -996,14 +1018,16 @@
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.3",
+      "pluginVersion": "8.2.5",
       "targets": [
         {
           "exemplar": true,
@@ -1433,7 +1457,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 31,
+  "schemaVersion": 32,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1466,7 +1490,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Cluster Monitor",
+  "title": "Cluster Monitor V1",
   "uid": "HcLYc_Ink",
-  "version": 4
+  "version": 3
 }
