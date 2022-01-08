@@ -7,9 +7,11 @@ export default class Valves {
   outlet: number = 0;
 
   livingRoom: number = 0;
-  liamsRoom: number = 0;
-  study: number = 0;
-  ourRoom: number = 0;
+  diningRoom: number = 0;
+  frontStudy: number = 0;
+  rearStudy: number = 0;
+  frontBedroom: number = 0;
+  rearBedroom: number = 0;
 
   constructor(client: MqttClient) {
     this.client = client;
@@ -23,22 +25,31 @@ export default class Valves {
 
       if (message.node.includes("Living Room")) {
         this.livingRoom = message.state;
-      } else if (message.node.includes("Liams Room")) {
-        this.liamsRoom = message.state;
-      } else if (message.node.includes("Study")) {
-        this.study = message.state;
-      } else if (message.node.includes("Our Room")) {
-        this.ourRoom = message.state;
+      } else if (message.node.includes("Dining Room")) {
+        this.diningRoom = message.state;
+      } else if (message.node.includes("Front Study")) {
+        this.frontStudy = message.state;
+      } else if (message.node.includes("Rear Study")) {
+        this.rearStudy = message.state;
+      } else if (message.node.includes("Front Bedroom")) {
+        this.rearStudy = message.state;
+      } else if (message.node.includes("Rear Bedroom")) {
+        this.rearBedroom = message.state;
       }
     }
   }
 
   getCurrent() {
-    return JSON.stringify({
+    const data = {
       livingRoomValve: this.livingRoom,
-      liamsRoomValve: this.liamsRoom,
-      studyValve: this.study,
-      ourRoomValve: this.ourRoom,
-    });
+      diningRoomValve: this.diningRoom,
+      frontStudyValve: this.frontStudy,
+      rearStudyValve: this.rearStudy,
+      frontBedroom: this.frontBedroom,
+      rearBedroom: this.rearBedroom,
+    };
+
+    console.log(data);
+    return JSON.stringify(data);
   }
 }

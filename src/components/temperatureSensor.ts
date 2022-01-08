@@ -11,10 +11,11 @@ export default class TemperatureSensor {
     this.topic = "Temperatures";
 
     this.sensors.push(new sensor("Living Room"));
-    this.sensors.push(new sensor("Kitchen"));
-    this.sensors.push(new sensor("Liams Room"));
-    this.sensors.push(new sensor("Study"));
-    this.sensors.push(new sensor("Our Room"));
+    this.sensors.push(new sensor("Dining Room"));
+    this.sensors.push(new sensor("Front Study"));
+    this.sensors.push(new sensor("Rear Study"));
+    this.sensors.push(new sensor("Front Bedroom"));
+    this.sensors.push(new sensor("Rear Bedroom"));
   }
 
   handleIncoming(topic: string, payload: object) {
