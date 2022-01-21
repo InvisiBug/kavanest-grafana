@@ -48,8 +48,6 @@ export default class Valves {
       frontBedroom: this.frontBedroom,
       rearBedroom: this.rearBedroom,
     };
-
-    console.log(data);
     return JSON.stringify(data);
   }
 }

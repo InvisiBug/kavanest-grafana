@@ -60,6 +60,9 @@ class sensor {
     let message = JSON.parse(payload.toString());
 
     if (message.node.includes(this.id)) {
+      if (this.id === "Front Study") {
+        console.log(message);
+      }
       this.temperature = parseFloat((message.temperature + this.offset).toFixed(2));
       this.humidity = parseFloat(message.humidity.toFixed(2));
       this.pressure = parseFloat(message.pressure.toFixed(2));
