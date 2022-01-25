@@ -1,53 +1,50 @@
-import { MqttClient } from "mqtt";
+import { request, gql } from "graphql-request";
+import { apiUrl } from "../utils";
 
-export default class Valves {
-  client: MqttClient;
-  topic: string;
-  inlet: number = 0;
-  outlet: number = 0;
+export default class Valve {
+  topic: string = "Valves";
 
-  livingRoom: number = 0;
-  diningRoom: number = 0;
-  frontStudy: number = 0;
-  rearStudy: number = 0;
-  frontBedroom: number = 0;
-  rearBedroom: number = 0;
+  constructor() {}
 
-  constructor(client: MqttClient) {
-    this.client = client;
-    this.topic = "Valves";
+  async getValves() {
+    const sensor = await request(
+      apiUrl,
+      gql`
+        query GetValves {
+          response: getValves {
+            room
+            connected
+            state
+          }
+        }
+      `,
+    );
+    return sensor.response;
   }
 
-  handleIncoming(topic: string, payload: object) {
-    if (topic.includes("Valve")) {
-      let message = JSON.parse(payload.toString());
-      message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
+  async getCurrent() {
+    const valves = await this.getValves();
 
-      if (message.node.includes("Living Room")) {
-        this.livingRoom = message.state;
-      } else if (message.node.includes("Dining Room")) {
-        this.diningRoom = message.state;
-      } else if (message.node.includes("Front Study")) {
-        this.frontStudy = message.state;
-      } else if (message.node.includes("Rear Study")) {
-        this.rearStudy = message.state;
-      } else if (message.node.includes("Front Bedroom")) {
-        this.rearStudy = message.state;
-      } else if (message.node.includes("Rear Bedroom")) {
-        this.rearBedroom = message.state;
-      }
-    }
+    // console.log(valves);
+
+    let obj: any = {};
+    valves.forEach((valve: any) => {
+      obj[`${valve.room}Valve`] = valve.connected ? (valve.state ? 1 : 0) : undefined;
+    });
+
+    // console.log(obj);
+    // console.log(obj.livingRoomValve);
+    return JSON.stringify(obj);
   }
 
-  getCurrent() {
-    const data = {
-      livingRoomValve: this.livingRoom,
-      diningRoomValve: this.diningRoom,
-      frontStudyValve: this.frontStudy,
-      rearStudyValve: this.rearStudy,
-      frontBedroom: this.frontBedroom,
-      rearBedroom: this.rearBedroom,
-    };
-    return JSON.stringify(data);
-  }
+  handleIncoming() {}
 }
+
+// {
+//   livingRoomTemperature: 21,
+//   diningRoomTemperature: 14.4,
+//   frontStudyTemperature: 26.7,
+//   rearStudyTemperature: 23.1,
+//   frontBedroomTemperature: 18.1,
+//   rearBedroomTemperature: undefined
+// }

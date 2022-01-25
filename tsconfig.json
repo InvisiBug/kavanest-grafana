@@ -12,5 +12,5 @@
   },
   "include": [
     "src/*"
-, "src/components/weather.ts", "src/components/valves.ts", "src/components/radiatorMonitor.ts"  ]
+, "src/components/weather.ts", "src/components/oldValves.ts", "src/components/radiatorMonitor.ts"  ]
 }
