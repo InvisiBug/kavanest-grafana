@@ -21,7 +21,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
-  "id": 2,
+  "id": 9,
   "links": [
     {
       "asDropdown": false,
@@ -88,90 +88,6 @@
       "type": "row"
     },
     {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 0,
-        "y": 1
-      },
-      "id": 28,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "alias": "Outside",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["outsideTemp"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Outside",
-      "type": "stat"
-    },
-    {
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -198,7 +114,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 2,
+        "x": 0,
         "y": 1
       },
       "id": 23,
@@ -215,7 +131,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -282,7 +198,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 4,
+        "x": 2,
         "y": 1
       },
       "id": 26,
@@ -299,7 +215,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -324,7 +240,7 @@
           "select": [
             [
               {
-                "params": ["kitchenTemperature"],
+                "params": ["diningRoomTemperature"],
                 "type": "field"
               },
               {
@@ -336,7 +252,7 @@
           "tags": []
         }
       ],
-      "title": "Kitchen",
+      "title": "Dining Room",
       "type": "stat"
     },
     {
@@ -366,7 +282,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 6,
+        "x": 4,
         "y": 1
       },
       "id": 24,
@@ -383,7 +299,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -408,7 +324,7 @@
           "select": [
             [
               {
-                "params": ["liamsRoomTemperature"],
+                "params": ["frontStudyTemperature"],
                 "type": "field"
               },
               {
@@ -420,7 +336,7 @@
           "tags": []
         }
       ],
-      "title": "Rear Study",
+      "title": "Front Study",
       "type": "stat"
     },
     {
@@ -450,7 +366,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 8,
+        "x": 6,
         "y": 1
       },
       "id": 25,
@@ -467,7 +383,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -492,7 +408,7 @@
           "select": [
             [
               {
-                "params": ["studyTemperature"],
+                "params": ["rearStudyTemperature"],
                 "type": "field"
               },
               {
@@ -504,7 +420,7 @@
           "tags": []
         }
       ],
-      "title": "Front Study",
+      "title": "Rear Study",
       "type": "stat"
     },
     {
@@ -534,7 +450,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 10,
+        "x": 8,
         "y": 1
       },
       "id": 22,
@@ -551,9 +467,13 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -572,12 +492,12 @@
           "select": [
             [
               {
-                "params": ["ourRoomTemperature"],
+                "params": ["frontBedroomTemperature"],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "last"
               }
             ]
           ],
@@ -585,6 +505,174 @@
         }
       ],
       "title": "Front Bedroom",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 10,
+        "y": 1
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Our Room Temperatire",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearBedroomTemperature"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Rear Bedroom",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 12,
+        "y": 1
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Outside",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["outsideTemp"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Outside",
       "type": "stat"
     },
     {
@@ -630,7 +718,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 14,
+        "x": 15,
         "y": 1
       },
       "id": 20,
@@ -647,7 +735,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "alias": "Heating State",
@@ -689,416 +777,13 @@
       "type": "stat"
     },
     {
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "Open"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "Closed"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 16,
-        "y": 1
-      },
-      "id": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "alias": "Living Room",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Living Room",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["livingRoomValve"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Living Room",
-      "type": "stat"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "Open"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "Closed"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 18,
-        "y": 1
-      },
-      "id": 14,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "alias": "Study",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Study",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["studyValve"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Study",
-      "type": "stat"
-    },
-    {
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "Open"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "Closed"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 20,
-        "y": 1
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "alias": "Liams Room",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Liams Room",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["liamsRoomValve"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Liams Room",
-      "type": "stat"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "Open"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 1,
-                  "text": "Closed"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 22,
-        "y": 1
-      },
-      "id": 10,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.3.3",
-      "targets": [
-        {
-          "alias": "Our Room",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Our Room",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["ourRoomValve"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Our Room",
-      "type": "stat"
-    },
-    {
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "Temperature",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -1110,11 +795,8 @@
               "viz": false
             },
             "lineInterpolation": "smooth",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 2,
-            "pointSize": 8,
+            "pointSize": 6,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -1141,14 +823,28 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "celsius"
+          }
         },
         "overrides": [
           {
             "matcher": {
               "id": "byName",
               "options": "Outside"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rear Bedroom"
             },
             "properties": [
               {
@@ -1163,12 +859,12 @@
         ]
       },
       "gridPos": {
-        "h": 18,
+        "h": 22,
         "w": 24,
         "x": 0,
         "y": 4
       },
-      "id": 2,
+      "id": 36,
       "options": {
         "legend": {
           "calcs": [],
@@ -1179,6 +875,7 @@
           "mode": "multi"
         }
       },
+      "pluginVersion": "8.1.5",
       "targets": [
         {
           "alias": "Living Room",
@@ -1196,6 +893,7 @@
               "type": "fill"
             }
           ],
+          "hide": false,
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
@@ -1220,7 +918,7 @@
           "tags": []
         },
         {
-          "alias": "Kitchen",
+          "alias": "Dining Room",
           "datasource": {
             "type": "influxdb",
             "uid": "CkrngRt7k"
@@ -1239,52 +937,12 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Kitchen",
+          "refId": "Dining Room",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["kitchenTemperature"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [10],
-                "type": "moving_average"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Rear Study",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "CkrngRt7k"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Liams Room",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["liamsRoomTemperature"],
+                "params": ["diningRoomTemperature"],
                 "type": "field"
               },
               {
@@ -1319,12 +977,52 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Study",
+          "refId": "Front Study",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["studyTemperature"],
+                "params": ["frontStudyTemperature"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [10],
+                "type": "moving_average"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Rear Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Rear Study",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearStudyTemperature"],
                 "type": "field"
               },
               {
@@ -1355,16 +1053,55 @@
               "type": "fill"
             }
           ],
-          "hide": false,
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Our Room",
+          "refId": "Front Bedroom",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["ourRoomTemperature"],
+                "params": ["frontBedroomTemperature"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [10],
+                "type": "moving_average"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Rear Bedroom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Rear Bedroom",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearBedroomTemperature"],
                 "type": "field"
               },
               {
@@ -1424,12 +1161,614 @@
       "type": "timeseries"
     },
     {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 0,
+        "y": 26
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Living Room",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Living Room",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["livingRoomValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Living Room",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 2,
+        "y": 26
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Our Room",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Our Room",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["diningRoomValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Dining Room",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 4,
+        "y": 26
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Study",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["frontStudyValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Front Study",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 6,
+        "y": 26
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Liams Room",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Liams Room",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearStudyValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Rear Study",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 8,
+        "y": 26
+      },
+      "id": 34,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Front Bedroom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Front Bedroom",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["frontBedroomValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Front Bedroom",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Open"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "Closed"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 10,
+        "y": 26
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "alias": "Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "CkrngRt7k"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Study",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearBedroomValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Rear Bedroom",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 29
       },
       "id": 6,
       "panels": [],
@@ -1554,7 +1893,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 30
       },
       "id": 8,
       "options": {
@@ -1570,6 +1909,10 @@
       "targets": [
         {
           "alias": "Living Room",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1600,7 +1943,11 @@
           "tags": []
         },
         {
-          "alias": "Liams Room",
+          "alias": "Dining Room",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1615,12 +1962,12 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Liams Room",
+          "refId": "Dining Room",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["liamsRoomValve"],
+                "params": ["diningRoomValve"],
                 "type": "field"
               },
               {
@@ -1632,7 +1979,11 @@
           "tags": []
         },
         {
-          "alias": "Study",
+          "alias": "Front Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1647,12 +1998,12 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Study",
+          "refId": "Front Study",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["studyValve"],
+                "params": ["frontStudyValve"],
                 "type": "field"
               },
               {
@@ -1664,7 +2015,11 @@
           "tags": []
         },
         {
-          "alias": "Our Room",
+          "alias": "Rear Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
           "groupBy": [
             {
               "params": ["$__interval"],
@@ -1679,12 +2034,84 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "Our Room",
+          "refId": "Rear Study",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["ourRoomValve"],
+                "params": ["rearStudyValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Front Bedroom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Front Bedroom",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["frontBedroomValve"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Rear Bedroom",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "nIY9bH5nz"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Rear Bedroom",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["rearBedroomValve"],
                 "type": "field"
               },
               {
@@ -1723,7 +2150,7 @@
               "fill": "solid"
             },
             "lineWidth": 1,
-            "pointSize": 1,
+            "pointSize": 6,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -1771,10 +2198,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 34
       },
       "id": 32,
       "options": {
@@ -1878,7 +2305,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 39
       },
       "id": 30,
       "options": {
@@ -1983,7 +2410,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Heating",
-  "uid": "FcZv3X47k",
-  "version": 22,
+  "uid": "FcZv3X47r",
+  "version": 13,
   "weekStart": ""
 }

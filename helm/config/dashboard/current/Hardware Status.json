@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 7,
-  "iteration": 1640541638043,
+  "iteration": 1643733613879,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -51,7 +51,7 @@
         "content": "<h1 style=\"text-align:center; margin-top:10px\">Master Node</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -63,10 +63,10 @@
       },
       "id": 4,
       "options": {
-        "content": "<h1 style=\"text-align:center; margin-top:10px\">Heavy Node</h1>",
+        "content": "<h1 style=\"text-align:center; margin-top:10px\">Worker</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -78,10 +78,10 @@
       },
       "id": 6,
       "options": {
-        "content": "<h1 style=\"text-align:center; margin-top:10px\">Light Node</h1>",
+        "content": "<h1 style=\"text-align:center; margin-top:10px\">Registry\n</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -145,7 +145,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -227,7 +227,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -313,7 +313,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -388,7 +388,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -467,7 +467,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -549,7 +549,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -635,7 +635,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -710,7 +710,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -784,7 +784,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -890,7 +890,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1059,7 +1059,6 @@
           "refId": "C"
         }
       ],
-      "title": "System",
       "type": "timeseries"
     },
     {
@@ -1142,7 +1141,7 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "multi"
         }
       },
       "pluginVersion": "8.2.5",
@@ -1180,7 +1179,6 @@
           "refId": "C"
         }
       ],
-      "title": "System",
       "type": "timeseries"
     },
     {
@@ -1208,7 +1206,7 @@
         "content": "<h1 style=\"text-align:center; margin-top:10px\">KavaNas</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -1223,7 +1221,7 @@
         "content": "<h1 style=\"text-align:center; margin-top:10px\">Network Controller</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -1238,7 +1236,7 @@
         "content": "<h1 style=\"text-align:center; margin-top:10px\">KavaNet</h1>",
         "mode": "html"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
@@ -1302,7 +1300,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1384,7 +1382,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1470,7 +1468,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1513,11 +1511,11 @@
               },
               {
                 "color": "orange",
-                "value": 40
+                "value": 45
               },
               {
                 "color": "red",
-                "value": 45
+                "value": 50
               }
             ]
           },
@@ -1545,7 +1543,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1624,7 +1622,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1706,7 +1704,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1792,7 +1790,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1867,7 +1865,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -1946,7 +1944,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2028,7 +2026,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2114,7 +2112,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2189,7 +2187,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2263,7 +2261,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2382,7 +2380,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2501,7 +2499,7 @@
         "showUnfilled": true,
         "text": {}
       },
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "datasource": {
@@ -2613,7 +2611,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.3.4",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -3169,6 +3167,6 @@
   "timezone": "",
   "title": "Hardware Status",
   "uid": "crndh5Tnz",
-  "version": 37,
+  "version": 47,
   "weekStart": ""
 }
