@@ -21,8 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
-  "iteration": 1643733613879,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -61,9 +59,9 @@
         "x": 8,
         "y": 1
       },
-      "id": 4,
+      "id": 6,
       "options": {
-        "content": "<h1 style=\"text-align:center; margin-top:10px\">Worker</h1>",
+        "content": "<h1 style=\"text-align:center; margin-top:10px\">Worker 4GB\n</h1>",
         "mode": "html"
       },
       "pluginVersion": "8.3.4",
@@ -76,19 +74,15 @@
         "x": 16,
         "y": 1
       },
-      "id": 6,
+      "id": 4,
       "options": {
-        "content": "<h1 style=\"text-align:center; margin-top:10px\">Registry\n</h1>",
+        "content": "<h1 style=\"text-align:center; margin-top:10px\">Worker 8GB</h1>",
         "mode": "html"
       },
       "pluginVersion": "8.3.4",
       "type": "text"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -150,7 +144,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
@@ -166,10 +160,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -232,7 +222,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"}",
@@ -248,10 +238,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -318,7 +304,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
@@ -336,10 +322,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -393,7 +375,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_hwmon_temp_celsius{instance=\"$master:9100\",job=\"K3S\",sensor=\"temp0\"}",
@@ -407,10 +389,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -451,7 +429,7 @@
         "x": 8,
         "y": 3
       },
-      "id": 22,
+      "id": 57,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -472,10 +450,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
-          "expr": "count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))",
+          "expr": "count(count(node_cpu_seconds_total{instance=\"$worker_4gb:9100\",job=\"K3S\"}) by (cpu))",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
@@ -488,10 +466,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -533,7 +507,7 @@
         "x": 10,
         "y": 3
       },
-      "id": 23,
+      "id": 58,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -554,10 +528,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
-          "expr": "node_memory_MemTotal_bytes{instance=\"$heavy:9100\",job=\"K3S\"}",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\"}",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
@@ -570,10 +544,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -619,7 +589,7 @@
         "x": 12,
         "y": 3
       },
-      "id": 24,
+      "id": 59,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -640,10 +610,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
-          "expr": "node_filesystem_size_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+          "expr": "node_filesystem_size_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
           "instant": true,
@@ -658,10 +628,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -696,6 +662,312 @@
         "x": 14,
         "y": 3
       },
+      "id": 60,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "node_hwmon_temp_celsius{instance=\"$worker_4gb:9100\",job=\"K3S\",sensor=\"temp0\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Temp",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 16,
+        "y": 3
+      },
+      "id": 22,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Cores",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 18,
+        "y": 3
+      },
+      "id": 23,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "node_memory_MemTotal_bytes{instance=\"$heavy:9100\",job=\"K3S\"}",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ram",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "RAM",
+      "type": "stat"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 20,
+        "y": 3
+      },
+      "id": 24,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 240
+        }
+      ],
+      "title": "Storage",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 45
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 3
+      },
       "id": 42,
       "options": {
         "colorMode": "value",
@@ -715,7 +987,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_hwmon_temp_celsius{instance=\"$heavy:9100\",job=\"K3S\",sensor=\"temp0\"}",
@@ -729,10 +1001,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -789,7 +1057,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$master:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
@@ -805,7 +1073,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$master:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"})",
@@ -821,7 +1089,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -835,10 +1103,6 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -877,6 +1141,108 @@
         "y": 6
       },
       "hideTimeOverride": false,
+      "id": 61,
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "(((count(count(node_cpu_seconds_total{instance=\"$worker_4gb:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$worker_4gb:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$worker_4gb:9100\",job=\"K3S\"}) by (cpu))",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "CPU",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\"})",
+          "format": "time_series",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ram",
+          "refId": "B",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "Disk",
+          "refId": "C"
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 80
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 16,
+        "y": 6
+      },
+      "hideTimeOverride": false,
       "id": 21,
       "links": [],
       "options": {
@@ -895,7 +1261,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$heavy:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))",
@@ -911,7 +1277,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$heavy:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$heavy:9100\",job=\"K3S\"})",
@@ -927,7 +1293,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -941,10 +1307,6 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1029,6 +1391,10 @@
       "pluginVersion": "8.2.5",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$master:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
           "format": "time_series",
@@ -1040,6 +1406,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$master:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"})",
           "format": "time_series",
@@ -1051,6 +1421,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "hide": false,
@@ -1062,10 +1436,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1132,6 +1502,134 @@
         "y": 8
       },
       "hideTimeOverride": false,
+      "id": 62,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": false,
+          "expr": "(((count(count(node_cpu_seconds_total{instance=\"$worker_4gb:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$worker_4gb:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$worker_4gb:9100\",job=\"K3S\"}) by (cpu))",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "CPU",
+          "refId": "A",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": true,
+          "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\"})",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Ram",
+          "refId": "B",
+          "step": 240
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
+          "exemplar": true,
+          "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$worker_4gb:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Disk",
+          "refId": "C"
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 80
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 16,
+        "y": 8
+      },
+      "hideTimeOverride": false,
       "id": 25,
       "links": [],
       "options": {
@@ -1147,6 +1645,10 @@
       "pluginVersion": "8.2.5",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$heavy:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$heavy:9100\",job=\"K3S\"}) by (cpu))",
           "format": "time_series",
@@ -1159,6 +1661,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$heavy:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$heavy:9100\",job=\"K3S\"})",
           "format": "time_series",
@@ -1170,6 +1676,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$heavy:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "hide": false,
@@ -1240,10 +1750,6 @@
       "type": "text"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1305,7 +1811,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "count(count(node_cpu_seconds_total{instance=\"$KavaNas:9100\",job=\"K3S\"}) by (cpu))",
@@ -1321,10 +1827,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1387,7 +1889,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_memory_MemTotal_bytes{instance=\"$KavaNas:9100\",job=\"K3S\"}",
@@ -1403,10 +1905,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1473,7 +1971,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_filesystem_size_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
@@ -1491,10 +1989,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1548,7 +2042,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_hwmon_temp_celsius{instance=\"$KavaNas:9100\",job=\"K3S\",sensor=\"temp0\"}",
@@ -1562,10 +2056,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1627,7 +2117,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "count(count(node_cpu_seconds_total{instance=\"$NetworkController:9100\",job=\"K3S\"}) by (cpu))",
@@ -1643,10 +2133,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1709,7 +2195,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_memory_MemTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"}",
@@ -1725,10 +2211,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1795,7 +2277,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_filesystem_size_bytes{instance=\"$NetworkController:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
@@ -1813,10 +2295,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1870,7 +2348,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_hwmon_temp_celsius{instance=\"$NetworkController:9100\",job=\"K3S\",sensor=\"temp0\"}",
@@ -1884,10 +2362,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1949,7 +2423,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "count(count(node_cpu_seconds_total{instance=\"$KavaNet:9100\",job=\"K3S\"}) by (cpu))",
@@ -1965,10 +2439,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2031,7 +2501,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_memory_MemTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"}",
@@ -2047,10 +2517,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2117,7 +2583,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_filesystem_size_bytes{instance=\"$KavaNet:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"}",
@@ -2135,10 +2601,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2192,7 +2654,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "node_hwmon_temp_celsius{instance=\"$KavaNet:9100\",job=\"K3S\",sensor=\"temp0\"}",
@@ -2206,10 +2668,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2266,7 +2724,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$master:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$master:9100\",job=\"K3S\"}) by (cpu))",
@@ -2282,7 +2740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$master:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"})",
@@ -2298,7 +2756,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$master:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -2311,7 +2769,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/srv/dev-disk-by-label-KavaNas\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/srv/dev-disk-by-label-KavaNas\",fstype!=\"rootfs\"})",
@@ -2325,10 +2783,6 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2385,7 +2839,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$NetworkController:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$NetworkController:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$NetworkController:9100\",job=\"K3S\"}) by (cpu))",
@@ -2401,7 +2855,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"})",
@@ -2417,7 +2871,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$NetworkController:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$NetworkController:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -2430,7 +2884,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "((node_memory_SwapTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} - node_memory_SwapFree_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"}) / (node_memory_SwapTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} )) * 100",
@@ -2444,10 +2898,6 @@
       "type": "bargauge"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2504,7 +2954,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$KavaNet:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$KavaNet:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$KavaNet:9100\",job=\"K3S\"}) by (cpu))",
@@ -2520,7 +2970,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"})",
@@ -2536,7 +2986,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$KavaNet:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$KavaNet:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -2549,7 +2999,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "((node_memory_SwapTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} - node_memory_SwapFree_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"}) / (node_memory_SwapTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} )) * 100",
@@ -2572,10 +3022,6 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -2629,7 +3075,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "rate(node_network_receive_bytes_total{instance=\"$KavaNas:9100\",job=\"K3S\",device=\"eth0\"}[$__rate_interval])*8",
@@ -2644,7 +3090,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "rate(node_network_transmit_bytes_total{instance=\"$KavaNas:9100\",job=\"K3S\",device=\"eth0\"}[$__rate_interval])*8",
@@ -2690,10 +3136,6 @@
       }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2777,7 +3219,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$NetworkController:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$NetworkController:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$NetworkController:9100\",job=\"K3S\"}) by (cpu))",
@@ -2793,7 +3235,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"})",
@@ -2808,7 +3250,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$NetworkController:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$NetworkController:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -2821,7 +3263,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "((node_memory_SwapTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} - node_memory_SwapFree_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"}) / (node_memory_SwapTotal_bytes{instance=\"$NetworkController:9100\",job=\"K3S\"} )) * 100",
@@ -2835,10 +3277,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -2922,7 +3360,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$KavaNet:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$KavaNet:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$KavaNet:9100\",job=\"K3S\"}) by (cpu))",
@@ -2938,7 +3376,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"})",
@@ -2953,7 +3391,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$KavaNet:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$KavaNet:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
@@ -2966,7 +3404,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "E0LSRRp7k"
+            "uid": "SDra13bnz"
           },
           "exemplar": true,
           "expr": "((node_memory_SwapTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} - node_memory_SwapFree_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"}) / (node_memory_SwapTotal_bytes{instance=\"$KavaNet:9100\",job=\"K3S\"} )) * 100",
@@ -2980,10 +3418,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "E0LSRRp7k"
-      },
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -3065,6 +3499,10 @@
       "pluginVersion": "8.2.5",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": false,
           "expr": "(((count(count(node_cpu_seconds_total{instance=\"$KavaNas:9100\",job=\"K3S\"}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=\"$KavaNas:9100\",job=\"K3S\"}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=\"$KavaNas:9100\",job=\"K3S\"}) by (cpu))",
           "format": "time_series",
@@ -3077,6 +3515,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_memory_MemAvailable_bytes{instance=\"$master:9100\",job=\"K3S\"} * 100) / node_memory_MemTotal_bytes{instance=\"$master:9100\",job=\"K3S\"})",
           "format": "time_series",
@@ -3088,6 +3530,10 @@
           "step": 240
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "hide": false,
@@ -3097,6 +3543,10 @@
           "refId": "C"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "SDra13bnz"
+          },
           "exemplar": true,
           "expr": "100 - ((node_filesystem_avail_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/srv/dev-disk-by-label-KavaNas\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=\"$KavaNas:9100\",job=\"K3S\",mountpoint=\"/srv/dev-disk-by-label-KavaNas\",fstype!=\"rootfs\"})",
           "hide": false,
@@ -3125,7 +3575,7 @@
       {
         "hide": 2,
         "name": "heavy",
-        "query": "192.168.1.43",
+        "query": "192.168.1.44",
         "skipUrlSync": false,
         "type": "constant"
       },
@@ -3138,8 +3588,8 @@
       },
       {
         "hide": 2,
-        "name": "Light",
-        "query": "192.168.1.11",
+        "name": "worker_4gb",
+        "query": "192.168.1.43",
         "skipUrlSync": false,
         "type": "constant"
       },
@@ -3167,6 +3617,6 @@
   "timezone": "",
   "title": "Hardware Status",
   "uid": "crndh5Tnz",
-  "version": 47,
+  "version": 4,
   "weekStart": ""
 }

@@ -136,7 +136,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -220,7 +220,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -304,7 +304,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -388,7 +388,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -472,7 +472,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -556,7 +556,7 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -640,7 +640,7 @@
           "alias": "Outside",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -741,7 +741,7 @@
           "alias": "Heating State",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -881,7 +881,7 @@
           "alias": "Living Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -921,7 +921,7 @@
           "alias": "Dining Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -961,7 +961,7 @@
           "alias": "Front Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1001,7 +1001,7 @@
           "alias": "Rear Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1041,7 +1041,7 @@
           "alias": "Front Bedroom",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1080,7 +1080,7 @@
           "alias": "Rear Bedroom",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1120,7 +1120,7 @@
           "alias": "Outside",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1226,7 +1226,7 @@
           "alias": "Living Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1326,7 +1326,7 @@
           "alias": "Our Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1426,7 +1426,7 @@
           "alias": "Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1527,7 +1527,7 @@
           "alias": "Liams Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1627,7 +1627,7 @@
           "alias": "Front Bedroom",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1727,7 +1727,7 @@
           "alias": "Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "CkrngRt7k"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1911,7 +1911,7 @@
           "alias": "Living Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1946,7 +1946,7 @@
           "alias": "Dining Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -1982,7 +1982,7 @@
           "alias": "Front Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -2018,7 +2018,7 @@
           "alias": "Rear Study",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -2054,7 +2054,7 @@
           "alias": "Front Bedroom",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -2090,7 +2090,7 @@
           "alias": "Rear Bedroom",
           "datasource": {
             "type": "influxdb",
-            "uid": "nIY9bH5nz"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {

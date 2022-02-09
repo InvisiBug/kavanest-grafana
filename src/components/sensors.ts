@@ -38,12 +38,3 @@ export default class Sensor {
 
   handleIncoming() {}
 }
-
-// {
-//   livingRoomTemperature: 21,
-//   diningRoomTemperature: 14.4,
-//   frontStudyTemperature: 26.7,
-//   rearStudyTemperature: 23.1,
-//   frontBedroomTemperature: 18.1,
-//   rearBedroomTemperature: undefined
-// }
