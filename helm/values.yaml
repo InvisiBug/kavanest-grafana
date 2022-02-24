@@ -60,7 +60,7 @@ deployment:
 
   - name: prometheus
     image: prom/prometheus
-    ports: 
+    ports:
       - port: 9090
     volumes:
       - name: prometheus-config
