@@ -1,44 +1,50 @@
-import { MqttClient } from "mqtt";
+import { request, gql } from "graphql-request";
+import { apiUrl } from "../utils";
 
-export default class Valves {
-  client: MqttClient;
-  topic: string;
-  inlet: number = 0;
-  outlet: number = 0;
+export default class Valve {
+  topic: string = "Valves";
 
-  livingRoom: number = 0;
-  liamsRoom: number = 0;
-  study: number = 0;
-  ourRoom: number = 0;
+  constructor() {}
 
-  constructor(client: MqttClient) {
-    this.client = client;
-    this.topic = "Valves";
+  async getValves() {
+    const sensor = await request(
+      apiUrl,
+      gql`
+        query GetValves {
+          response: getValves {
+            room
+            connected
+            state
+          }
+        }
+      `,
+    );
+    return sensor.response;
   }
 
-  handleIncoming(topic: string, payload: object) {
-    if (topic.includes("Valve")) {
-      let message = JSON.parse(payload.toString());
-      message.state = message.state ? 1 : 0; // Map the true / false state to a 1 / 0
+  async getCurrent() {
+    const valves = await this.getValves();
 
-      if (message.node.includes("Living Room")) {
-        this.livingRoom = message.state;
-      } else if (message.node.includes("Liams Room")) {
-        this.liamsRoom = message.state;
-      } else if (message.node.includes("Study")) {
-        this.study = message.state;
-      } else if (message.node.includes("Our Room")) {
-        this.ourRoom = message.state;
-      }
-    }
-  }
+    // console.log(valves);
 
-  getCurrent() {
-    return JSON.stringify({
-      livingRoomValve: this.livingRoom,
-      liamsRoomValve: this.liamsRoom,
-      studyValve: this.study,
-      ourRoomValve: this.ourRoom,
+    let obj: any = {};
+    valves.forEach((valve: any) => {
+      obj[`${valve.room}Valve`] = valve.connected ? (valve.state ? 1 : 0) : undefined;
     });
+
+    // console.log(obj);
+    // console.log(obj.livingRoomValve);
+    return JSON.stringify(obj);
   }
+
+  handleIncoming() {}
 }
+
+// {
+//   livingRoomTemperature: 21,
+//   diningRoomTemperature: 14.4,
+//   frontStudyTemperature: 26.7,
+//   rearStudyTemperature: 23.1,
+//   frontBedroomTemperature: 18.1,
+//   rearBedroomTemperature: undefined
+// }

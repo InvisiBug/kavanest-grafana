@@ -20,13 +20,12 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "gnetId": null,
-  "graphTooltip": 0,
+  "graphTooltip": 2,
   "id": 3,
   "links": [
     {
       "asDropdown": false,
-      "icon": "external link",
+      "icon": "dashboard",
       "includeVars": false,
       "keepTime": false,
       "tags": [],
@@ -40,7 +39,6 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -81,9 +79,7 @@
       "options": {
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -91,21 +87,17 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "alias": "Co2",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -117,9 +109,7 @@
           "select": [
             [
               {
-                "params": [
-                  "co2"
-                ],
+                "params": ["co2"],
                 "type": "field"
               },
               {
@@ -140,20 +130,14 @@
         "conditions": [
           {
             "evaluator": {
-              "params": [
-                1100
-              ],
+              "params": [1100],
               "type": "gt"
             },
             "operator": {
               "type": "and"
             },
             "query": {
-              "params": [
-                "A",
-                "1m",
-                "now"
-              ]
+              "params": ["A", "1m", "now"]
             },
             "reducer": {
               "params": [],
@@ -171,7 +155,6 @@
         "noDataState": "keep_state",
         "notifications": []
       },
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -265,15 +248,11 @@
           "alias": "Co2",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -285,9 +264,7 @@
           "select": [
             [
               {
-                "params": [
-                  "co2"
-                ],
+                "params": ["co2"],
                 "type": "field"
               },
               {
@@ -311,7 +288,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -387,10 +363,7 @@
               "id": "byNames",
               "options": {
                 "mode": "exclude",
-                "names": [
-                  "Our Room",
-                  "Outside"
-                ],
+                "names": ["Our Room", "Outside"],
                 "prefix": "All except:",
                 "readOnly": true
               }
@@ -430,15 +403,11 @@
           "alias": "Living Room",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -450,9 +419,7 @@
           "select": [
             [
               {
-                "params": [
-                  "livingRoomTemperature"
-                ],
+                "params": ["livingRoomTemperature"],
                 "type": "field"
               },
               {
@@ -460,9 +427,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -473,15 +438,11 @@
           "alias": "Kitchen",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -494,9 +455,7 @@
           "select": [
             [
               {
-                "params": [
-                  "kitchenTemperature"
-                ],
+                "params": ["kitchenTemperature"],
                 "type": "field"
               },
               {
@@ -504,9 +463,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -517,15 +474,11 @@
           "alias": "Liams Room",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -538,9 +491,7 @@
           "select": [
             [
               {
-                "params": [
-                  "liamsRoomTemperature"
-                ],
+                "params": ["liamsRoomTemperature"],
                 "type": "field"
               },
               {
@@ -548,9 +499,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -561,15 +510,11 @@
           "alias": "Study",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -582,9 +527,7 @@
           "select": [
             [
               {
-                "params": [
-                  "studyTemperature"
-                ],
+                "params": ["studyTemperature"],
                 "type": "field"
               },
               {
@@ -592,9 +535,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -605,15 +546,11 @@
           "alias": "Our Room",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -626,9 +563,7 @@
           "select": [
             [
               {
-                "params": [
-                  "ourRoomTemperature"
-                ],
+                "params": ["ourRoomTemperature"],
                 "type": "field"
               },
               {
@@ -636,9 +571,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -649,15 +582,11 @@
           "alias": "Outside",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -670,9 +599,7 @@
           "select": [
             [
               {
-                "params": [
-                  "outsideTemp"
-                ],
+                "params": ["outsideTemp"],
                 "type": "field"
               },
               {
@@ -680,9 +607,7 @@
                 "type": "mean"
               },
               {
-                "params": [
-                  10
-                ],
+                "params": [10],
                 "type": "moving_average"
               }
             ]
@@ -694,7 +619,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -739,9 +663,7 @@
       "options": {
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -749,21 +671,17 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "alias": "pm2.5",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -775,9 +693,7 @@
           "select": [
             [
               {
-                "params": [
-                  "pm2.5"
-                ],
+                "params": ["pm2.5"],
                 "type": "field"
               },
               {
@@ -793,7 +709,6 @@
       "type": "gauge"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -873,9 +788,7 @@
               "id": "byNames",
               "options": {
                 "mode": "exclude",
-                "names": [
-                  "PM2.5"
-                ],
+                "names": ["PM2.5"],
                 "prefix": "All except:",
                 "readOnly": true
               }
@@ -915,15 +828,11 @@
           "alias": "PM1",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -935,9 +844,7 @@
           "select": [
             [
               {
-                "params": [
-                  "pm1"
-                ],
+                "params": ["pm1"],
                 "type": "field"
               },
               {
@@ -952,15 +859,11 @@
           "alias": "PM2.5",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -973,9 +876,7 @@
           "select": [
             [
               {
-                "params": [
-                  "pm2.5"
-                ],
+                "params": ["pm2.5"],
                 "type": "field"
               },
               {
@@ -990,15 +891,11 @@
           "alias": "PM10",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -1011,9 +908,7 @@
           "select": [
             [
               {
-                "params": [
-                  "pm10"
-                ],
+                "params": ["pm10"],
                 "type": "field"
               },
               {
@@ -1029,7 +924,6 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1081,30 +975,24 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "alias": "Our Room",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -1116,9 +1004,7 @@
           "select": [
             [
               {
-                "params": [
-                  "ourRoomValve"
-                ],
+                "params": ["ourRoomValve"],
                 "type": "field"
               },
               {
@@ -1133,7 +1019,6 @@
       "type": "stat"
     },
     {
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1186,30 +1071,24 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "alias": "Heating State",
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -1221,9 +1100,7 @@
           "select": [
             [
               {
-                "params": [
-                  "heating"
-                ],
+                "params": ["heating"],
                 "type": "field"
               },
               {
@@ -1239,7 +1116,151 @@
       "type": "stat"
     },
     {
-      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 4,
+        "y": 16
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "alias": "Inlet",
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["radiatorInlet"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [10],
+                "type": "moving_average"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Outlet",
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["radiatorOutlet"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [10],
+                "type": "moving_average"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Our Radiator",
+      "type": "timeseries"
+    },
+    {
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1276,29 +1297,23 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "8.2.5",
+      "pluginVersion": "8.3.4",
       "targets": [
         {
           "groupBy": [
             {
-              "params": [
-                "$__interval"
-              ],
+              "params": ["$__interval"],
               "type": "time"
             },
             {
-              "params": [
-                "null"
-              ],
+              "params": ["null"],
               "type": "fill"
             }
           ],
@@ -1310,9 +1325,7 @@
           "select": [
             [
               {
-                "params": [
-                  "ourRoomTemperature"
-                ],
+                "params": ["ourRoomTemperature"],
                 "type": "field"
               },
               {
@@ -1329,11 +1342,9 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 32,
+  "schemaVersion": 34,
   "style": "dark",
-  "tags": [
-    "KavaNest"
-  ],
+  "tags": ["KavaNest"],
   "templating": {
     "list": []
   },
@@ -1345,5 +1356,6 @@
   "timezone": "",
   "title": "My Room",
   "uid": "TheffN57z",
-  "version": 2
+  "version": 6,
+  "weekStart": ""
 }

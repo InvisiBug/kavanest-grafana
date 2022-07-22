@@ -55,10 +55,12 @@ deployment:
     env:
       - name: CLUSTER
         value: cluster
+      - name: API
+        value: https://api.kavanet.io
 
   - name: prometheus
     image: prom/prometheus
-    ports: 
+    ports:
       - port: 9090
     volumes:
       - name: prometheus-config

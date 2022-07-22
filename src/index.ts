@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, TemperatureSensors, Heating, Weather, RadiatorValves, AirSensor } from "./components/index";
+import { RadiatorMonitor, Heating, Weather, AirSensor, Valves, Sensors } from "./components/index";
 require("dotenv").config();
 
 // Connect to MQTT networks
@@ -23,14 +23,15 @@ client.subscribe("#", (error: Error) => {
 });
 
 // Devices
-let devices: Array<PossibleDevices> = [];
+let devices: Array<any> = [];
 
 devices.push(new Heating(client));
-devices.push(new RadiatorValves(client));
 devices.push(new RadiatorMonitor(client));
-devices.push(new TemperatureSensors(client));
 devices.push(new Weather());
 devices.push(new AirSensor(client));
+
+devices.push(new Valves());
+devices.push(new Sensors());
 
 //* Incoming message
 client.on("message", (topic: string, payload: object) => {
@@ -48,9 +49,9 @@ setInterval(() => {
   publish();
 }, 5 * 1000);
 
-let publish = () => {
+let publish = async () => {
   for (let i = 0; i < devices.length; i++) {
-    intClient.publish(devices[i].topic, devices[i].getCurrent());
+    intClient.publish(devices[i].topic, await devices[i].getCurrent());
   }
 };
 
@@ -59,4 +60,10 @@ publish();
 client.on("connect", () => console.log("Connected to KavaNet MQTT"));
 intClient.on("connect", () => console.log("Connected to Grafana MQTT network"));
 
-type PossibleDevices = RadiatorMonitor | TemperatureSensors | Weather | Heating | RadiatorValves | AirSensor;
+// const valves = new Valve();
+
+// const fn = async () => {
+//   console.log(await valves.getCurrent());
+// };
+
+// fn();
