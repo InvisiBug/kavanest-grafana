@@ -1,5 +1,5 @@
 import mqtt from "mqtt";
-import { RadiatorMonitor, Heating, Weather, AirSensor, Valves, Sensors } from "./components/index";
+import { RadiatorMonitor, Heating, Weather, AirSensor, Valves, Sensors, Radiators } from "./components/index";
 require("dotenv").config();
 
 // Connect to MQTT networks
@@ -25,13 +25,18 @@ client.subscribe("#", (error: Error) => {
 // Devices
 let devices: Array<any> = [];
 
+// These ones
 devices.push(new Heating(client));
-devices.push(new RadiatorMonitor(client));
+// devices.push(new RadiatorMonitor(client));
 devices.push(new Weather());
-devices.push(new AirSensor(client));
+// devices.push(new AirSensor(client));
 
-devices.push(new Valves());
+// devices.push(new Valves());
+
+// These ones use the api
 devices.push(new Sensors());
+
+devices.push(new Radiators());
 
 //* Incoming message
 client.on("message", (topic: string, payload: object) => {
