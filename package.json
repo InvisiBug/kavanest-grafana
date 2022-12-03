@@ -9,10 +9,10 @@
     "dev": "nodemon --exec \"ts-node \" ./src/index.ts",
     "start": "yarn build && node ./dist/index.js",
     "build": "tsc",
-    "push": "./bin/push.sh",
+    "push--live": "./bin/push.sh",
     "deploy--live": "./bin/deploy--live.sh",
     "deploy": "yarn push && ./bin/deploy.sh",
-    "up": "docker compose up -d && yarn start",
+    "up": "docker compose up -d && yarn dev",
     "down": "docker compose down"
   },
   "dependencies": {
