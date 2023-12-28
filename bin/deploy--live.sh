@@ -4,4 +4,5 @@ clear && cd helm && \
 helm upgrade grafana . \
 --install \
 --namespace grafana \
---create-namespace
+--create-namespace \
+-f values/live.yaml
