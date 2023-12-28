@@ -2,7 +2,7 @@ name: grafana
 
 namespace: grafana
 env:
-  APP_VERSION: <desired_application_version>
+  APP_VERSION: eb53029eb2ac16ca5d64e6025dbf8d178ba96a62
 
 deployment:
   - name: grafana
