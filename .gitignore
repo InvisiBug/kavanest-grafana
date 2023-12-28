@@ -9,6 +9,8 @@
 # testing
 /coverage
 
+/helm/charts
+
 # production
 /build
 
