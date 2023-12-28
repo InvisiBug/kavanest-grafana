@@ -1,6 +1,8 @@
 name: grafana
 
 namespace: grafana
+env:
+  APP_VERSION: <desired_application_version>
 
 deployment:
   - name: grafana
