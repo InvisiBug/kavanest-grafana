@@ -1,6 +1,8 @@
 name: grafana
 
 namespace: grafana
+env:
+  APP_VERSION: eb53029eb2ac16ca5d64e6025dbf8d178ba96a62
 
 deployment:
   - name: grafana
@@ -48,7 +50,7 @@ deployment:
     - port: 9001
 
   - name: interconnector
-    image: 192.168.1.61:5000/grafana-interconnector
+    image: invisibug/grafana-interconnector
     ports:
     - port: 1883
     - port: 9001
