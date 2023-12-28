@@ -63,7 +63,7 @@ communityDeployment:
 
 deployment:
   - name: interconnector
-    image: invisibug/grafana-interconnector
+    image: invisibug/grafana-interconnector:latest
     ports:
     - port: 1883
     - port: 9001
