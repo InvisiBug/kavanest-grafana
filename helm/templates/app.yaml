@@ -3,5 +3,6 @@
 {{ include "library.nodePort" . }}
 {{ include "library.configmap" .}}
 {{ include "library.deployment" . }}
+{{ include "library.communityDeployment" . }}
 {{ include "library.ingress" . }}
 {{ include "library.pvc" . }}
