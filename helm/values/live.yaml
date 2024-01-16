@@ -2,7 +2,7 @@ name: grafana
 
 namespace: grafana
 env:
-  APP_VERSION: a1ef8826535683854f5d1d695d22fa8e65416333
+  APP_VERSION: 5afd4dcd98687156f322594876711b4de77ae979
 
 communityDeployment:
   - name: grafana
@@ -15,7 +15,7 @@ communityDeployment:
         path: /var/lib/grafana
 
   - name: influx
-    image: influxdb:1.5
+    image: influxdb:1.6.1
     ports:
       - port: 3000
     env:
