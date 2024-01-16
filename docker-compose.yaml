@@ -41,7 +41,7 @@ services:
 
   influxdb:
     container_name: influx
-    image: influxdb:1.5
+    image: influxdb:1.6.1
     ports:
       - "8086:8086"
     environment:

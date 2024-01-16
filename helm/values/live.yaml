@@ -15,7 +15,7 @@ communityDeployment:
         path: /var/lib/grafana
 
   - name: influx
-    image: influxdb:1.5
+    image: influxdb:1.6.1
     ports:
       - port: 3000
     env:
