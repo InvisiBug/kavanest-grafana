@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
-  "id": 1,
+  "id": 0,
   "links": [
     {
       "asDropdown": false,
@@ -92,7 +92,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -106,7 +106,7 @@
             "steps": [
               {
                 "color": "orange",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -140,7 +140,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -183,7 +183,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -197,7 +197,7 @@
             "steps": [
               {
                 "color": "yellow",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -231,7 +231,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -274,7 +274,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -288,7 +288,7 @@
             "steps": [
               {
                 "color": "blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -322,7 +322,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -365,7 +365,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -378,8 +378,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "purple",
+                "value": 0
               },
               {
                 "color": "red",
@@ -394,97 +394,6 @@
         "h": 3,
         "w": 2,
         "x": 6,
-        "y": 1
-      },
-      "id": 22,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {},
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "YIUetqb7z"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Our Room Temperatire",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["frontBedroomTemperature"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Printer Room",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 8,
         "y": 1
       },
       "id": 33,
@@ -504,7 +413,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "datasource": {
@@ -547,7 +456,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "fieldConfig": {
         "defaults": {
@@ -560,7 +469,7 @@
             "steps": [
               {
                 "color": "dark-green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -594,7 +503,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Outside",
@@ -638,7 +547,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -668,7 +577,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -702,7 +611,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Heating State",
@@ -746,7 +655,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "fieldConfig": {
         "defaults": {
@@ -777,6 +686,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -792,7 +702,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -894,11 +804,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Living Room",
@@ -1146,7 +1057,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -1176,7 +1087,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1210,7 +1121,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Living Room",
@@ -1254,7 +1165,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "fieldConfig": {
         "defaults": {
@@ -1283,7 +1194,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1317,7 +1228,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Our Room",
@@ -1361,7 +1272,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "fieldConfig": {
         "defaults": {
@@ -1390,7 +1301,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1424,7 +1335,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Study",
@@ -1468,9 +1379,8 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1498,7 +1408,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1513,113 +1423,6 @@
         "h": 3,
         "w": 2,
         "x": 6,
-        "y": 26
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {},
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "alias": "Liams Room",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "YIUetqb7z"
-          },
-          "groupBy": [
-            {
-              "params": ["$__interval"],
-              "type": "time"
-            },
-            {
-              "params": ["null"],
-              "type": "fill"
-            }
-          ],
-          "measurement": "mqtt_consumer",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "Liams Room",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": ["rearStudyValve"],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Printer Room",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "0": {
-                  "color": "green",
-                  "index": 1,
-                  "text": "Open"
-                },
-                "1": {
-                  "color": "red",
-                  "index": 0,
-                  "text": "Closed"
-                }
-              },
-              "type": "value"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 8,
         "y": 26
       },
       "id": 34,
@@ -1639,7 +1442,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Bedroom",
@@ -1696,7 +1499,149 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "index": 0,
+                  "text": "Off"
+                },
+                "1": {
+                  "index": 1,
+                  "text": "On"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 32,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "alias": "Heating",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ae9sc9idx7lz4e"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["heating"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Heating",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -1730,6 +1675,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -1759,7 +1705,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1850,7 +1796,7 @@
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 34
       },
       "id": 8,
       "options": {
@@ -1861,11 +1807,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Living Room",
@@ -2053,7 +2000,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "description": "",
       "fieldConfig": {
@@ -2067,6 +2014,8 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": 0,
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
@@ -2079,15 +2028,13 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 1,
-            "pointSize": 6,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -2102,24 +2049,22 @@
               "options": {
                 "0": {
                   "index": 0,
-                  "text": "Off"
+                  "text": "Open"
                 },
                 "1": {
                   "index": 1,
-                  "text": "On"
+                  "text": "Closed"
                 }
               },
               "type": "value"
             }
           ],
-          "max": 1,
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2128,15 +2073,91 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Liams Room"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Study"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Our Room"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Living Room"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Bedroom"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 4,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 38
       },
-      "id": 32,
+      "id": 37,
       "options": {
         "legend": {
           "calcs": [],
@@ -2145,17 +2166,18 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "hideZeros": false,
+          "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
-          "alias": "Heating",
+          "alias": "Living Room",
           "datasource": {
             "type": "influxdb",
-            "uid": "ae9sc9idx7lz4e"
+            "uid": "YIUetqb7z"
           },
           "groupBy": [
             {
@@ -2170,12 +2192,48 @@
           "measurement": "mqtt_consumer",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "Living Room",
           "resultFormat": "time_series",
           "select": [
             [
               {
-                "params": ["heating"],
+                "params": ["livingRoomRadiatorFan"],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Study",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "YIUetqb7z"
+          },
+          "groupBy": [
+            {
+              "params": ["$__interval"],
+              "type": "time"
+            },
+            {
+              "params": ["null"],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "mqtt_consumer",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "Dining Room",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": ["studyRadiatorFan"],
                 "type": "field"
               },
               {
@@ -2187,13 +2245,13 @@
           "tags": []
         }
       ],
-      "title": "Heating",
+      "title": "Fan States",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ae9sc9idx7lz4e"
+        "uid": "cf9a9lrvhf11cc"
       },
       "fieldConfig": {
         "defaults": {
@@ -2224,6 +2282,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
+            "showValues": false,
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -2239,7 +2298,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -2285,7 +2344,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 42
       },
       "id": 30,
       "options": {
@@ -2296,11 +2355,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "12.3.1",
       "targets": [
         {
           "alias": "Living Room",
@@ -2382,13 +2442,13 @@
           "tags": []
         }
       ],
-      "title": "Our Radiator",
+      "title": "Radiators",
       "type": "timeseries"
     }
   ],
   "preload": false,
   "refresh": "5s",
-  "schemaVersion": 40,
+  "schemaVersion": 42,
   "tags": ["KavaNest"],
   "templating": {
     "list": []
@@ -2401,6 +2461,5 @@
   "timezone": "",
   "title": "Heating",
   "uid": "FcZv3X47r",
-  "version": 7,
-  "weekStart": ""
+  "version": 3
 }

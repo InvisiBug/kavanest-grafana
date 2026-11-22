@@ -36,8 +36,8 @@ communityDeployment:
 
   - name: telegraf
     image: telegraf:1.9
-    ports: 
-    - port: 5050
+    ports:
+      - port: 5050
     volumes:
       - name: telegraf-config
         type: config
@@ -46,8 +46,8 @@ communityDeployment:
   - name: mosquitto
     image: eclipse-mosquitto:1.6
     ports:
-    - port: 1883
-    - port: 9001
+      - port: 1883
+      - port: 9001
 
   - name: prometheus
     image: prom/prometheus
@@ -65,8 +65,8 @@ deployment:
   - name: interconnector
     image: invisibug/grafana-interconnector
     ports:
-    - port: 1883
-    - port: 9001
+      - port: 1883
+      - port: 9001
     env:
       - name: CLUSTER
         value: cluster
@@ -101,7 +101,7 @@ service:
       ports:
         - port: 1883
         - port: 9001
-    
+
     - name: prometheus
       selector: prometheus
       ports:
@@ -112,20 +112,29 @@ service:
   #     selector: grafana
   #     port: 80
   #     containerPort: 3000
-  
-ingress:
-  - name: grafana.kavanet.io
-    selector: grafana
-    path: /
-    port: 3000
-    host: grafana.kavanet.io
-  # - name: grafana.kavanet.co.uk
-  #   selector: grafana
-  #   path: /
-  #   port: 3000
-  #   host: grafana.kavanet.co.uk
 
-    # This hasnt been applied yet
+httpRoute:
+  name: kavanest-grafana
+  gatewayName: kavanetes-gateway
+  gatewayNamespace: nginx-gateway
+  host: grafana.kavanet.io
+  path: /
+  serviceName: kavanest-grafana
+  servicePort: 80
+
+# ingress:
+#   - name: grafana.kavanet.io
+#     selector: grafana
+#     path: /
+#     port: 3000
+#     host: grafana.kavanet.io
+# - name: grafana.kavanet.co.uk
+#   selector: grafana
+#   path: /
+#   port: 3000
+#   host: grafana.kavanet.co.uk
+
+# This hasnt been applied yet
 
 configmap:
   - name: telegraf-config
@@ -133,7 +142,6 @@ configmap:
 
   - name: prometheus-config
     file: config/prometheus/prometheus.yml
-
 
 pvc:
   - name: grafana-storage
