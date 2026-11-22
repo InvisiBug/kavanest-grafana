@@ -6,3 +6,4 @@
 {{ include "library.communityDeployment" . }}
 {{ include "library.ingress" . }}
 {{ include "library.pvc" . }}
+{{ include "kavanest.mqtt" . }}

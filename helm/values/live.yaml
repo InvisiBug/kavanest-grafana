@@ -121,8 +121,8 @@ httpRoute:
   gatewayNamespace: nginx-gateway
   host: grafana.kavanet.io
   path: /
-  serviceName: kavanest-grafana
-  servicePort: 80
+  serviceName: grafana
+  servicePort: 3000
 
 configmap:
   - name: telegraf-config
