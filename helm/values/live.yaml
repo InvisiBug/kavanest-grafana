@@ -107,12 +107,6 @@ service:
       ports:
         - port: 9090
 
-  # loadBalancer:
-  #   - name: grafana-lb
-  #     selector: grafana
-  #     port: 80
-  #     containerPort: 3000
-
 httpRoute:
   name: kavanest-grafana
   gatewayName: kavanetes-gateway
@@ -121,20 +115,6 @@ httpRoute:
   path: /
   serviceName: kavanest-grafana
   servicePort: 80
-
-# ingress:
-#   - name: grafana.kavanet.io
-#     selector: grafana
-#     path: /
-#     port: 3000
-#     host: grafana.kavanet.io
-# - name: grafana.kavanet.co.uk
-#   selector: grafana
-#   path: /
-#   port: 3000
-#   host: grafana.kavanet.co.uk
-
-# This hasnt been applied yet
 
 configmap:
   - name: telegraf-config
@@ -150,3 +130,21 @@ pvc:
     storage: 500Mi
   - name: prometheus-storage
     storage: 500Mi
+# loadBalancer:
+#   - name: grafana-lb
+#     selector: grafana
+#     port: 80
+#     containerPort: 3000
+# ingress:
+#   - name: grafana.kavanet.io
+#     selector: grafana
+#     path: /
+#     port: 3000
+#     host: grafana.kavanet.io
+# - name: grafana.kavanet.co.uk
+#   selector: grafana
+#   path: /
+#   port: 3000
+#   host: grafana.kavanet.co.uk
+
+# This hasnt been applied yet
