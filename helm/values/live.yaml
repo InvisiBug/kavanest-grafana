@@ -69,6 +69,12 @@ configmap:
   - name: mosquitto-config
     file: config/mosquitto/mosquitto.conf
 
+  - name: telegraf-config
+    file: config/telegraf/telegraf.conf
+
+  - name: prometheus-config
+    file: config/prometheus/prometheus.yml
+
 deployment:
   - name: interconnector
     image: invisibug/grafana-interconnector
@@ -123,13 +129,6 @@ httpRoute:
   path: /
   serviceName: grafana
   servicePort: 3000
-
-configmap:
-  - name: telegraf-config
-    file: config/telegraf/telegraf.conf
-
-  - name: prometheus-config
-    file: config/prometheus/prometheus.yml
 
 pvc:
   - name: grafana-storage
