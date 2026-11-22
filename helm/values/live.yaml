@@ -105,7 +105,7 @@ service:
         - port: 5000
 
     - name: mosquitto
-      selector: mosquitto
+      selector: kavanest-mqtt
       ports:
         - port: 1883
         - port: 9001

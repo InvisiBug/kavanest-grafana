@@ -40,6 +40,8 @@ devices.push(new Radiators());
 
 //* Incoming message
 client.on("message", (topic: string, payload: object) => {
+  // console.log(payload.toString());
+
   try {
     for (let i = 0; i < devices.length; i++) {
       devices[i].handleIncoming(topic, payload);
