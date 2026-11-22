@@ -43,12 +43,6 @@ communityDeployment:
         type: config
         path: /etc/telegraf/
 
-  - name: mosquitto
-    image: eclipse-mosquitto:1.6
-    ports:
-      - port: 1883
-      - port: 9001
-
   - name: prometheus
     image: prom/prometheus
     ports:
@@ -60,6 +54,20 @@ communityDeployment:
       - name: prometheus-storage
         type: pvc
         path: /prometheus
+
+mqtt:
+  name: kavanest-mqtt
+  image: eclipse-mosquitto:1.6
+  ports:
+  - port: 1883
+  - port: 9001
+  config:
+    name: mosquitto-config
+    path: /mosquitto/config/mosquitto.conf
+
+configmap:
+  - name: mosquitto-config
+    file: config/mosquitto/mosquitto.conf
 
 deployment:
   - name: interconnector

@@ -1,0 +1,44 @@
+{{- define "kavanest.mqtt" -}}
+{{- if .Values.mqtt}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mqtt.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.mqtt.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.mqtt.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mqtt.name }}
+    spec:
+      volumes:
+      - name: {{ .Values.mqtt.config.name }}
+        configMap:
+          name: {{ .Values.mqtt.config.name }}
+      containers:
+      - name: {{ .Values.mqtt.name }}
+        image: {{ .Values.mqtt.image | quote }}
+        imagePullPolicy: Always
+        command:
+        - mosquitto
+        args:
+        - -c
+        - {{ .Values.mqtt.config.path }}
+        ports:
+        {{- range .Values.mqtt.ports }}
+        - containerPort: {{ .port }}
+        {{- end }}
+        volumeMounts:
+        - name: {{ .Values.mqtt.config.name }}
+          mountPath: {{ .Values.mqtt.config.path }}
+          subPath: mosquitto.conf
+      restartPolicy: Always
+{{- end }}
+{{- end }}
